@@ -1,7 +1,5 @@
 set(MOCKS_LIST 
     ${FPHIG_TEST}/mock/fphig_mock.c
-    ${FPHIG_TEST}/mock/syntax_error_message_mock.c
-    ${FPHIG_TEST}/mock/position_after_white_spaces_mock.c
     ${FPHIG_TEST}/mock/malloc_mock.c
     ${FPHIG_TEST}/mock/free_mock.c
     ${FPHIG_TEST}/mock/list_mock.h
@@ -10,35 +8,11 @@ set(MOCKS_LIST
     ${FPHIG_TEST}/mock/list_next_mock.c
     ${FPHIG_TEST}/mock/list_remove_mock.c
     ${FPHIG_TEST}/mock/list_copy_mock.c
-    ${FPHIG_TEST}/mock/snprintf_parsed_note_mock.c
-    ${FPHIG_TEST}/mock/parsed_note_to_enharmonic_parsed_note_mock.c
-    ${FPHIG_TEST}/mock/destroy_notation_mock.h
-    ${FPHIG_TEST}/mock/destroy_notation_mock.c
     ${FPHIG_TEST}/mock/directory_list_mock.c
     ${FPHIG_TEST}/mock/destroy_directory_list_mock.h
     ${FPHIG_TEST}/mock/destroy_directory_list_mock.c
     ${FPHIG_TEST}/mock/modules_load_all_mock.c
-    ${FPHIG_TEST}/mock/destroy_plugins_all_mock.h
-    ${FPHIG_TEST}/mock/destroy_plugins_all_mock.c
-    ${FPHIG_TEST}/mock/plugin_load_mock.c
     ${FPHIG_TEST}/mock/library_unload_mock.c
-    ${FPHIG_TEST}/mock/notation_push_note_mock.h
-    ${FPHIG_TEST}/mock/notation_push_note_mock.c
-    ${FPHIG_TEST}/mock/notation_push_bpm_mock.h
-    ${FPHIG_TEST}/mock/notation_push_bpm_mock.c
-    ${FPHIG_TEST}/mock/track_process_notation_mock.c
-    ${FPHIG_TEST}/mock/track_process_note_mock.c
-    ${FPHIG_TEST}/mock/plugin_process_note_mock.h
-    ${FPHIG_TEST}/mock/plugin_process_note_mock.c
-    ${FPHIG_TEST}/mock/destroy_output_drivers_all_mock.h
-    ${FPHIG_TEST}/mock/destroy_output_drivers_all_mock.c
     ${FPHIG_TEST}/mock/strnstr_mock.c
-    ${FPHIG_TEST}/mock/key_octave_signature_to_integer_key_mock.c
-    ${FPHIG_TEST}/mock/parse/parse_key_mock.c
-    ${FPHIG_TEST}/mock/parse/parse_octave_mock.c
-    ${FPHIG_TEST}/mock/parse/parse_signature_mock.c
-    ${FPHIG_TEST}/mock/parse/parse_value_mock.c
-    ${FPHIG_TEST}/mock/parse/parse_velocity_mock.c
-    ${FPHIG_TEST}/mock/parse/parse_note_component_type_mock.c
     PARENT_SCOPE
 )

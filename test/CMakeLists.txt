@@ -22,7 +22,6 @@ if(${BUILD_TESTING})
     )
     # Initialize a list for code coverage
 
-    add_subdirectory(assert)
     add_subdirectory(mock)
     add_subdirectory(unit)
     add_subdirectory(system)

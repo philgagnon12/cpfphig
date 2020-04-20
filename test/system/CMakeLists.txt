@@ -15,9 +15,6 @@ endfunction()
 
 add_subdirectory("plugins")
 
-fphig_add_system_test(parse_notation)
-fphig_add_system_test(parse_snprintf_note)
-fphig_add_system_test(snprintf_note)
 fphig_add_system_test(directory_list)
 
 fphig_add_system_test(mutex)
@@ -32,6 +29,5 @@ fphig_add_system_test(publisher_subscribe_publish_destroy)
 
 # REMARK system tests that include "fphig.h" NOT "fphig/fphig.h"
 # should be last
-fphig_add_system_test(plugin_load_all_symbols)
 
 set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)

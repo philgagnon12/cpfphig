@@ -1,36 +1,64 @@
-if(${BUILD_TESTING})
+function(melphig_add_unit_test TEST_PREFIX )
 
-    if(${COVERAGE})
-        include(CodeCoverage)
-        append_coverage_compiler_flags()
-        # Remove all the crap targets from including CTest
-        set_property(GLOBAL PROPERTY CTEST_TARGETS_ADDED 1)
-        # CTest needed for valgrind
-        # TODO add custom target for valgrind, if valgrind is installed
-        include(CTest)
-    endif()
-
-    # Symlink for header files
-    add_custom_command(
-        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
-        COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
-        COMMENT "symlink include/fphig_test"
+    # Dont filter out when its has a REAL
+    set( UNIT_TEST_SOURCES
+         ${MELPHIG_SRC}/${TEST_PREFIX}.c
+         ${MELPHIG_TEST}/unit/${TEST_PREFIX}_unit_test.c
+         ${HEADER_LIST}
     )
+    foreach( ARG ${ARGN} )
+        list( APPEND UNIT_TEST_SOURCES ${ARG} )
+    endforeach()
 
-    add_custom_target( symlink_include_fphig_test ALL
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
-    )
-    # Initialize a list for code coverage
+    # Executable name
+    string(REPLACE "/" "_" EXETARGET ${TEST_PREFIX})
+    add_executable(${EXETARGET}_unit_test ${UNIT_TEST_SOURCES})
 
-    add_subdirectory(assert)
-    add_subdirectory(mock)
-    add_subdirectory(unit)
-    add_subdirectory(system)
+    # cmocka
+    find_package(cmocka REQUIRED)
+    target_include_directories( ${EXETARGET}_unit_test PRIVATE ${cmocka_INCLUDE_DIRS})
+    target_link_libraries( ${EXETARGET}_unit_test ${cmocka_LIBRARIES})
 
-    if(${COVERAGE})
-        setup_target_for_coverage_lcov( NAME coverage
-                                        EXECUTABLE ${COVERAGE_COMMANDS_LIST}
-        )
-    endif()
+    # REAL appending
+    target_compile_definitions(${EXETARGET}_unit_test PRIVATE MELPHIG_UNIT_TESTING)
 
-endif()
+    # coverage
+    list(APPEND COVERAGE_COMMANDS_LIST "COMMAND;${EXETARGET}_unit_test" )
+    set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
+
+    # add test
+    add_test(NAME test_${EXETARGET}_unit_test COMMAND ${EXETARGET}_unit_test)
+endfunction()
+
+
+melphig_add_unit_test(melphig)
+
+melphig_add_unit_test(malloc
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+)
+
+melphig_add_unit_test(free
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+)
+
+melphig_add_unit_test(list_push
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
+)
+
+melphig_add_unit_test(list_shift
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/list_push_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../src/list_push.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
+)
+
+melphig_add_unit_test(list_next
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+)
+
+
+set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
+

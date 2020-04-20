@@ -2,41 +2,15 @@ set(
     HEADER_LIST
     ${FPHIG_SRC}/fphig.h
     ${FPHIG_SRC}/lexicon.h
-    ${FPHIG_SRC}/syntax_error_message.h
-    ${FPHIG_SRC}/position_after_white_spaces.h
     ${FPHIG_SRC}/malloc.h
     ${FPHIG_SRC}/free.h
     ${FPHIG_SRC}/list.h
-    ${FPHIG_SRC}/destroy_notation.h
-    ${FPHIG_SRC}/plugin.h
-    ${FPHIG_SRC}/plugins_load_all.h
-    ${FPHIG_SRC}/plugin_load.h
     ${FPHIG_SRC}/library_load.h
     ${FPHIG_SRC}/library_sym.h
     ${FPHIG_SRC}/library_unload.h
     ${FPHIG_SRC}/modules_load_all.h
     ${FPHIG_SRC}/directory_list.h
     ${FPHIG_SRC}/destroy_directory_list.h
-    ${FPHIG_SRC}/destroy_plugins_all.h
-    ${FPHIG_SRC}/sequencer.h
-    ${FPHIG_SRC}/sequencer_create.h
-    ${FPHIG_SRC}/sequencer_create_track.h
-    ${FPHIG_SRC}/track.h
-    ${FPHIG_SRC}/track_create_plugin_instance.h
-    ${FPHIG_SRC}/track_play.h
-    ${FPHIG_SRC}/track_process_note.h
-    ${FPHIG_SRC}/track_output_notation.h
-    ${FPHIG_SRC}/track_output_note.h
-    ${FPHIG_SRC}/track_output_silence.h
-    ${FPHIG_SRC}/notation_push_note.h
-    ${FPHIG_SRC}/notation_push_bpm.h
-    ${FPHIG_SRC}/track_process_notation.h
-    ${FPHIG_SRC}/output_driver.h
-    ${FPHIG_SRC}/output_publisher_subscribe.h
-    ${FPHIG_SRC}/output_publisher_publish.h
-    ${FPHIG_SRC}/output_driver_load.h
-    ${FPHIG_SRC}/output_drivers_load_all.h
-    ${FPHIG_SRC}/destroy_output_drivers_all.h
     ${FPHIG_SRC}/thread.h
     ${FPHIG_SRC}/thread_create.h
     ${FPHIG_SRC}/thread_join.h
@@ -74,27 +48,12 @@ set(
     ${FPHIG_SRC}/strnstr.h
     ${FPHIG_SRC}/defer.h
     ${FPHIG_SRC}/sleep.h
-    ${FPHIG_SRC}/key_octave_signature_to_integer_key.h
-    ${FPHIG_SRC}/parse/parse_key.h
-    ${FPHIG_SRC}/parse/parse_octave.h
-    ${FPHIG_SRC}/parse/parse_signature.h
-    ${FPHIG_SRC}/parse/parse_value.h
-    ${FPHIG_SRC}/parse/parse_velocity.h
-    ${FPHIG_SRC}/parse/parse_note_component_type.h
-    ${FPHIG_SRC}/parse/parse_note.h
-    ${FPHIG_SRC}/parse/parse_bpm.h
-    ${FPHIG_SRC}/parse/parse_silence.h
-    ${FPHIG_SRC}/parse/parse_notation.h
-    ${FPHIG_SRC}/parse/confine_size_by_lookahead.h
-    ${FPHIG_SRC}/parse/confine_size_by_spaced_lookahead.h
 )
 
 
 set(
     SRC_LIST
     ${FPHIG_SRC}/fphig.c
-    ${FPHIG_SRC}/syntax_error_message.c
-    ${FPHIG_SRC}/position_after_white_spaces.c
     ${FPHIG_SRC}/malloc.c
     ${FPHIG_SRC}/free.c
     ${FPHIG_SRC}/free.h
@@ -104,28 +63,8 @@ set(
     ${FPHIG_SRC}/list_next.c
     ${FPHIG_SRC}/list_remove.c
     ${FPHIG_SRC}/list_copy.c
-    ${FPHIG_SRC}/destroy_notation.c
     ${FPHIG_SRC}/modules_load_all.c
-    ${FPHIG_SRC}/plugins_load_all.c
-    ${FPHIG_SRC}/plugin_load.c
     ${FPHIG_SRC}/destroy_directory_list.c
-    ${FPHIG_SRC}/destroy_plugins_all.c
-    ${FPHIG_SRC}/sequencer_create.c
-    ${FPHIG_SRC}/sequencer_create_track.c
-    ${FPHIG_SRC}/track_create_plugin_instance.c
-    ${FPHIG_SRC}/track_play.c
-    ${FPHIG_SRC}/track_process_note.c
-    ${FPHIG_SRC}/track_output_notation.c
-    ${FPHIG_SRC}/track_output_note.c
-    ${FPHIG_SRC}/track_output_silence.c
-    ${FPHIG_SRC}/notation_push_note.c
-    ${FPHIG_SRC}/notation_push_bpm.c
-    ${FPHIG_SRC}/track_process_notation.c
-    ${FPHIG_SRC}/output_driver_load.c
-    ${FPHIG_SRC}/output_drivers_load_all.c
-    ${FPHIG_SRC}/destroy_output_drivers_all.c
-    ${FPHIG_SRC}/output_publisher_subscribe.c
-    ${FPHIG_SRC}/output_publisher_publish.c
     ${FPHIG_SRC}/assert.c
     ${FPHIG_SRC}/publisher_create.c
     ${FPHIG_SRC}/publisher_destroy.c
@@ -138,34 +77,10 @@ set(
     ${FPHIG_SRC}/destroy_thread_pool_thread.c
     ${FPHIG_SRC}/destroy_thread_pool.c
     ${FPHIG_SRC}/defer.c
-    ${FPHIG_SRC}/key_octave_signature_to_integer_key.c
-    ${FPHIG_SRC}/parse/parse_key.c
-    ${FPHIG_SRC}/parse/parse_octave.c
-    ${FPHIG_SRC}/parse/parse_signature.c
-    ${FPHIG_SRC}/parse/parse_value.c
-    ${FPHIG_SRC}/parse/parse_velocity.c
-    ${FPHIG_SRC}/parse/parse_note_component_type.c
-    ${FPHIG_SRC}/parse/parse_note.c
-    ${FPHIG_SRC}/parse/parse_bpm.c
-    ${FPHIG_SRC}/parse/parse_silence.c
-    ${FPHIG_SRC}/parse/parse_notation.c
-    ${FPHIG_SRC}/parse/confine_size_by_lookahead.c
-    ${FPHIG_SRC}/parse/confine_size_by_spaced_lookahead.c
-    ${FPHIG_SRC}/bpm_value_to_milliseconds.c
-    ${FPHIG_SRC}/note_copy.c
-    ${FPHIG_SRC}/snprintf_note.c
-    ${FPHIG_SRC}/integer_key_to_key_octave_signature.c
-    ${FPHIG_SRC}/key_octave_signature_to_enharmonic.c
-    ${FPHIG_SRC}/snprintf_key_octave_signature.c
-
 )
 
 
 add_subdirectory("os")
-add_subdirectory("output_drivers")
-add_subdirectory("plugins")
-add_subdirectory("cli")
-add_subdirectory("daemon")
 
 add_library( fphig ${SRC_LIST} )
 

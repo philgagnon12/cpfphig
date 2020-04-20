@@ -1,11 +1,11 @@
 #ifndef FPHIG_THREAD_POOL_THREAD_H
 #define FPHIG_THREAD_POOL_THREAD_H
 
-#include "melphig/melphig.h"
-#include "melphig/publisher.h"
-#include "melphig/thread.h"
-#include "melphig/thread_cond.h"
-#include "melphig/mutex.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher.h"
+#include "fphig/thread.h"
+#include "fphig/thread_cond.h"
+#include "fphig/mutex.h"
 
 typedef void (fphig_thread_pool_thread_routine_symbol)(void*);
 

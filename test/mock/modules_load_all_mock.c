@@ -1,6 +1,6 @@
-#include "melphig/melphig.h"
-#include "melphig/modules_load_all.h"
-#include "melphig/list.h"
+#include "fphig/fphig.h"
+#include "fphig/modules_load_all.h"
+#include "fphig/list.h"
 
 #include <stdarg.h>
 #include <stddef.h>

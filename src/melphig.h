@@ -1,7 +1,7 @@
 #ifndef FPHIG_H
 #define FPHIG_H
 
-#include "melphig_config.h"
+#include "fphig_config.h"
 #include <stdlib.h>
 
 typedef int fphig;

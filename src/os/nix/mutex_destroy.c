@@ -1,10 +1,10 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/mutex_destroy.h"
-#include "melphig/mutex.h"
-#include "melphig/free.h"
+#include "fphig/mutex_destroy.h"
+#include "fphig/mutex.h"
+#include "fphig/free.h"
 
 #include <pthread.h>
 

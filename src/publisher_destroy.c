@@ -1,11 +1,11 @@
-#include "melphig/melphig.h"
-#include "melphig/publisher_destroy.h"
-#include "melphig/publisher.h"
-#include "melphig/publisher_unsubscribe.h"
-#include "melphig/list.h"
-#include "melphig/free.h"
-#include "melphig/mutex_destroy.h"
-#include "melphig/thread_cond_destroy.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher_destroy.h"
+#include "fphig/publisher.h"
+#include "fphig/publisher_unsubscribe.h"
+#include "fphig/list.h"
+#include "fphig/free.h"
+#include "fphig/mutex_destroy.h"
+#include "fphig/thread_cond_destroy.h"
 
 fphig
 fphig_publisher_destroy( struct fphig_publisher*                Publisher,

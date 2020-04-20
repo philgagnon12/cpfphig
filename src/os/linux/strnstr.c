@@ -1,8 +1,8 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifndef FPHIG_HAVE_STRNSTR
 
-#include "melphig/strnstr.h"
+#include "fphig/strnstr.h"
 
 #include <string.h>
 #include <stdio.h>

@@ -1,7 +1,7 @@
-#include "melphig/melphig.h"
-#include "melphig/destroy_directory_list.h"
-#include "melphig/list.h"
-#include "melphig/free.h"
+#include "fphig/fphig.h"
+#include "fphig/destroy_directory_list.h"
+#include "fphig/list.h"
+#include "fphig/free.h"
 
 fphig
 REAL(fphig_destroy_directory_list)( struct fphig_list*                    File_Names,

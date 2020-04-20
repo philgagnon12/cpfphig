@@ -1,7 +1,7 @@
 #ifndef FPHIG_LIBRARY_UNLOAD_H
 #define FPHIG_LIBRARY_UNLOAD_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 fphig
 fphig_library_unload( void*                                    Handle,

@@ -1,10 +1,10 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/melphig.h"
-#include "melphig/thread.h"
-#include "melphig/thread_create.h"
+#include "fphig/fphig.h"
+#include "fphig/thread.h"
+#include "fphig/thread_create.h"
 
 #include <pthread.h>
 

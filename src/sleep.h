@@ -1,7 +1,7 @@
 #ifndef FPHIG_SLEEP_H
 #define FPHIG_SLEEP_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 fphig
 fphig_sleep( int                                    Milliseconds,

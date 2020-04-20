@@ -1,6 +1,6 @@
-#include "melphig/melphig.h"
-#include "melphig/directory_list.h"
-#include "melphig/destroy_directory_list.h"
+#include "fphig/fphig.h"
+#include "fphig/directory_list.h"
+#include "fphig/destroy_directory_list.h"
 
 #include <stdarg.h>
 #include <stddef.h>

@@ -1,7 +1,7 @@
 #ifndef FPHIG_LIBRARY_LOAD_H
 #define FPHIG_LIBRARY_LOAD_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 fphig
 fphig_library_load( const char*                             File_Name,

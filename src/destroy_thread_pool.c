@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
-#include "melphig/thread_pool.h"
-#include "melphig/list.h"
-#include "melphig/destroy_thread_pool_thread.h"
-#include "melphig/free.h"
-#include "melphig/mutex_destroy.h"
+#include "fphig/fphig.h"
+#include "fphig/thread_pool.h"
+#include "fphig/list.h"
+#include "fphig/destroy_thread_pool_thread.h"
+#include "fphig/free.h"
+#include "fphig/mutex_destroy.h"
 
 fphig
 fphig_destroy_thread_pool( struct fphig_thread_pool*            Thread_Pool,

@@ -1,8 +1,8 @@
 #ifndef FPHIG_PUBLISHER_DESTROY_H
 #define FPHIG_PUBLISHER_DESTROY_H
 
-#include "melphig/melphig.h"
-#include "melphig/publisher.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher.h"
 
 fphig
 fphig_publisher_destroy( struct fphig_publisher*                Publisher,

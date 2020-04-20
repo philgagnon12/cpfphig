@@ -1,8 +1,8 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/thread_exit.h"
+#include "fphig/thread_exit.h"
 
 #include <pthread.h>
 

@@ -1,8 +1,8 @@
 #ifndef FPHIG_DEFER_H
 #define FPHIG_DEFER_H
 
-#include "melphig/melphig.h"
-#include "melphig/thread_pool.h"
+#include "fphig/fphig.h"
+#include "fphig/thread_pool.h"
 
 typedef void (fphig_defer_routine_symbol)( void* Arg );
 

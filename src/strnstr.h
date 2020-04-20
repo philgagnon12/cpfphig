@@ -1,7 +1,7 @@
 #ifndef FPHIG_STRNSTR_H
 #define FPHIG_STRNSTR_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #include <stdlib.h>
 

@@ -1,9 +1,9 @@
 #ifndef FPHIG_MUTEX_INIT_H
 #define FPHIG_MUTEX_INIT_H
 
-#include "melphig/melphig.h"
-#include "melphig/mutex.h"
-#include "melphig/mutex_attr.h"
+#include "fphig/fphig.h"
+#include "fphig/mutex.h"
+#include "fphig/mutex_attr.h"
 
 fphig
 fphig_mutex_init( struct fphig_mutex*                    Mutex,

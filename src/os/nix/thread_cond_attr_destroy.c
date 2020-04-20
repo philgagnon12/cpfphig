@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/thread_cond_attr_destroy.h"
-#include "melphig/thread_cond_attr.h"
+#include "fphig/thread_cond_attr_destroy.h"
+#include "fphig/thread_cond_attr.h"
 
 #include <pthread.h>
 

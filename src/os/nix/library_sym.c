@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_DLFCN_H
 
-#include "melphig/melphig.h"
-#include "melphig/library_sym.h"
+#include "fphig/fphig.h"
+#include "fphig/library_sym.h"
 
 #include <dlfcn.h>
 

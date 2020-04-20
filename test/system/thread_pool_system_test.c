@@ -1,8 +1,8 @@
-#include "melphig/melphig.h"
-#include "melphig/thread_pool.h"
-#include "melphig/thread_pool_create.h"
-#include "melphig/thread_pool_task.h"
-#include "melphig/destroy_thread_pool.h"
+#include "fphig/fphig.h"
+#include "fphig/thread_pool.h"
+#include "fphig/thread_pool_create.h"
+#include "fphig/thread_pool_task.h"
+#include "fphig/destroy_thread_pool.h"
 
 #include <stdarg.h>
 #include <stddef.h>

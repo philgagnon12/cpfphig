@@ -1,12 +1,12 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_DIRENT_H
 
-#include "melphig/directory_list.h"
-#include "melphig/destroy_directory_list.h"
-#include "melphig/list.h"
-#include "melphig/malloc.h"
-#include "melphig/free.h"
+#include "fphig/directory_list.h"
+#include "fphig/destroy_directory_list.h"
+#include "fphig/list.h"
+#include "fphig/malloc.h"
+#include "fphig/free.h"
 
 #include <dirent.h>
 #include <errno.h>

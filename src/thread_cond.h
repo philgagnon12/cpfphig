@@ -1,7 +1,7 @@
 #ifndef FPHIG_THREAD_COND_H
 #define FPHIG_THREAD_COND_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 #include <pthread.h>

@@ -1,6 +1,6 @@
 set(
     HEADER_LIST
-    ${FPHIG_SRC}/melphig.h
+    ${FPHIG_SRC}/fphig.h
     ${FPHIG_SRC}/lexicon.h
     ${FPHIG_SRC}/syntax_error_message.h
     ${FPHIG_SRC}/position_after_white_spaces.h
@@ -92,7 +92,7 @@ set(
 
 set(
     SRC_LIST
-    ${FPHIG_SRC}/melphig.c
+    ${FPHIG_SRC}/fphig.c
     ${FPHIG_SRC}/syntax_error_message.c
     ${FPHIG_SRC}/position_after_white_spaces.c
     ${FPHIG_SRC}/malloc.c
@@ -167,7 +167,7 @@ add_subdirectory("plugins")
 add_subdirectory("cli")
 add_subdirectory("daemon")
 
-add_library( melphig ${SRC_LIST} )
+add_library( fphig ${SRC_LIST} )
 
 set( HEADER_LIST ${HEADER_LIST} PARENT_SCOPE )
 set( SRC_LIST ${SRC_LIST} PARENT_SCOPE )

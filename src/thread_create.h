@@ -1,9 +1,9 @@
 #ifndef FPHIG_THREAD_CREATE_H
 #define FPHIG_THREAD_CREATE_H
 
-#include "melphig/melphig.h"
-#include "melphig/thread.h"
-#include "melphig/thread_attr.h"
+#include "fphig/fphig.h"
+#include "fphig/thread.h"
+#include "fphig/thread_attr.h"
 
 fphig
 fphig_thread_create( struct fphig_thread*                   Thread,

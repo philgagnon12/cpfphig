@@ -1,8 +1,8 @@
 #ifndef DIRECTORY_LIST_H
 #define DIRECTORY_LIST_H
 
-#include "melphig/melphig.h"
-#include "melphig/list.h"
+#include "fphig/fphig.h"
+#include "fphig/list.h"
 
 fphig
 fphig_directory_list( const char*                           Directory,

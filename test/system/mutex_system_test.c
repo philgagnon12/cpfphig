@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
-#include "melphig/mutex.h"
-#include "melphig/mutex_init.h"
-#include "melphig/mutex_lock.h"
-#include "melphig/mutex_unlock.h"
-#include "melphig/mutex_destroy.h"
+#include "fphig/fphig.h"
+#include "fphig/mutex.h"
+#include "fphig/mutex_init.h"
+#include "fphig/mutex_lock.h"
+#include "fphig/mutex_unlock.h"
+#include "fphig/mutex_destroy.h"
 
 #include <stdarg.h>
 #include <stddef.h>

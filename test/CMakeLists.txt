@@ -12,13 +12,13 @@ if(${BUILD_TESTING})
 
     # Symlink for header files
     add_custom_command(
-        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/../include/melphig_test
-        COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/../include/melphig_test
-        COMMENT "symlink include/melphig_test"
+        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
+        COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
+        COMMENT "symlink include/fphig_test"
     )
 
-    add_custom_target( symlink_include_melphig_test ALL
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../include/melphig_test
+    add_custom_target( symlink_include_fphig_test ALL
+        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
     )
     # Initialize a list for code coverage
 

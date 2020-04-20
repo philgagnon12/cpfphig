@@ -1,12 +1,12 @@
-#include "melphig/melphig.h"
-#include "melphig/publisher_unsubscribe.h"
-#include "melphig/publisher.h"
-#include "melphig/subscription.h"
-#include "melphig/publisher_publish.h"
-#include "melphig/mutex_lock.h"
-#include "melphig/mutex_unlock.h"
-#include "melphig/thread_join.h"
-#include "melphig/free.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher_unsubscribe.h"
+#include "fphig/publisher.h"
+#include "fphig/subscription.h"
+#include "fphig/publisher_publish.h"
+#include "fphig/mutex_lock.h"
+#include "fphig/mutex_unlock.h"
+#include "fphig/thread_join.h"
+#include "fphig/free.h"
 
 fphig
 fphig_publisher_unsubscribe( struct fphig_subscription*             Subscription,

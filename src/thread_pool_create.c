@@ -1,7 +1,7 @@
-#include "melphig/melphig.h"
-#include "melphig/thread_pool.h"
-#include "melphig/mutex_attr.h"
-#include "melphig/mutex_init.h"
+#include "fphig/fphig.h"
+#include "fphig/thread_pool.h"
+#include "fphig/mutex_attr.h"
+#include "fphig/mutex_init.h"
 
 fphig
 fphig_thread_pool_create( struct fphig_thread_pool*             Thread_Pool,

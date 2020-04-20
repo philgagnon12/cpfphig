@@ -1,13 +1,13 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/malloc.h"
-#include "melphig/mutex_init.h"
-#include "melphig/mutex.h"
-#include "melphig/mutex_attr.h"
-#include "melphig/mutex_destroy.h"
-#include "melphig/free.h"
+#include "fphig/malloc.h"
+#include "fphig/mutex_init.h"
+#include "fphig/mutex.h"
+#include "fphig/mutex_attr.h"
+#include "fphig/mutex_destroy.h"
+#include "fphig/free.h"
 
 #include <pthread.h>
 

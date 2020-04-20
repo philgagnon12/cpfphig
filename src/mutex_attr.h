@@ -1,7 +1,7 @@
 #ifndef FPHIG_MUTEX_ATTR_H
 #define FPHIG_MUTEX_ATTR_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 #include <pthread.h>

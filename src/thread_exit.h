@@ -1,7 +1,7 @@
 #ifndef FPHIG_THREAD_EXIT_H
 #define FPHIG_THREAD_EXIT_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 fphig
 fphig_thread_exit( void*                                Value_Ptr,

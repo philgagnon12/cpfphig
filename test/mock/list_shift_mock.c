@@ -1,6 +1,6 @@
-#include "melphig/melphig.h"
-#include "melphig/list.h"
-#include "melphig_test/mock/list_mock.h"
+#include "fphig/fphig.h"
+#include "fphig/list.h"
+#include "fphig_test/mock/list_mock.h"
 
 #include <stdarg.h>
 #include <stddef.h>

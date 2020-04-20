@@ -1,11 +1,11 @@
 #ifndef FPHIG_PUBLISHER_H
 #define FPHIG_PUBLISHER_H
 
-#include "melphig/melphig.h"
-#include "melphig/subscription.h"
-#include "melphig/thread_cond.h"
-#include "melphig/list.h"
-#include "melphig/mutex.h"
+#include "fphig/fphig.h"
+#include "fphig/subscription.h"
+#include "fphig/thread_cond.h"
+#include "fphig/list.h"
+#include "fphig/mutex.h"
 
 enum fphig_publisher_thread_cond_kind
 {

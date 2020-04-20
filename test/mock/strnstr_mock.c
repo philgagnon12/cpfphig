@@ -1,5 +1,5 @@
-#include "melphig/melphig.h"
-#include "melphig/strnstr.h"
+#include "fphig/fphig.h"
+#include "fphig/strnstr.h"
 
 #include <stdarg.h>
 #include <stddef.h>

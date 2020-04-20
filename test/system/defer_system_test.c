@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
-#include "melphig/defer.h"
-#include "melphig/thread_pool.h"
-#include "melphig/thread_pool_create.h"
-#include "melphig/destroy_thread_pool.h"
-#include "melphig/sleep.h"
+#include "fphig/fphig.h"
+#include "fphig/defer.h"
+#include "fphig/thread_pool.h"
+#include "fphig/thread_pool_create.h"
+#include "fphig/destroy_thread_pool.h"
+#include "fphig/sleep.h"
 
 #include <stdarg.h>
 #include <stddef.h>

@@ -1,9 +1,9 @@
 #ifndef FPHIG_PUBLISHER_SUBSCRIBE_H
 #define FPHIG_PUBLISHER_SUBSCRIBE_H
 
-#include "melphig/melphig.h"
-#include "melphig/publisher.h"
-#include "melphig/subscription.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher.h"
+#include "fphig/subscription.h"
 
 fphig
 fphig_publisher_subscribe( struct fphig_publisher*                      Publisher,

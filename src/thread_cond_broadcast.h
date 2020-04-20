@@ -1,8 +1,8 @@
 #ifndef FPHIG_THREAD_COND_BROADCAST_H
 #define FPHIG_THREAD_COND_BROADCAST_H
 
-#include "melphig/melphig.h"
-#include "melphig/thread_cond.h"
+#include "fphig/fphig.h"
+#include "fphig/thread_cond.h"
 
 
 fphig

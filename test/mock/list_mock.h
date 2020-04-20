@@ -1,8 +1,8 @@
 #ifndef LIST_MOCK_H
 #define LIST_MOCK_H
 
-#include "melphig/melphig.h"
-#include "melphig/list.h"
+#include "fphig/fphig.h"
+#include "fphig/list.h"
 
 fphig
 real_fphig_list_push( struct fphig_list*                      List,

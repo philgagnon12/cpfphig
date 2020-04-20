@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/thread_join.h"
-#include "melphig/thread.h"
+#include "fphig/thread_join.h"
+#include "fphig/thread.h"
 
 #include <pthread.h>
 

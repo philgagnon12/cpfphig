@@ -1,9 +1,9 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/mutex_unlock.h"
-#include "melphig/mutex.h"
+#include "fphig/mutex_unlock.h"
+#include "fphig/mutex.h"
 
 #include <pthread.h>
 

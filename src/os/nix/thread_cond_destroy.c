@@ -1,10 +1,10 @@
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 #ifdef FPHIG_HAVE_PTHREAD_H
 
-#include "melphig/thread_cond_destroy.h"
-#include "melphig/thread_cond.h"
-#include "melphig/free.h"
+#include "fphig/thread_cond_destroy.h"
+#include "fphig/thread_cond.h"
+#include "fphig/free.h"
 
 #include <stdio.h>
 #include <string.h>

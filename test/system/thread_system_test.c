@@ -1,8 +1,8 @@
-#include "melphig/melphig.h"
-#include "melphig/thread.h"
-#include "melphig/thread_create.h"
-#include "melphig/thread_join.h"
-#include "melphig/thread_exit.h"
+#include "fphig/fphig.h"
+#include "fphig/thread.h"
+#include "fphig/thread_create.h"
+#include "fphig/thread_join.h"
+#include "fphig/thread_exit.h"
 
 #include <stdarg.h>
 #include <stddef.h>

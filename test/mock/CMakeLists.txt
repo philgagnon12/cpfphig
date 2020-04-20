@@ -1,5 +1,5 @@
 set(MOCKS_LIST 
-    ${FPHIG_TEST}/mock/melphig_mock.c
+    ${FPHIG_TEST}/mock/fphig_mock.c
     ${FPHIG_TEST}/mock/syntax_error_message_mock.c
     ${FPHIG_TEST}/mock/position_after_white_spaces_mock.c
     ${FPHIG_TEST}/mock/malloc_mock.c

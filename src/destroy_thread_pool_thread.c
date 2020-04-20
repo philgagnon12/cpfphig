@@ -1,13 +1,13 @@
-#include "melphig/melphig.h"
-#include "melphig/thread_pool_thread.h"
-#include "melphig/malloc.h"
-#include "melphig/free.h"
-#include "melphig/thread_cond_signal.h"
-#include "melphig/thread_join.h"
-#include "melphig/thread_cond_destroy.h"
-#include "melphig/mutex_destroy.h"
-#include "melphig/mutex_lock.h"
-#include "melphig/mutex_unlock.h"
+#include "fphig/fphig.h"
+#include "fphig/thread_pool_thread.h"
+#include "fphig/malloc.h"
+#include "fphig/free.h"
+#include "fphig/thread_cond_signal.h"
+#include "fphig/thread_join.h"
+#include "fphig/thread_cond_destroy.h"
+#include "fphig/mutex_destroy.h"
+#include "fphig/mutex_lock.h"
+#include "fphig/mutex_unlock.h"
 
 fphig
 fphig_destroy_thread_pool_thread( struct fphig_thread_pool_thread*      Thread_Pool_Thread,

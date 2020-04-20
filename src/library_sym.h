@@ -1,7 +1,7 @@
 #ifndef FPHIG_LIBRARY_SYM_H
 #define FPHIG_LIBRARY_SYM_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 fphig
 fphig_library_sym( void*                                    Handle,

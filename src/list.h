@@ -1,7 +1,7 @@
 #ifndef FPHIG_LIST_H
 #define FPHIG_LIST_H
 
-#include "melphig/melphig.h"
+#include "fphig/fphig.h"
 
 struct fphig_list_node;
 struct fphig_list_node

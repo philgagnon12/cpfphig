@@ -1,11 +1,10 @@
-# cmake .. -DBUILD_TESTING=YES -DCMAKE_BUILD_TYPE=Debug -DCMAKE_COMPILER_IS_GNUCXX=YES -DCOVERAGE=YES -DFPHIG_WITH_FLUIDSYNTH=YES -DFPHIG_WITH_LUA=YES
-#powershell new-item -itemtype symboliclink -path soemthing -value somtheingelse
+# cmake .. -DBUILD_TESTING=YES -DCMAKE_BUILD_TYPE=Debug -DCMAKE_COMPILER_IS_GNUCXX=YES -DCOVERAGE=YES 
 
 # TODO add warning flags to compiler
 
 cmake_minimum_required(VERSION 3.13.2)
 
-project( melphig
+project( fphig
          VERSION 0.1
          LANGUAGES C )
 
@@ -40,14 +39,14 @@ include(CheckFunctionExists)
 
 check_function_exists(strnstr FPHIG_HAVE_STRNSTR)
 
-configure_file( melphig_config.cmake.in melphig_config.h )
-include_directories( ${melphig_BINARY_DIR} )
+configure_file( fphig_config.cmake.in fphig_config.h )
+include_directories( ${fphig_BINARY_DIR} )
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )
 
-set(FPHIG_INCLUDE ${melphig_SOURCE_DIR}/include)
-set(FPHIG_SRC ${melphig_SOURCE_DIR}/src)
-set(FPHIG_TEST ${melphig_SOURCE_DIR}/test)
+set(FPHIG_INCLUDE ${fphig_SOURCE_DIR}/include)
+set(FPHIG_SRC ${fphig_SOURCE_DIR}/src)
+set(FPHIG_TEST ${fphig_SOURCE_DIR}/test)
 
 
 if( ${BUILD_TESTING} )
@@ -79,8 +78,8 @@ if( CTAGS_RETURN EQUAL 0 )
         add_custom_target( ctags ALL )
         add_custom_command( TARGET ctags
             POST_BUILD
-            COMMAND ${FPHIG_CTAGS} -R --exclude=.git ${melphig_SOURCE_DIR}/src ${melphig_SOURCE_DIR}/test/mock
-            WORKING_DIRECTORY ${melphig_SOURCE_DIR}
+            COMMAND ${FPHIG_CTAGS} -R --exclude=.git ${fphig_SOURCE_DIR}/src ${fphig_SOURCE_DIR}/test/mock
+            WORKING_DIRECTORY ${fphig_SOURCE_DIR}
             COMMENT "running ctags"
         )
     else()

@@ -1,13 +1,13 @@
-#include "melphig/melphig.h"
-#include "melphig/publisher_publish.h"
-#include "melphig/publisher.h"
-#include "melphig/list.h"
-#include "melphig/thread_cond_broadcast.h"
-#include "melphig/thread_cond_wait.h"
-#include "melphig/mutex_lock.h"
-#include "melphig/mutex_unlock.h"
-#include "melphig/thread_cond_signal.h"
-#include "melphig/assert.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher_publish.h"
+#include "fphig/publisher.h"
+#include "fphig/list.h"
+#include "fphig/thread_cond_broadcast.h"
+#include "fphig/thread_cond_wait.h"
+#include "fphig/mutex_lock.h"
+#include "fphig/mutex_unlock.h"
+#include "fphig/thread_cond_signal.h"
+#include "fphig/assert.h"
 
 #include <string.h>
 #include <stdio.h>

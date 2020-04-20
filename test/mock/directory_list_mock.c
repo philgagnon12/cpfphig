@@ -1,6 +1,6 @@
-#include "melphig/melphig.h"
-#include "melphig/directory_list.h"
-#include "melphig/list.h"
+#include "fphig/fphig.h"
+#include "fphig/directory_list.h"
+#include "fphig/list.h"
 
 #include <stdarg.h>
 #include <stddef.h>

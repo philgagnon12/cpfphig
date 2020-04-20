@@ -1,10 +1,10 @@
 #ifndef FPHIG_SUBSCRIPTION_H
 #define FPHIG_SUBSCRIPTION_H
 
-#include "melphig/melphig.h"
-#include "melphig/publisher.h"
-#include "melphig/thread.h"
-#include "melphig/thread_cond.h"
+#include "fphig/fphig.h"
+#include "fphig/publisher.h"
+#include "fphig/thread.h"
+#include "fphig/thread_cond.h"
 
 
 typedef fphig (fphig_subscription_routine_symbol)( void*                                   Publisher_Data,

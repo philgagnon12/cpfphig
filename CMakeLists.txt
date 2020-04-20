@@ -22,8 +22,7 @@ include(CheckFunctionExists)
 
 check_function_exists(strnstr FPHIG_HAVE_STRNSTR)
 
-configure_file( fphig_config.cmake.in fphig_config.h )
-include_directories( ${fphig_BINARY_DIR} )
+configure_file( fphig_config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/src/fphig_config.h )
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )
 
@@ -37,7 +36,6 @@ if( ${BUILD_TESTING} )
 endif()
 
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/include )
 # TODO RPATH HANDLING
 # https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling
 # Currently the below setting will use absolute path for RPATH, when doing an install package this needs to be dynamic

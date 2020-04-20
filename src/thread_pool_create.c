@@ -3,23 +3,23 @@
 #include "melphig/mutex_attr.h"
 #include "melphig/mutex_init.h"
 
-mphig
-mphig_thread_pool_create( struct mphig_thread_pool*             Thread_Pool,
-                          MELPHIG_OPTIONAL struct mphig_error*  Error )
+fphig
+fphig_thread_pool_create( struct fphig_thread_pool*             Thread_Pool,
+                          FPHIG_OPTIONAL struct fphig_error*  Error )
 {
-    mphig                       ret             = MELPHIG_FAIL;
-    struct mphig_mutex_attr     mutex_attr      = MELPHIG_CONST_MPHIG_MUTEX_ATTR;
+    fphig                       ret             = FPHIG_FAIL;
+    struct fphig_mutex_attr     mutex_attr      = FPHIG_CONST_MPHIG_MUTEX_ATTR;
 
     // NULL checks
     if( Thread_Pool == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Thread_Pool is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Thread_Pool is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    return mphig_mutex_init( &Thread_Pool->mutex,
+    return fphig_mutex_init( &Thread_Pool->mutex,
                              &mutex_attr,
                              Error );
 }

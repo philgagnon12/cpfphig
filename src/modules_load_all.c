@@ -9,29 +9,29 @@
 #include "string.h"
 #include "stdio.h"
 
-#define MELPHIG_BUFFER_SIZE ( 0x04FF )
+#define FPHIG_BUFFER_SIZE ( 0x04FF )
 
-mphig
-mphig_modules_load_all( struct mphig_list                         Modules_Directories,
-                        mphig_module_load_symbol*                 Mphig_Module_Load,
-                        struct mphig_list*                        Modules,
-                        MELPHIG_OPTIONAL struct mphig_error*      Error )
+fphig
+fphig_modules_load_all( struct fphig_list                         Modules_Directories,
+                        fphig_module_load_symbol*                 Mphig_Module_Load,
+                        struct fphig_list*                        Modules,
+                        FPHIG_OPTIONAL struct fphig_error*      Error )
 {
-    mphig                       ret                             = MELPHIG_FAIL;
-    struct mphig_list_iterator  plugins_directories_iterator    = { &Modules_Directories, NULL };
+    fphig                       ret                             = FPHIG_FAIL;
+    struct fphig_list_iterator  plugins_directories_iterator    = { &Modules_Directories, NULL };
     char*                       directory                       = NULL;
-    mphig                       next_directory_ret              = MELPHIG_FAIL;
-    struct mphig_error          next_directory_error            = MELPHIG_CONST_MPHIG_ERROR;
-    struct mphig_list           file_names                      = MELPHIG_CONST_MPHIG_LIST;
-    struct mphig_list_iterator  file_names_iterator             = { &file_names, NULL };
+    fphig                       next_directory_ret              = FPHIG_FAIL;
+    struct fphig_error          next_directory_error            = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_list           file_names                      = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list_iterator  file_names_iterator             = { &file_names, NULL };
     char*                       file_name                       = NULL;
-    mphig                       next_file_name_ret              = MELPHIG_FAIL;
-    struct mphig_error          next_file_name_error            = MELPHIG_CONST_MPHIG_ERROR;
-    struct mphig_list           paths                           = MELPHIG_CONST_MPHIG_LIST;
-    struct mphig_list_iterator  paths_iterator                  = { &paths, NULL };
-    mphig                       next_path_ret                   = MELPHIG_FAIL;
-    struct mphig_error          next_path_error                 = MELPHIG_CONST_MPHIG_ERROR;
-    char                        path_buffer[MELPHIG_BUFFER_SIZE];
+    fphig                       next_file_name_ret              = FPHIG_FAIL;
+    struct fphig_error          next_file_name_error            = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_list           paths                           = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list_iterator  paths_iterator                  = { &paths, NULL };
+    fphig                       next_path_ret                   = FPHIG_FAIL;
+    struct fphig_error          next_path_error                 = FPHIG_CONST_MPHIG_ERROR;
+    char                        path_buffer[FPHIG_BUFFER_SIZE];
     int                         path_buffer_len                 = 0;
     char*                       path                            = NULL;
     char*                       full_path                       = NULL;
@@ -48,39 +48,39 @@ mphig_modules_load_all( struct mphig_list                         Modules_Direct
     if( Mphig_Module_Load == NULL || Modules == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Mphig_Module_Load or Modules is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Mphig_Module_Load or Modules is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     // Assume ok
-    ret = MELPHIG_OK;
+    ret = FPHIG_OK;
 
     file_names_iterator.current_node = NULL;
-    while( MELPHIG_OK == ( next_directory_ret = mphig_list_next( &plugins_directories_iterator,
+    while( FPHIG_OK == ( next_directory_ret = fphig_list_next( &plugins_directories_iterator,
                                                                  &directory,
                                                                  &next_directory_error ) ) &&
-           ret == MELPHIG_OK )
+           ret == FPHIG_OK )
     {
-        if( MELPHIG_FAIL == ( ret = mphig_directory_list( directory,
+        if( FPHIG_FAIL == ( ret = fphig_directory_list( directory,
                                                           &file_names,
                                                           Error ) ) )
         {
             break;
         }
-        if( ret == MELPHIG_OK )
+        if( ret == FPHIG_OK )
         {
-            while( ret == MELPHIG_OK &&
-                   MELPHIG_OK == ( next_file_name_ret = mphig_list_next( &file_names_iterator,
+            while( ret == FPHIG_OK &&
+                   FPHIG_OK == ( next_file_name_ret = fphig_list_next( &file_names_iterator,
                                                                          &file_name,
                                                                          &next_file_name_error ) ) )
             {
                 memset( path_buffer,
                         0x00,
-                        MELPHIG_BUFFER_SIZE );
+                        FPHIG_BUFFER_SIZE );
 
                 snprintf( path_buffer,
-                          MELPHIG_BUFFER_SIZE,
+                          FPHIG_BUFFER_SIZE,
                           "%s/%s",
                           directory,
                           file_name );
@@ -88,9 +88,9 @@ mphig_modules_load_all( struct mphig_list                         Modules_Direct
                 // Reset
                 path = NULL;
 
-                path_buffer_len = strnlen( path_buffer, MELPHIG_BUFFER_SIZE-1);
+                path_buffer_len = strnlen( path_buffer, FPHIG_BUFFER_SIZE-1);
 
-                if( MELPHIG_OK == ( ret = mphig_malloc( path_buffer_len+1,
+                if( FPHIG_OK == ( ret = fphig_malloc( path_buffer_len+1,
                                                         &path,
                                                         Error ) ) )
                 {
@@ -102,62 +102,62 @@ mphig_modules_load_all( struct mphig_list                         Modules_Direct
                             path_buffer,
                             path_buffer_len );
 
-                    ret = mphig_list_push( &paths,
+                    ret = fphig_list_push( &paths,
                                            path,
                                            Error );
 
                     path = NULL;
                 }
             }
-            if( next_file_name_ret == MELPHIG_FAIL &&
-                next_file_name_error.error_type == mphig_system_error )
+            if( next_file_name_ret == FPHIG_FAIL &&
+                next_file_name_error.error_type == fphig_system_error )
             {
                 if( Error != NULL )
                     *Error = next_file_name_error;
 
-                ret = MELPHIG_FAIL;
+                ret = FPHIG_FAIL;
             }
-            if( ret == MELPHIG_OK )
+            if( ret == FPHIG_OK )
             {
                 file_names_iterator.current_node = file_names.last;
             }
         }
     } // while
 
-    if( next_directory_ret == MELPHIG_FAIL &&
-        next_directory_error.error_type == mphig_system_error )
+    if( next_directory_ret == FPHIG_FAIL &&
+        next_directory_error.error_type == fphig_system_error )
     {
         if( Error != NULL )
             *Error = next_directory_error;
 
-        ret = MELPHIG_FAIL;
+        ret = FPHIG_FAIL;
     }
 
-    if( ret == MELPHIG_OK )
+    if( ret == FPHIG_OK )
     {
-        while( MELPHIG_OK == ( next_path_ret = mphig_list_next( &paths_iterator,
+        while( FPHIG_OK == ( next_path_ret = fphig_list_next( &paths_iterator,
                                                                 &full_path,
                                                                 &next_path_error ) ) )
         {
             // Silently skip the file when it doesnt have one of the plugin extensions
             extension = NULL;
 
-            for( extension_index = 0; ret == MELPHIG_OK && extension_index < sizeof( module_extensions ) / sizeof( char* ) && extension == NULL; extension_index++ )
+            for( extension_index = 0; ret == FPHIG_OK && extension_index < sizeof( module_extensions ) / sizeof( char* ) && extension == NULL; extension_index++ )
             {
-                ret = mphig_strnstr( full_path,
+                ret = fphig_strnstr( full_path,
                                      module_extensions[extension_index],
-                                     MELPHIG_BUFFER_SIZE,
+                                     FPHIG_BUFFER_SIZE,
                                      &extension,
                                      Error );
             }
-            if( ret == MELPHIG_OK )
+            if( ret == FPHIG_OK )
             {
                 if( extension == NULL )
                 {
                     continue;
                 }
 
-                if( MELPHIG_FAIL == ( ret = Mphig_Module_Load( full_path,
+                if( FPHIG_FAIL == ( ret = Mphig_Module_Load( full_path,
                                                                Modules,
                                                                Error ) ) )
                 {
@@ -167,23 +167,23 @@ mphig_modules_load_all( struct mphig_list                         Modules_Direct
         } // while
     }
 
-    if( next_path_ret == MELPHIG_FAIL &&
-        next_path_error.error_type == mphig_system_error )
+    if( next_path_ret == FPHIG_FAIL &&
+        next_path_error.error_type == fphig_system_error )
     {
         if( Error != NULL )
             *Error = next_path_error;
 
-        ret = MELPHIG_FAIL;
+        ret = FPHIG_FAIL;
     }
 
     // clean up
-    mphig_destroy_directory_list( &paths, NULL );
-    mphig_destroy_directory_list( &file_names, NULL );
+    fphig_destroy_directory_list( &paths, NULL );
+    fphig_destroy_directory_list( &file_names, NULL );
 
     // clean up on error
-    if( ret == MELPHIG_FAIL )
+    if( ret == FPHIG_FAIL )
     {
-        mphig_free( &path, NULL );
+        fphig_free( &path, NULL );
 
     }
 

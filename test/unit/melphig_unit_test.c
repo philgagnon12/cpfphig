@@ -10,11 +10,11 @@
 
 static void arguments( void** state )
 {
-    struct mphig_error error = {};
+    struct fphig_error error = {};
 
     printf("invalid Message\n");
-    assert_int_equal( MELPHIG_FAIL,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_FAIL,
+                      fphig_error_message( fphig_system_error,
                                            NULL,
                                            &error,
                                            NULL,
@@ -22,8 +22,8 @@ static void arguments( void** state )
                                            0 ) );
 
     printf("invalid Error\n");
-    assert_int_equal( MELPHIG_FAIL,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_FAIL,
+                      fphig_error_message( fphig_system_error,
                                            "error message",
                                            NULL,
                                            NULL,
@@ -33,27 +33,27 @@ static void arguments( void** state )
 
 static void error_type_into_error( void** state )
 {
-    struct mphig_error error = {};
+    struct fphig_error error = {};
 
     printf("error_type same as arg\n");
-    assert_int_equal( MELPHIG_OK,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_OK,
+                      fphig_error_message( fphig_system_error,
                                            "error_message",
                                            &error,
                                            NULL,
                                            NULL,
                                            0 ) );
 
-    assert_int_equal( mphig_system_error, error.error_type );
+    assert_int_equal( fphig_system_error, error.error_type );
 }
 
 static void message_into_error( void** state )
 {
-    struct mphig_error error = {};
+    struct fphig_error error = {};
 
     printf("message with valid message_size and exact string length\n");
-    assert_int_equal( MELPHIG_OK,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_OK,
+                      fphig_error_message( fphig_system_error,
                                            "error_message",
                                            &error,
                                            NULL,
@@ -68,11 +68,11 @@ static void message_into_error( void** state )
 
 static void file_into_error( void** state )
 {
-    struct mphig_error error = {};
+    struct fphig_error error = {};
 
     printf("file with valid file_size and exact string length\n");
-    assert_int_equal( MELPHIG_OK,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_OK,
+                      fphig_error_message( fphig_system_error,
                                            "error_message",
                                            &error,
                                            "file.c",
@@ -88,11 +88,11 @@ static void file_into_error( void** state )
 
 static void function_into_error( void** state )
 {
-    struct mphig_error error = {};
+    struct fphig_error error = {};
 
     printf("function with valid function_size and exact string length\n");
-    assert_int_equal( MELPHIG_OK,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_OK,
+                      fphig_error_message( fphig_system_error,
                                            "error_message",
                                            &error,
                                            NULL,
@@ -107,11 +107,11 @@ static void function_into_error( void** state )
 
 static void line_into_error( void** state )
 {
-    struct mphig_error error = {};
+    struct fphig_error error = {};
 
     printf("line same as arg\n");
-    assert_int_equal( MELPHIG_OK,
-                      mphig_error_message( mphig_system_error,
+    assert_int_equal( FPHIG_OK,
+                      fphig_error_message( fphig_system_error,
                                            "error_message",
                                            &error,
                                            NULL,

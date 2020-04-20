@@ -1,13 +1,13 @@
-#ifndef MELPHIG_THREAD_COND_BROADCAST_H
-#define MELPHIG_THREAD_COND_BROADCAST_H
+#ifndef FPHIG_THREAD_COND_BROADCAST_H
+#define FPHIG_THREAD_COND_BROADCAST_H
 
 #include "melphig/melphig.h"
 #include "melphig/thread_cond.h"
 
 
-mphig
-mphig_thread_cond_broadcast( struct mphig_thread_cond*             Cond,
-                             MELPHIG_OPTIONAL struct mphig_error*  Error );
+fphig
+fphig_thread_cond_broadcast( struct fphig_thread_cond*             Cond,
+                             FPHIG_OPTIONAL struct fphig_error*  Error );
 
 
 #endif

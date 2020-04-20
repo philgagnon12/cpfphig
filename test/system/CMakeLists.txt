@@ -1,7 +1,7 @@
 find_package( Threads )
 
 function(melphig_add_system_test PREFIX)
-    add_executable(${PREFIX}_system_test ${MELPHIG_TEST}/system/${PREFIX}_system_test.c )
+    add_executable(${PREFIX}_system_test ${FPHIG_TEST}/system/${PREFIX}_system_test.c )
 
     find_package(cmocka REQUIRED)
     target_include_directories( ${PREFIX}_system_test PRIVATE ${cmocka_INCLUDE_DIRS})

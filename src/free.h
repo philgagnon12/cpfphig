@@ -1,5 +1,5 @@
-#ifndef MELPHIG_FREE_H
-#define MELPHIG_FREE_H
+#ifndef FPHIG_FREE_H
+#define FPHIG_FREE_H
 
 #include "melphig/melphig.h"
 
@@ -7,10 +7,10 @@
 // Declared as void* to avoid compiler warnings
 // HOW TO USE
 // int* number = NULL;
-// mphig_malloc( sizeof( int ), &number, NULL );
-// mphig_free( &number, NULL );
-mphig
-mphig_free( void*                                   Ptr,
-            MELPHIG_OPTIONAL struct mphig_error*    Error );
+// fphig_malloc( sizeof( int ), &number, NULL );
+// fphig_free( &number, NULL );
+fphig
+fphig_free( void*                                   Ptr,
+            FPHIG_OPTIONAL struct fphig_error*    Error );
 
 #endif

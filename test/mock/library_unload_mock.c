@@ -6,15 +6,15 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_library_unload( void*                                    Handle,
-                      MELPHIG_OPTIONAL struct mphig_error*     Error )
+fphig
+fphig_library_unload( void*                                    Handle,
+                      FPHIG_OPTIONAL struct fphig_error*     Error )
 {
-    mphig                   ret    = MELPHIG_FAIL;
+    fphig                   ret    = FPHIG_FAIL;
 
     assert_non_null( Handle );
 
-    ret = (mphig)mock();
+    ret = (fphig)mock();
 
     return ret;
 }

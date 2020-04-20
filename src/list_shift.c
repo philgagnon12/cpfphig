@@ -2,20 +2,20 @@
 #include "melphig/list.h"
 #include "melphig/free.h"
 
-mphig
-REAL(mphig_list_shift)( struct mphig_list*                      List,
+fphig
+REAL(fphig_list_shift)( struct fphig_list*                      List,
                         void*                                   Item,
-                        MELPHIG_OPTIONAL struct mphig_error*    Error )
+                        FPHIG_OPTIONAL struct fphig_error*    Error )
 {
     void*                   item    = NULL;
-    struct mphig_list_node* node    = NULL;
+    struct fphig_list_node* node    = NULL;
 
     if( List == NULL || Item == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "List or Item is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "List or Item is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     node = List->first;
@@ -23,11 +23,11 @@ REAL(mphig_list_shift)( struct mphig_list*                      List,
     if( node == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_user_error, "List is empty", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_user_error, "List is empty", Error, __FILE__, __FUNCTION__, __LINE__ );
 
         *(void**)Item = NULL;
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
         // Assign the new first item
@@ -36,10 +36,10 @@ REAL(mphig_list_shift)( struct mphig_list*                      List,
 
     item = node->item;
 
-    if( MELPHIG_FAIL == mphig_free( &node,
+    if( FPHIG_FAIL == fphig_free( &node,
                                     Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     *(void**)Item = item;
@@ -59,6 +59,6 @@ REAL(mphig_list_shift)( struct mphig_list*                      List,
         List->first->previous = NULL;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 

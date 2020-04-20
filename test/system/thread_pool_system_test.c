@@ -25,22 +25,22 @@ routine( void* Arg )
 
 static void create_task_and_destroy( void** state )
 {
-    struct mphig_thread_pool thread_pool    = MELPHIG_CONST_MPHIG_THREAD_POOL;
+    struct fphig_thread_pool thread_pool    = FPHIG_CONST_MPHIG_THREAD_POOL;
     struct timespec timestamp               = { 0, 0 };
     struct timespec realtime                = { 0, 0 };
 
     checked = 0;
 
-    assert_int_equal( MELPHIG_OK, mphig_thread_pool_create( &thread_pool,
+    assert_int_equal( FPHIG_OK, fphig_thread_pool_create( &thread_pool,
                                                             NULL ) );
 
 
-    assert_int_equal( MELPHIG_OK, mphig_thread_pool_task( &thread_pool,
+    assert_int_equal( FPHIG_OK, fphig_thread_pool_task( &thread_pool,
                                                           &routine,
                                                           NULL,
                                                           NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_thread_pool_task( &thread_pool,
+    assert_int_equal( FPHIG_OK, fphig_thread_pool_task( &thread_pool,
                                                           &routine,
                                                           NULL,
                                                           NULL ) );
@@ -54,7 +54,7 @@ static void create_task_and_destroy( void** state )
         assert_true( ( realtime.tv_sec - timestamp.tv_sec) < 2 );
     }
 
-    assert_int_equal( MELPHIG_OK, mphig_destroy_thread_pool( &thread_pool,
+    assert_int_equal( FPHIG_OK, fphig_destroy_thread_pool( &thread_pool,
                                                              NULL ) );
 }
 

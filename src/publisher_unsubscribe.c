@@ -8,19 +8,19 @@
 #include "melphig/thread_join.h"
 #include "melphig/free.h"
 
-mphig
-mphig_publisher_unsubscribe( struct mphig_subscription*             Subscription,
-                             MELPHIG_OPTIONAL struct mphig_error*   Error )
+fphig
+fphig_publisher_unsubscribe( struct fphig_subscription*             Subscription,
+                             FPHIG_OPTIONAL struct fphig_error*   Error )
 {
-    struct mphig_publisher*     publisher   = NULL;
+    struct fphig_publisher*     publisher   = NULL;
 
     // NULL checks
     if( Subscription == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Subscription is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Subscription is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     publisher = Subscription->publisher;
@@ -28,48 +28,48 @@ mphig_publisher_unsubscribe( struct mphig_subscription*             Subscription
     if( publisher == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Subscription->publisher is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Subscription->publisher is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    if( MELPHIG_FAIL == mphig_mutex_lock( &(publisher->mutex),
+    if( FPHIG_FAIL == fphig_mutex_lock( &(publisher->mutex),
                                           Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     publisher->unsubscribing_subscription = Subscription;
 
-    if( MELPHIG_FAIL == mphig_mutex_unlock( &(publisher->mutex),
+    if( FPHIG_FAIL == fphig_mutex_unlock( &(publisher->mutex),
                                             Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    if( MELPHIG_FAIL == mphig_publisher_publish( publisher,
+    if( FPHIG_FAIL == fphig_publisher_publish( publisher,
                                                  NULL,
-                                                 mphig_publisher_thread_cond_kind_abort,
+                                                 fphig_publisher_thread_cond_kind_abort,
                                                  Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    if( MELPHIG_FAIL == mphig_thread_join( &(Subscription->thread),
+    if( FPHIG_FAIL == fphig_thread_join( &(Subscription->thread),
                                            NULL,
                                            Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
 
-    if( MELPHIG_FAIL == mphig_free( Subscription,
+    if( FPHIG_FAIL == fphig_free( Subscription,
                                     Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 
 

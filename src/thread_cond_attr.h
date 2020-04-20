@@ -1,23 +1,23 @@
-#ifndef MELPHIG_THREAD_COND_ATTR_H
-#define MELPHIG_THREAD_COND_ATTR_H
+#ifndef FPHIG_THREAD_COND_ATTR_H
+#define FPHIG_THREAD_COND_ATTR_H
 
 #include "melphig/melphig.h"
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
+#ifdef FPHIG_HAVE_PTHREAD_H
 #include <pthread.h>
 #endif
 
-struct mphig_thread_cond_attr
+struct fphig_thread_cond_attr
 {
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
+#ifdef FPHIG_HAVE_PTHREAD_H
     pthread_condattr_t   pthread_cond_attr;
 #endif
 
 };
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
-#define MELPHIG_CONST_MPHIG_THREAD_COND_ATTR { 0 }
+#ifdef FPHIG_HAVE_PTHREAD_H
+#define FPHIG_CONST_MPHIG_THREAD_COND_ATTR { 0 }
 #endif
 
 #endif

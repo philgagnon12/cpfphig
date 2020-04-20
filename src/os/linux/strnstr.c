@@ -1,6 +1,6 @@
 #include "melphig/melphig.h"
 
-#ifndef MELPHIG_HAVE_STRNSTR
+#ifndef FPHIG_HAVE_STRNSTR
 
 #include "melphig/strnstr.h"
 
@@ -8,12 +8,12 @@
 #include <stdio.h>
 
 
-mphig
-mphig_strnstr( const char*                          Haystack,
+fphig
+fphig_strnstr( const char*                          Haystack,
                const char*                          Needle,
                size_t                               Len,
                char** const                         Occurence,
-               MELPHIG_OPTIONAL struct mphig_error* Error )
+               FPHIG_OPTIONAL struct fphig_error* Error )
 {
     char haystack_buffer[Len+1];
     const char* occurence = NULL;
@@ -22,9 +22,9 @@ mphig_strnstr( const char*                          Haystack,
     if( Haystack == NULL || Needle == NULL || Occurence == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Haystack, Needle or Occurence is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Haystack, Needle or Occurence is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     *Occurence = NULL;
@@ -32,7 +32,7 @@ mphig_strnstr( const char*                          Haystack,
     if( 0 == strnlen( Needle, Len ) )
     {
         *Occurence = NULL;
-        return MELPHIG_OK;
+        return FPHIG_OK;
     }
 
     memset( haystack_buffer,
@@ -53,7 +53,7 @@ mphig_strnstr( const char*                          Haystack,
         *Occurence = (char* const)(Haystack + (occurence - haystack_buffer));
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 
 #endif

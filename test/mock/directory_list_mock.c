@@ -7,21 +7,21 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_directory_list( const char*                           Directory,
-                      struct mphig_list*                    File_Names,
-                      MELPHIG_OPTIONAL struct mphig_error*  Error )
+fphig
+fphig_directory_list( const char*                           Directory,
+                      struct fphig_list*                    File_Names,
+                      FPHIG_OPTIONAL struct fphig_error*  Error )
 {
-    struct mphig_list*  file_names = NULL;
-    mphig               ret        = MELPHIG_FAIL;
+    struct fphig_list*  file_names = NULL;
+    fphig               ret        = FPHIG_FAIL;
 
     assert_non_null( Directory );
     assert_non_null( File_Names );
 
-    ret = (mphig)mock();
-    if( ret == MELPHIG_OK )
+    ret = (fphig)mock();
+    if( ret == FPHIG_OK )
     {
-        file_names = (struct mphig_list*)mock();
+        file_names = (struct fphig_list*)mock();
 
         *File_Names = *file_names;
     }

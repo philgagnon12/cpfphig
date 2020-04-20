@@ -1,11 +1,11 @@
-#ifndef MELPHIG_LIBRARY_LOAD_H
-#define MELPHIG_LIBRARY_LOAD_H
+#ifndef FPHIG_LIBRARY_LOAD_H
+#define FPHIG_LIBRARY_LOAD_H
 
 #include "melphig/melphig.h"
 
-mphig
-mphig_library_load( const char*                             File_Name,
+fphig
+fphig_library_load( const char*                             File_Name,
                     void**                                  Handle,
-                    MELPHIG_OPTIONAL struct mphig_error*    Error );
+                    FPHIG_OPTIONAL struct fphig_error*    Error );
 
 #endif

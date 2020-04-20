@@ -3,22 +3,22 @@
 #include <string.h>
 #include <stdio.h>
 
-mphig
-mphig_error_message( enum mphig_error_type          Error_Type,
+fphig
+fphig_error_message( enum fphig_error_type          Error_Type,
                      const char*                    Message,
-                     struct mphig_error*            Error,
-                     MELPHIG_OPTIONAL const char*   File,
-                     MELPHIG_OPTIONAL const char*   Function,
-                     MELPHIG_OPTIONAL size_t        Line )
+                     struct fphig_error*            Error,
+                     FPHIG_OPTIONAL const char*   File,
+                     FPHIG_OPTIONAL const char*   Function,
+                     FPHIG_OPTIONAL size_t        Line )
 {
     // The return fail can never really be caught but prevent further damage
     if( Message == NULL || Error == NULL )
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
 
     Error->error_type       = Error_Type;
-    Error->message_size     = MELPHIG_ERROR_MESSAGE_SIZE;
-    Error->file_size        = MELPHIG_ERROR_FILE_SIZE;
-    Error->function_size    = MELPHIG_ERROR_FUNCTION_SIZE;
+    Error->message_size     = FPHIG_ERROR_MESSAGE_SIZE;
+    Error->file_size        = FPHIG_ERROR_FILE_SIZE;
+    Error->function_size    = FPHIG_ERROR_FUNCTION_SIZE;
     Error->line             = 0;
 
     memset( Error->message,
@@ -61,7 +61,7 @@ mphig_error_message( enum mphig_error_type          Error_Type,
         Error->line = Line;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 
 

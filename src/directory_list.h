@@ -4,9 +4,9 @@
 #include "melphig/melphig.h"
 #include "melphig/list.h"
 
-mphig
-mphig_directory_list( const char*                           Directory,
-                      struct mphig_list*                    File_Names,
-                      MELPHIG_OPTIONAL struct mphig_error*  Error );
+fphig
+fphig_directory_list( const char*                           Directory,
+                      struct fphig_list*                    File_Names,
+                      FPHIG_OPTIONAL struct fphig_error*  Error );
 
 #endif

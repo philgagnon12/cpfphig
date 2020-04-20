@@ -12,20 +12,20 @@
 
 static void init_lock_unlock_destroy( void** state )
 {
-    struct mphig_mutex          mutex       = MELPHIG_CONST_MPHIG_MUTEX;
-    struct mphig_mutex_attr     mutex_attr  = MELPHIG_CONST_MPHIG_MUTEX_ATTR;
+    struct fphig_mutex          mutex       = FPHIG_CONST_MPHIG_MUTEX;
+    struct fphig_mutex_attr     mutex_attr  = FPHIG_CONST_MPHIG_MUTEX_ATTR;
 
-    assert_int_equal( MELPHIG_OK, mphig_mutex_init( &mutex,
+    assert_int_equal( FPHIG_OK, fphig_mutex_init( &mutex,
                                                     &mutex_attr,
                                                     NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_mutex_lock( &mutex,
+    assert_int_equal( FPHIG_OK, fphig_mutex_lock( &mutex,
                                                     NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_mutex_unlock( &mutex,
+    assert_int_equal( FPHIG_OK, fphig_mutex_unlock( &mutex,
                                                       NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_mutex_destroy( &mutex,
+    assert_int_equal( FPHIG_OK, fphig_mutex_destroy( &mutex,
                                                        NULL ) );
 
 }

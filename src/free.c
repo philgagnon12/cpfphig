@@ -3,22 +3,22 @@
 
 #include "stdlib.h"
 
-mphig
-mphig_free( void*                                   Ptr,
-            MELPHIG_OPTIONAL struct mphig_error*    Error )
+fphig
+fphig_free( void*                                   Ptr,
+            FPHIG_OPTIONAL struct fphig_error*    Error )
 {
     // NULL check
     if( Ptr == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Ptr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Ptr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     free( *(void**)Ptr );
     *(void**)Ptr = NULL;
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 

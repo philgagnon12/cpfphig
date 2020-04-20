@@ -3,18 +3,18 @@
 
 #include <stdlib.h>
 
-mphig
-mphig_malloc( const size_t                          Size,
+fphig
+fphig_malloc( const size_t                          Size,
               void*                                 Ptr,
-              MELPHIG_OPTIONAL struct mphig_error*  Error )
+              FPHIG_OPTIONAL struct fphig_error*  Error )
 {
     // NULL checks
     if( Ptr == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Ptr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Ptr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     *(void**)Ptr = malloc( Size );
@@ -22,12 +22,12 @@ mphig_malloc( const size_t                          Size,
     if( *(void**)Ptr == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "malloc did not allocate", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "malloc did not allocate", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 
 

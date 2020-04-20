@@ -1,6 +1,6 @@
 #include "melphig/melphig.h"
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
+#ifdef FPHIG_HAVE_PTHREAD_H
 
 #include "melphig/thread_cond.h"
 #include "melphig/mutex.h"
@@ -13,13 +13,13 @@
 
 #include <math.h>
 
-mphig
-mphig_thread_cond_timed_wait( struct mphig_thread_cond*               Cond,
-                              struct mphig_mutex*                     Mutex,
+fphig
+fphig_thread_cond_timed_wait( struct fphig_thread_cond*               Cond,
+                              struct fphig_mutex*                     Mutex,
                               int                                     Milliseconds,
-                              MELPHIG_OPTIONAL struct mphig_error*    Error )
+                              FPHIG_OPTIONAL struct fphig_error*    Error )
 {
-    mphig           ret                     = MELPHIG_FAIL;
+    fphig           ret                     = FPHIG_FAIL;
     struct timespec milliseconds_timespec   = { 0, 0 };
     int             timedwait_ret           = 0;
     struct timespec realtime                = { 0, 0 };
@@ -28,9 +28,9 @@ mphig_thread_cond_timed_wait( struct mphig_thread_cond*               Cond,
     if( Cond == NULL || Mutex == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Cond or Mutex is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Cond or Mutex is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     if( Milliseconds > 0 )
@@ -51,19 +51,19 @@ mphig_thread_cond_timed_wait( struct mphig_thread_cond*               Cond,
     switch( timedwait_ret )
     {
         case 0:
-            ret = MELPHIG_OK;
+            ret = FPHIG_OK;
             break;
         case ETIMEDOUT:
             if( Error != NULL )
-                mphig_error_message( mphig_user_error, "pthread_cond_timedwait time exceeded", Error, __FILE__, __FUNCTION__, __LINE__ );
+                fphig_error_message( fphig_user_error, "pthread_cond_timedwait time exceeded", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-            ret = MELPHIG_FAIL;
+            ret = FPHIG_FAIL;
             break;
         default:
             if( Error != NULL )
-                mphig_error_message( mphig_user_error, "pthread_cond_timedwait failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+                fphig_error_message( fphig_user_error, "pthread_cond_timedwait failed", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-            ret = MELPHIG_FAIL;
+            ret = FPHIG_FAIL;
     }
 
     return ret;

@@ -11,9 +11,9 @@ static
 void
 defer_routine( void* Arg )
 {
-    struct mphig_deferred* deferred = NULL;
+    struct fphig_deferred* deferred = NULL;
 
-    mphig_assert( NULL != Arg,
+    fphig_assert( NULL != Arg,
                   "Arg is NULL",
                   __FILE__,
                   __FUNCTION__,
@@ -21,8 +21,8 @@ defer_routine( void* Arg )
 
     deferred = Arg;
 
-    mphig_assert( MELPHIG_OK == mphig_sleep( deferred->delay_milliseconds, NULL ),
-                  "mphig_sleep failed",
+    fphig_assert( FPHIG_OK == fphig_sleep( deferred->delay_milliseconds, NULL ),
+                  "fphig_sleep failed",
                   __FILE__,
                   __FUNCTION__,
                   __LINE__ );
@@ -30,31 +30,31 @@ defer_routine( void* Arg )
     deferred->routine( deferred->routine_arg );
 }
 
-mphig
-mphig_defer( mphig_defer_routine_symbol*            Routine,
+fphig
+fphig_defer( fphig_defer_routine_symbol*            Routine,
              void*                                  Routine_Arg,
              int                                    Delay_Milliseconds,
-             struct mphig_thread_pool*              Thread_Pool,
-             MELPHIG_OPTIONAL struct mphig_error*   Error )
+             struct fphig_thread_pool*              Thread_Pool,
+             FPHIG_OPTIONAL struct fphig_error*   Error )
 {
-    mphig                               ret             = MELPHIG_FAIL;
-    struct mphig_deferred*              deferred        = NULL;
-    static const struct mphig_deferred  const_deferred  = MELPHIG_CONST_MPHIG_DEFERRED;
+    fphig                               ret             = FPHIG_FAIL;
+    struct fphig_deferred*              deferred        = NULL;
+    static const struct fphig_deferred  const_deferred  = FPHIG_CONST_MPHIG_DEFERRED;
 
     // NULL checks
     if( Routine == NULL || Thread_Pool == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "Routine or Thread_Pool is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "Routine or Thread_Pool is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    if( MELPHIG_FAIL == mphig_malloc( sizeof( struct mphig_deferred ),
+    if( FPHIG_FAIL == fphig_malloc( sizeof( struct fphig_deferred ),
                                       &deferred,
                                       Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     *deferred = const_deferred;
@@ -63,17 +63,17 @@ mphig_defer( mphig_defer_routine_symbol*            Routine,
     deferred->routine_arg           = Routine_Arg;
     deferred->delay_milliseconds    = Delay_Milliseconds;
 
-    if( MELPHIG_OK == ( ret = mphig_thread_pool_task( Thread_Pool,
+    if( FPHIG_OK == ( ret = fphig_thread_pool_task( Thread_Pool,
                                                       &defer_routine,
                                                       deferred,
                                                       Error ) ) )
     {
-        ret = MELPHIG_OK;
+        ret = FPHIG_OK;
     }
 
-    if( ret == MELPHIG_FAIL )
+    if( ret == FPHIG_FAIL )
     {
-        mphig_free( &deferred,
+        fphig_free( &deferred,
                     NULL );
     }
 

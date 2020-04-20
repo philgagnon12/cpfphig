@@ -16,52 +16,52 @@
 static int checked = 0;
 
 static
-mphig
+fphig
 subscription_routine( void*                                   Publisher_Data,
                       void*                                   Subscription_Data,
-                      MELPHIG_OPTIONAL struct mphig_error*    Error )
+                      FPHIG_OPTIONAL struct fphig_error*    Error )
 {
     checked += 1;
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 
 
 
 static void create_subscribe_publish_destroy( void** state )
 {
-    struct mphig_publisher      publisher               = MELPHIG_CONST_MPHIG_PUBLISHER;
-    struct mphig_subscription*  first_subscription      = NULL;
-    struct mphig_subscription*  second_subscription     = NULL;
-    struct mphig_subscription*  third_subscription      = NULL;
+    struct fphig_publisher      publisher               = FPHIG_CONST_MPHIG_PUBLISHER;
+    struct fphig_subscription*  first_subscription      = NULL;
+    struct fphig_subscription*  second_subscription     = NULL;
+    struct fphig_subscription*  third_subscription      = NULL;
 
-    assert_int_equal( MELPHIG_OK, mphig_publisher_create( &publisher,
+    assert_int_equal( FPHIG_OK, fphig_publisher_create( &publisher,
                                                           NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_publisher_subscribe( &publisher,
+    assert_int_equal( FPHIG_OK, fphig_publisher_subscribe( &publisher,
                                                              NULL,
                                                              &subscription_routine,
                                                              &first_subscription,
                                                              NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_publisher_subscribe( &publisher,
+    assert_int_equal( FPHIG_OK, fphig_publisher_subscribe( &publisher,
                                                              NULL,
                                                              &subscription_routine,
                                                              &second_subscription,
                                                              NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_publisher_publish( &publisher,
+    assert_int_equal( FPHIG_OK, fphig_publisher_publish( &publisher,
                                                            NULL,
-                                                           mphig_publisher_thread_cond_kind_data,
+                                                           fphig_publisher_thread_cond_kind_data,
                                                            NULL ) );
 
     // Wont get run
-    assert_int_equal( MELPHIG_OK, mphig_publisher_subscribe( &publisher,
+    assert_int_equal( FPHIG_OK, fphig_publisher_subscribe( &publisher,
                                                              NULL,
                                                              &subscription_routine,
                                                              &third_subscription,
                                                              NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_publisher_destroy( &publisher,
+    assert_int_equal( FPHIG_OK, fphig_publisher_destroy( &publisher,
                                                            NULL ) );
 
     assert_int_equal( 2, checked );

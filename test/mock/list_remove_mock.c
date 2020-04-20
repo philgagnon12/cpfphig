@@ -7,20 +7,20 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_list_remove( struct mphig_list*                      List,
+fphig
+fphig_list_remove( struct fphig_list*                      List,
                    void*                                   Item,
-                   MELPHIG_OPTIONAL struct mphig_error*    Error )
+                   FPHIG_OPTIONAL struct fphig_error*    Error )
 {
     assert_non_null( List );
 
     // When dealing with lists, use real functions
-    mphig ret = (mphig)mock();
+    fphig ret = (fphig)mock();
 
-    if( ret == MELPHIG_OK )
+    if( ret == FPHIG_OK )
     {
-        // Expecting the real thing to work but if it doesnt, have to make sure MELPHIG_FAIL is returned
-        ret = real_mphig_list_remove( List,
+        // Expecting the real thing to work but if it doesnt, have to make sure FPHIG_FAIL is returned
+        ret = real_fphig_list_remove( List,
                                       Item,
                                       Error );
     }

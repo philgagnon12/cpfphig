@@ -1,28 +1,28 @@
 
 #include "melphig/melphig.h"
 
-#ifdef MELPHIG_HAVE_UNISTD_H
+#ifdef FPHIG_HAVE_UNISTD_H
 
 #include <unistd.h>
 
-mphig
-mphig_sleep( int Milliseconds,
-             MELPHIG_OPTIONAL struct mphig_error*   Error )
+fphig
+fphig_sleep( int Milliseconds,
+             FPHIG_OPTIONAL struct fphig_error*   Error )
 {
     if( Milliseconds <= 0 )
     {
-        return MELPHIG_OK;
+        return FPHIG_OK;
     }
 
     if( 0 != usleep( Milliseconds * 1000 ) )
     {
         if( Error != NULL )
-            mphig_error_message( mphig_system_error, "usleep failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message( fphig_system_error, "usleep failed", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 
 #endif

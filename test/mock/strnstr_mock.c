@@ -6,14 +6,14 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_strnstr( const char*                          Haystack,
+fphig
+fphig_strnstr( const char*                          Haystack,
                const char*                          Needle,
                size_t                               Len,
                char** const                         Occurence,
-               MELPHIG_OPTIONAL struct mphig_error* Error )
+               FPHIG_OPTIONAL struct fphig_error* Error )
 {
-    mphig   ret         = MELPHIG_FAIL;
+    fphig   ret         = FPHIG_FAIL;
     char*   occurence   = NULL;
 
     assert_non_null( Haystack );
@@ -24,8 +24,8 @@ mphig_strnstr( const char*                          Haystack,
     check_expected( Needle );
     check_expected( Len );
 
-    ret = (mphig)mock();
-    if( MELPHIG_OK == ret )
+    ret = (fphig)mock();
+    if( FPHIG_OK == ret )
     {
         occurence = (char*)mock_ptr_type(char*);
         *Occurence = occurence;

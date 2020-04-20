@@ -2,27 +2,27 @@
 #include "melphig/list.h"
 #include "melphig/malloc.h"
 
-mphig
-REAL(mphig_list_push)( struct mphig_list*                      List,
+fphig
+REAL(fphig_list_push)( struct fphig_list*                      List,
                        void*                                   Item,
-                       MELPHIG_OPTIONAL struct mphig_error*    Error )
+                       FPHIG_OPTIONAL struct fphig_error*    Error )
 {
-    struct mphig_list_node* node     = NULL;
-    struct mphig_list_node* previous = NULL;
+    struct fphig_list_node* node     = NULL;
+    struct fphig_list_node* previous = NULL;
 
     if( List == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "List is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "List is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
-    if( MELPHIG_FAIL == mphig_malloc( sizeof( struct mphig_list_node ),
+    if( FPHIG_FAIL == fphig_malloc( sizeof( struct fphig_list_node ),
                                       &node,
                                       Error ) )
     {
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     node->item = Item;
@@ -47,5 +47,5 @@ REAL(mphig_list_push)( struct mphig_list*                      List,
         List->last = node;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }

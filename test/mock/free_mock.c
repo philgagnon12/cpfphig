@@ -6,9 +6,9 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_free( void*                                   Ptr,
-            MELPHIG_OPTIONAL struct mphig_error*    Error )
+fphig
+fphig_free( void*                                   Ptr,
+            FPHIG_OPTIONAL struct fphig_error*    Error )
 {
     assert_non_null( (void**)Ptr );
 
@@ -22,5 +22,5 @@ mphig_free( void*                                   Ptr,
 
      *(void**)ptr = NULL;
 
-    return (mphig)mock();
+    return (fphig)mock();
 }

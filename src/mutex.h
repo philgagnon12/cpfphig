@@ -1,23 +1,23 @@
-#ifndef MELPHIG_MUTEX_H
-#define MELPHIG_MUTEX_H
+#ifndef FPHIG_MUTEX_H
+#define FPHIG_MUTEX_H
 
 #include "melphig/melphig.h"
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
+#ifdef FPHIG_HAVE_PTHREAD_H
 #include <pthread.h>
 #endif
 
-struct mphig_mutex
+struct fphig_mutex
 {
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
+#ifdef FPHIG_HAVE_PTHREAD_H
     pthread_mutex_t*  pthread_mutex;
 #endif
 
 };
 
-#ifdef MELPHIG_HAVE_PTHREAD_H
-#define MELPHIG_CONST_MPHIG_MUTEX { NULL }
+#ifdef FPHIG_HAVE_PTHREAD_H
+#define FPHIG_CONST_MPHIG_MUTEX { NULL }
 #endif
 
 #endif

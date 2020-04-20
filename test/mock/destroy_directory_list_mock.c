@@ -7,17 +7,17 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_destroy_directory_list( struct mphig_list*                    File_Names,
-                              MELPHIG_OPTIONAL struct mphig_error*  Error )
+fphig
+fphig_destroy_directory_list( struct fphig_list*                    File_Names,
+                              FPHIG_OPTIONAL struct fphig_error*  Error )
 {
     // Call the real function to prevent memory leaks in tests
-    mphig ret = (mphig)mock();
+    fphig ret = (fphig)mock();
 
-    if( ret == MELPHIG_OK )
+    if( ret == FPHIG_OK )
     {
-        // Expecting the real thing to work but if it doesnt, have to make sure MELPHIG_FAIL is returned
-        ret = real_mphig_destroy_directory_list( File_Names,
+        // Expecting the real thing to work but if it doesnt, have to make sure FPHIG_FAIL is returned
+        ret = real_fphig_destroy_directory_list( File_Names,
                                                  Error );
     }
 

@@ -1,10 +1,10 @@
-#ifndef MELPHIG_LIBRARY_UNLOAD_H
-#define MELPHIG_LIBRARY_UNLOAD_H
+#ifndef FPHIG_LIBRARY_UNLOAD_H
+#define FPHIG_LIBRARY_UNLOAD_H
 
 #include "melphig/melphig.h"
 
-mphig
-mphig_library_unload( void*                                    Handle,
-                      MELPHIG_OPTIONAL struct mphig_error*     Error );
+fphig
+fphig_library_unload( void*                                    Handle,
+                      FPHIG_OPTIONAL struct fphig_error*     Error );
 
 #endif

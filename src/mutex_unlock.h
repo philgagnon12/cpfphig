@@ -1,11 +1,11 @@
-#ifndef MELPHIG_MUTEX_UNLOCK_H
-#define MELPHIG_MUTEX_UNLOCK_H
+#ifndef FPHIG_MUTEX_UNLOCK_H
+#define FPHIG_MUTEX_UNLOCK_H
 
 #include "melphig/melphig.h"
 #include "melphig/mutex.h"
 
-mphig
-mphig_mutex_unlock( struct mphig_mutex*                    Mutex,
-                    MELPHIG_OPTIONAL struct mphig_error*   Error );
+fphig
+fphig_mutex_unlock( struct fphig_mutex*                    Mutex,
+                    FPHIG_OPTIONAL struct fphig_error*   Error );
 
 #endif

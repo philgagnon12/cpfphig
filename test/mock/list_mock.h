@@ -4,29 +4,29 @@
 #include "melphig/melphig.h"
 #include "melphig/list.h"
 
-mphig
-real_mphig_list_push( struct mphig_list*                      List,
+fphig
+real_fphig_list_push( struct fphig_list*                      List,
                       void*                                   Item,
-                      MELPHIG_OPTIONAL struct mphig_error*    Error );
+                      FPHIG_OPTIONAL struct fphig_error*    Error );
 
-mphig
-real_mphig_list_shift( struct mphig_list*                      List,
+fphig
+real_fphig_list_shift( struct fphig_list*                      List,
                        void*                                   Item,
-                       MELPHIG_OPTIONAL struct mphig_error*    Error );
+                       FPHIG_OPTIONAL struct fphig_error*    Error );
 
-mphig
-real_mphig_list_next( struct mphig_list_iterator* const       List_Iterator,
+fphig
+real_fphig_list_next( struct fphig_list_iterator* const       List_Iterator,
                       void*                                   Item,
-                      MELPHIG_OPTIONAL struct mphig_error*    Error );
+                      FPHIG_OPTIONAL struct fphig_error*    Error );
 
-mphig
-real_mphig_list_remove( struct mphig_list*                      List,
+fphig
+real_fphig_list_remove( struct fphig_list*                      List,
                         void*                                   Item,
-                        MELPHIG_OPTIONAL struct mphig_error*    Error );
+                        FPHIG_OPTIONAL struct fphig_error*    Error );
 
-mphig
-real_mphig_list_copy( struct mphig_list                       List,
-                      struct mphig_list*                      List_Copy,
-                      MELPHIG_OPTIONAL struct mphig_error*    Error );
+fphig
+real_fphig_list_copy( struct fphig_list                       List,
+                      struct fphig_list*                      List_Copy,
+                      FPHIG_OPTIONAL struct fphig_error*    Error );
 
 #endif

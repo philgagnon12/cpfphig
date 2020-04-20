@@ -11,32 +11,32 @@
 
 static void arguments( void** state )
 {
-    struct mphig_error error = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error error = FPHIG_CONST_MPHIG_ERROR;
 
     printf("Ptr NULL\n");
-    assert_int_equal( MELPHIG_FAIL, mphig_malloc( sizeof( mphig ),
+    assert_int_equal( FPHIG_FAIL, fphig_malloc( sizeof( fphig ),
                                                   NULL,
                                                   NULL ) );
 
     printf("Ptr NULL with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "Ptr is NULL" );
-    assert_int_equal( MELPHIG_FAIL, mphig_malloc( sizeof( mphig ),
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "Ptr is NULL" );
+    assert_int_equal( FPHIG_FAIL, fphig_malloc( sizeof( fphig ),
                                                   NULL,
                                                   &error ) );
 }
 
 static void allocated( void** state )
 {
-    mphig* allocated_mphig = NULL;
+    fphig* allocated_fphig = NULL;
 
-    assert_int_equal( MELPHIG_OK, mphig_malloc( sizeof( mphig ),
-                                                &allocated_mphig,
+    assert_int_equal( FPHIG_OK, fphig_malloc( sizeof( fphig ),
+                                                &allocated_fphig,
                                                 NULL ) );
 
-    assert_non_null( allocated_mphig );
-    *allocated_mphig = MELPHIG_OK;
-    free( allocated_mphig );
+    assert_non_null( allocated_fphig );
+    *allocated_fphig = FPHIG_OK;
+    free( allocated_fphig );
 }
 
 int main( void )

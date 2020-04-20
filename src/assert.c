@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 void
-mphig_assert_failed( const char*    Message,
+fphig_assert_failed( const char*    Message,
                      const char*    File,
                      const char*    Function,
                      size_t         Line )

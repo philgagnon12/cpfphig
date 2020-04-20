@@ -3,32 +3,32 @@
 #include "melphig/list.h"
 #include "melphig/free.h"
 
-mphig
-REAL(mphig_destroy_directory_list)( struct mphig_list*                    File_Names,
-                                    MELPHIG_OPTIONAL struct mphig_error*  Error )
+fphig
+REAL(fphig_destroy_directory_list)( struct fphig_list*                    File_Names,
+                                    FPHIG_OPTIONAL struct fphig_error*  Error )
 {
-    mphig                           ret             = MELPHIG_FAIL;
+    fphig                           ret             = FPHIG_FAIL;
     char*                           file_name       = NULL;
-    struct mphig_error              shift_error     = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error              shift_error     = FPHIG_CONST_MPHIG_ERROR;
 
     if( File_Names == NULL )
     {
         if( Error != NULL )
-            mphig_error_message(mphig_system_error, "File_Names is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            fphig_error_message(fphig_system_error, "File_Names is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        return MELPHIG_FAIL;
+        return FPHIG_FAIL;
     }
 
     // TODO File_Names should be renamed to Files_Name accross the board
-    while( MELPHIG_OK == ( ret = mphig_list_shift( File_Names,
+    while( FPHIG_OK == ( ret = fphig_list_shift( File_Names,
                                                    &file_name,
                                                    &shift_error ) ) )
     {
-        mphig_free( &file_name, NULL );
+        fphig_free( &file_name, NULL );
     }
 
     // Hand out error when its an error different than shifting from empty list
-    if( shift_error.error_type != mphig_user_error )
+    if( shift_error.error_type != fphig_user_error )
     {
         if( Error != NULL )
             *Error = shift_error;
@@ -36,6 +36,6 @@ REAL(mphig_destroy_directory_list)( struct mphig_list*                    File_N
         return ret;
     }
 
-    return MELPHIG_OK;
+    return FPHIG_OK;
 }
 

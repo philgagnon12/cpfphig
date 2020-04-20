@@ -11,31 +11,31 @@
 
 static void arguments( void** state )
 {
-    struct mphig_list_iterator  list_iterator = MELPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator  list_iterator = FPHIG_CONST_MPHIG_LIST_ITERATOR;
     int*                        item                = NULL;
-    struct mphig_error          error               = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error               = FPHIG_CONST_MPHIG_ERROR;
 
     printf("invalid List_Iterator\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( NULL,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( NULL,
                                                           &item,
                                                           NULL ) );
 
     printf("invalid List_Iterator with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "List_Iterator or Item is NULL");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( NULL,
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "List_Iterator or Item is NULL");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( NULL,
                                                           &item,
                                                           &error ) );
 
     printf("invalid Item\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           NULL,
                                                           NULL ) );
 
     printf("invalid Item with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "List_Iterator or Item is NULL");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "List_Iterator or Item is NULL");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           NULL,
                                                           &error ) );
 
@@ -43,56 +43,56 @@ static void arguments( void** state )
 
 static void list_null( void** state )
 {
-    struct mphig_list_iterator  list_iterator   = MELPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_MPHIG_LIST_ITERATOR;
     int*                        item            = NULL;
-    struct mphig_error          error           = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error           = FPHIG_CONST_MPHIG_ERROR;
 
     printf("list_null\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           NULL ) );
 
     printf("list_null with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "List_Iterator->list is NULL");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "List_Iterator->list is NULL");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           &error ) );
 }
 
 static void empty_list( void** state )
 {
-    struct mphig_list           list          = MELPHIG_CONST_MPHIG_LIST;
-    struct mphig_list_iterator  list_iterator = { &list, NULL };
+    struct fphig_list           list          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list_iterator  list_iterator = { &list, NULL };
     int*                        item          = NULL;
-    struct mphig_error          error         = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error         = FPHIG_CONST_MPHIG_ERROR;
 
     printf("empty_list\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           NULL ) );
 
     printf("empty_list with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_user_error );
-    expect_string( mphig_error_message, Message, "End of list has been reached");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    expect_value( fphig_error_message, Error_Type, fphig_user_error );
+    expect_string( fphig_error_message, Message, "End of list has been reached");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           &error ) );
 }
 
 static void next_item_is_null( void** state )
 {
-    struct mphig_list_iterator  list_iterator   = MELPHIG_CONST_MPHIG_LIST_ITERATOR;
-    struct mphig_list           list            = MELPHIG_CONST_MPHIG_LIST;
-    struct mphig_list_node      node            = MELPHIG_CONST_MPHIG_LIST_NODE;
+    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list           list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list_node      node            = FPHIG_CONST_MPHIG_LIST_NODE;
     int*                        item            = NULL;
-    struct mphig_error          error           = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error           = FPHIG_CONST_MPHIG_ERROR;
 
     list.first = &node;
     list_iterator.list = &list;
 
     printf("next_item_is_null\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           NULL ) );
 
@@ -101,37 +101,37 @@ static void next_item_is_null( void** state )
     list_iterator.current_node = NULL;
 
     printf("next_item_is_null with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "current_node->item is NULL");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "current_node->item is NULL");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           &error ) );
 }
 
 static void next_item( void** state )
 {
-    struct mphig_list_iterator  list_iterator = MELPHIG_CONST_MPHIG_LIST_ITERATOR;
-    struct mphig_list           list          = MELPHIG_CONST_MPHIG_LIST;
-    struct mphig_list_node      node          = MELPHIG_CONST_MPHIG_LIST_NODE;
+    struct fphig_list_iterator  list_iterator = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list           list          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list_node      node          = FPHIG_CONST_MPHIG_LIST_NODE;
     int*                        item          = NULL;
     int                         number        = 11;
-    struct mphig_error          error         = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error         = FPHIG_CONST_MPHIG_ERROR;
 
     node.item  = &number;
     list.first = &node;
     list_iterator.list = &list;
 
-    assert_int_equal( MELPHIG_OK, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_OK, real_fphig_list_next( &list_iterator,
                                                         &item,
                                                         &error ) );
 
     assert_non_null( item );
     assert_int_equal( 11, *item );
 
-    expect_value( mphig_error_message, Error_Type, mphig_user_error );
-    expect_string( mphig_error_message, Message, "End of list has been reached");
+    expect_value( fphig_error_message, Error_Type, fphig_user_error );
+    expect_string( fphig_error_message, Message, "End of list has been reached");
 
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           &error ) );
 
@@ -142,28 +142,28 @@ static void next_item( void** state )
 
 static void list_iterator_rewinds( void** state )
 {
-    struct mphig_list_iterator  list_iterator = MELPHIG_CONST_MPHIG_LIST_ITERATOR;
-    struct mphig_list           list          = MELPHIG_CONST_MPHIG_LIST;
-    struct mphig_list_node      node          = MELPHIG_CONST_MPHIG_LIST_NODE;
+    struct fphig_list_iterator  list_iterator = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list           list          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list_node      node          = FPHIG_CONST_MPHIG_LIST_NODE;
     int*                        item          = NULL;
     int                         number        = 11;
-    struct mphig_error          error         = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error         = FPHIG_CONST_MPHIG_ERROR;
 
     node.item  = &number;
     list.first = &node;
     list_iterator.list = &list;
 
-    assert_int_equal( MELPHIG_OK, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_OK, real_fphig_list_next( &list_iterator,
                                                         &item,
                                                         &error ) );
 
     assert_non_null( item );
     assert_int_equal( 11, *item );
 
-    expect_value( mphig_error_message, Error_Type, mphig_user_error );
-    expect_string( mphig_error_message, Message, "End of list has been reached");
+    expect_value( fphig_error_message, Error_Type, fphig_user_error );
+    expect_string( fphig_error_message, Message, "End of list has been reached");
 
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
                                                           &item,
                                                           &error ) );
 
@@ -171,7 +171,7 @@ static void list_iterator_rewinds( void** state )
     assert_non_null( item );
     assert_null( list_iterator.current_node );
 
-    assert_int_equal( MELPHIG_OK, real_mphig_list_next( &list_iterator,
+    assert_int_equal( FPHIG_OK, real_fphig_list_next( &list_iterator,
                                                         &item,
                                                         &error ) );
 

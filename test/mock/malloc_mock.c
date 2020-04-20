@@ -6,20 +6,20 @@
 #include <setjmp.h>
 #include <cmocka.h>
 
-mphig
-mphig_malloc( const size_t                          Size,
+fphig
+fphig_malloc( const size_t                          Size,
               void*                                 Ptr,
-              MELPHIG_OPTIONAL struct mphig_error*  Error )
+              FPHIG_OPTIONAL struct fphig_error*  Error )
 {
-    mphig ret;
+    fphig ret;
 
     assert_non_null( (void**)Ptr );
 
     check_expected( Size );
 
-    ret = (mphig)mock();
+    ret = (fphig)mock();
 
-    if( ret == MELPHIG_OK )
+    if( ret == FPHIG_OK )
     {
         *(void**)Ptr = test_malloc( Size );
     }

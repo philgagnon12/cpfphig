@@ -1,46 +1,46 @@
-#ifndef MELPHIG_H
-#define MELPHIG_H
+#ifndef FPHIG_H
+#define FPHIG_H
 
 #include "melphig_config.h"
 #include <stdlib.h>
 
-typedef int mphig;
+typedef int fphig;
 
-#define MELPHIG_OK      ( 0x00 )
-#define MELPHIG_FAIL    ( 0x01 )
+#define FPHIG_OK      ( 0x00 )
+#define FPHIG_FAIL    ( 0x01 )
 
 // Used to indicate that an argument is optional
-#define MELPHIG_OPTIONAL
+#define FPHIG_OPTIONAL
 
-#ifdef MELPHIG_UNIT_TESTING
+#ifdef FPHIG_UNIT_TESTING
 #define REAL( FunctionName ) real_ ## FunctionName
 #else
 #define REAL( FunctionName ) FunctionName
 #endif
 
-enum mphig_error_type{ mphig_ok, mphig_system_error, mphig_user_error };
+enum fphig_error_type{ fphig_ok, fphig_system_error, fphig_user_error };
 
-#define MELPHIG_ERROR_MESSAGE_SIZE      ( 0x0F00 )
-#define MELPHIG_ERROR_FILE_SIZE         ( 0x0F00 )
-#define MELPHIG_ERROR_FUNCTION_SIZE     ( 0x0F00 )
+#define FPHIG_ERROR_MESSAGE_SIZE      ( 0x0F00 )
+#define FPHIG_ERROR_FILE_SIZE         ( 0x0F00 )
+#define FPHIG_ERROR_FUNCTION_SIZE     ( 0x0F00 )
 
-struct mphig_error
+struct fphig_error
 {
-    enum mphig_error_type   error_type;
-    char                    message[MELPHIG_ERROR_MESSAGE_SIZE];
+    enum fphig_error_type   error_type;
+    char                    message[FPHIG_ERROR_MESSAGE_SIZE];
     size_t                  message_size;
 
-    char                    file[MELPHIG_ERROR_FILE_SIZE];
+    char                    file[FPHIG_ERROR_FILE_SIZE];
     size_t                  file_size;
 
-    char                    function[MELPHIG_ERROR_FUNCTION_SIZE];
+    char                    function[FPHIG_ERROR_FUNCTION_SIZE];
     size_t                  function_size;
 
     size_t                  line;
 };
 
-#define MELPHIG_CONST_MPHIG_ERROR { \
-    mphig_system_error, \
+#define FPHIG_CONST_MPHIG_ERROR { \
+    fphig_system_error, \
     0x00,               \
     0,                  \
     \
@@ -53,12 +53,12 @@ struct mphig_error
     0                   \
 }
 
-mphig
-mphig_error_message( enum mphig_error_type          Error_Type,
+fphig
+fphig_error_message( enum fphig_error_type          Error_Type,
                      const char*                    Message,
-                     struct mphig_error*            Error,
-                     MELPHIG_OPTIONAL const char*   File,
-                     MELPHIG_OPTIONAL const char*   Function,
-                     MELPHIG_OPTIONAL size_t        Line );
+                     struct fphig_error*            Error,
+                     FPHIG_OPTIONAL const char*   File,
+                     FPHIG_OPTIONAL const char*   Function,
+                     FPHIG_OPTIONAL size_t        Line );
 
 #endif

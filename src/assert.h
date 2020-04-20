@@ -1,13 +1,13 @@
-#ifndef MELPHIG_ASSERT_H
-#define MELPHIG_ASSERT_H
+#ifndef FPHIG_ASSERT_H
+#define FPHIG_ASSERT_H
 
 #include <assert.h>
 #include <stdio.h>
 
-#define mphig_assert( Condition, Message, File, Function, Line ) if(!(Condition)){ mphig_assert_failed( Message, File, Function, Line); assert(Condition); }
+#define fphig_assert( Condition, Message, File, Function, Line ) if(!(Condition)){ fphig_assert_failed( Message, File, Function, Line); assert(Condition); }
 
 void
-mphig_assert_failed( const char*    Message,
+fphig_assert_failed( const char*    Message,
                      const char*    File,
                      const char*    Function,
                      size_t         Line );

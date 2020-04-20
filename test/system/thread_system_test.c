@@ -21,7 +21,7 @@ start_routine( void* Arg )
     assert_non_null( Arg );
     assert_int_equal( 777, *(int*)Arg );
 
-    assert_int_equal( MELPHIG_OK, mphig_thread_exit( &start_routine_ret,
+    assert_int_equal( FPHIG_OK, fphig_thread_exit( &start_routine_ret,
                                                      NULL ) );
     assert_non_null( NULL );
     return NULL;
@@ -29,18 +29,18 @@ start_routine( void* Arg )
 
 static void create_exit_join( void** state )
 {
-    struct mphig_thread         thread      = MELPHIG_CONST_MPHIG_THREAD;
-    struct mphig_thread_attr    thread_attr = MELPHIG_CONST_MPHIG_THREAD_ATTR;
+    struct fphig_thread         thread      = FPHIG_CONST_MPHIG_THREAD;
+    struct fphig_thread_attr    thread_attr = FPHIG_CONST_MPHIG_THREAD_ATTR;
     int                         arg         = 777;
     int*                        exit_ret    = NULL;
 
-    assert_int_equal( MELPHIG_OK, mphig_thread_create( &thread,
+    assert_int_equal( FPHIG_OK, fphig_thread_create( &thread,
                                                        &thread_attr,
                                                        &start_routine,
                                                        &arg,
                                                        NULL ) );
 
-    assert_int_equal( MELPHIG_OK, mphig_thread_join( &thread,
+    assert_int_equal( FPHIG_OK, fphig_thread_join( &thread,
                                                      (void**)&exit_ret,
                                                      NULL ) );
 

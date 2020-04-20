@@ -1,15 +1,15 @@
-#ifndef MELPHIG_STRNSTR_H
-#define MELPHIG_STRNSTR_H
+#ifndef FPHIG_STRNSTR_H
+#define FPHIG_STRNSTR_H
 
 #include "melphig/melphig.h"
 
 #include <stdlib.h>
 
-mphig
-mphig_strnstr( const char*                          Haystack,
+fphig
+fphig_strnstr( const char*                          Haystack,
                const char*                          Needle,
                size_t                               Len,
                char** const                         Occurence,
-               MELPHIG_OPTIONAL struct mphig_error* Error );
+               FPHIG_OPTIONAL struct fphig_error* Error );
 
 #endif

@@ -14,31 +14,31 @@
 
 static void arguments( void** state )
 {
-    struct mphig_list       list               = MELPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list               = FPHIG_CONST_MPHIG_LIST;
     int                     item               = 11;
-    struct mphig_error      error              = {};
+    struct fphig_error      error              = {};
 
     printf("invalid List\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_shift( NULL,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_shift( NULL,
                                                            &item,
                                                            NULL ) );
 
     printf("invalid List with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "List or Item is NULL");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_shift( NULL,
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "List or Item is NULL");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_shift( NULL,
                                                            &item,
                                                            &error ) );
 
     printf("invalid Item\n");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_shift( &list,
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_shift( &list,
                                                            NULL,
                                                            NULL ) );
 
     printf("invalid Item with error\n");
-    expect_value( mphig_error_message, Error_Type, mphig_system_error );
-    expect_string( mphig_error_message, Message, "List or Item is NULL");
-    assert_int_equal( MELPHIG_FAIL, real_mphig_list_shift( &list,
+    expect_value( fphig_error_message, Error_Type, fphig_system_error );
+    expect_string( fphig_error_message, Message, "List or Item is NULL");
+    assert_int_equal( FPHIG_FAIL, real_fphig_list_shift( &list,
                                                            NULL,
                                                            &error ) );
 
@@ -46,20 +46,20 @@ static void arguments( void** state )
 
 static void first_shift( void** state )
 {
-    struct mphig_list   list        = MELPHIG_CONST_MPHIG_LIST;
+    struct fphig_list   list        = FPHIG_CONST_MPHIG_LIST;
     int                 item        = 11;
     int*                shift_item  = NULL;
 
 
-    expect_value( mphig_malloc, Size, sizeof( struct mphig_list_node ) );
-    will_return( mphig_malloc, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_push( &list,
+    expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
+    will_return( fphig_malloc, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_push( &list,
                                                        &item,
                                                        NULL ) );
 
-    expect_any( mphig_free, Ptr );
-    will_return( mphig_free, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_shift( &list,
+    expect_any( fphig_free, Ptr );
+    will_return( fphig_free, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_shift( &list,
                                                         &shift_item,
                                                         NULL ) );
 
@@ -71,7 +71,7 @@ static void first_shift( void** state )
 
 static void subsequent_shift( void** state )
 {
-    struct mphig_list       list                = MELPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list                = FPHIG_CONST_MPHIG_LIST;
     int                     first_item          = 11;
     int                     second_item         = 22;
     int                     third_item          = 33;
@@ -79,28 +79,28 @@ static void subsequent_shift( void** state )
     int*                    second_shift_item   = NULL;
     int*                    third_shift_item    = NULL;
 
-    expect_value( mphig_malloc, Size, sizeof( struct mphig_list_node ) );
-    will_return( mphig_malloc, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_push( &list,
+    expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
+    will_return( fphig_malloc, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_push( &list,
                                                        &first_item,
                                                        NULL ) );
 
-    expect_value( mphig_malloc, Size, sizeof( struct mphig_list_node ) );
-    will_return( mphig_malloc, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_push( &list,
+    expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
+    will_return( fphig_malloc, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_push( &list,
                                                        &second_item,
                                                        NULL ) );
 
-    expect_value( mphig_malloc, Size, sizeof( struct mphig_list_node ) );
-    will_return( mphig_malloc, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_push( &list,
+    expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
+    will_return( fphig_malloc, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_push( &list,
                                                        &third_item,
                                                        NULL ) );
 
 
-    expect_any( mphig_free, Ptr );
-    will_return( mphig_free, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_shift( &list,
+    expect_any( fphig_free, Ptr );
+    will_return( fphig_free, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_shift( &list,
                                                         &first_shift_item,
                                                         NULL ) );
 
@@ -117,9 +117,9 @@ static void subsequent_shift( void** state )
     assert_int_equal( 22, *(int*)(list.first->item) );
     assert_int_equal( 33, *(int*)(list.last->item) );
 
-    expect_any( mphig_free, Ptr );
-    will_return( mphig_free, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_shift( &list,
+    expect_any( fphig_free, Ptr );
+    will_return( fphig_free, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_shift( &list,
                                                         &second_shift_item,
                                                         NULL ) );
 
@@ -136,9 +136,9 @@ static void subsequent_shift( void** state )
     assert_int_equal( 33, *(int*)(list.first->item) );
     assert_int_equal( 33, *(int*)(list.last->item) );
 
-    expect_any( mphig_free, Ptr );
-    will_return( mphig_free, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_shift( &list,
+    expect_any( fphig_free, Ptr );
+    will_return( fphig_free, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_shift( &list,
                                                         &third_shift_item,
                                                         NULL ) );
 
@@ -151,20 +151,20 @@ static void subsequent_shift( void** state )
 
 static void shift_null( void** state )
 {
-    struct mphig_list       list            = MELPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
     int                     item            = 11;
     void*                   shift_item      = &item;
 
-    expect_value( mphig_malloc, Size, sizeof( struct mphig_list_node ) );
-    will_return( mphig_malloc, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_push( &list,
+    expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
+    will_return( fphig_malloc, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_push( &list,
                                                        NULL,
                                                        NULL ) );
 
 
-    expect_any( mphig_free, Ptr );
-    will_return( mphig_free, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_shift( &list,
+    expect_any( fphig_free, Ptr );
+    will_return( fphig_free, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_shift( &list,
                                                         &shift_item,
                                                         NULL ) );
 
@@ -173,36 +173,36 @@ static void shift_null( void** state )
 
 static void fail_free_is_fail( void** state )
 {
-    struct mphig_list       list            = MELPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
     void*                   shift_item      = NULL;
 
-    expect_value( mphig_malloc, Size, sizeof( struct mphig_list_node ) );
-    will_return( mphig_malloc, MELPHIG_OK );
-    assert_int_equal(MELPHIG_OK, real_mphig_list_push( &list,
+    expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
+    will_return( fphig_malloc, FPHIG_OK );
+    assert_int_equal(FPHIG_OK, real_fphig_list_push( &list,
                                                        NULL,
                                                        NULL ) );
 
-    expect_any( mphig_free, Ptr );
-    will_return( mphig_free, MELPHIG_FAIL );
-    assert_int_equal(MELPHIG_FAIL, real_mphig_list_shift( &list,
+    expect_any( fphig_free, Ptr );
+    will_return( fphig_free, FPHIG_FAIL );
+    assert_int_equal(FPHIG_FAIL, real_fphig_list_shift( &list,
                                                           &shift_item,
                                                           NULL ) );
 }
 
 static void shift_empty_list( void** state )
 {
-    struct mphig_list       list            = MELPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
     void*                   shift_item      = NULL;
-    struct mphig_error      error           = MELPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error      error           = FPHIG_CONST_MPHIG_ERROR;
 
-    assert_int_equal(MELPHIG_FAIL, real_mphig_list_shift( &list,
+    assert_int_equal(FPHIG_FAIL, real_fphig_list_shift( &list,
                                                           &shift_item,
                                                           NULL ) );
 
 
-    expect_value( mphig_error_message, Error_Type, mphig_user_error );
-    expect_string( mphig_error_message, Message, "List is empty");
-    assert_int_equal(MELPHIG_FAIL, real_mphig_list_shift( &list,
+    expect_value( fphig_error_message, Error_Type, fphig_user_error );
+    expect_string( fphig_error_message, Message, "List is empty");
+    assert_int_equal(FPHIG_FAIL, real_fphig_list_shift( &list,
                                                           &shift_item,
                                                           &error ) );
 }

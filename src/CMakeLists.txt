@@ -1,0 +1,173 @@
+set(
+    HEADER_LIST
+    ${MELPHIG_SRC}/melphig.h
+    ${MELPHIG_SRC}/lexicon.h
+    ${MELPHIG_SRC}/syntax_error_message.h
+    ${MELPHIG_SRC}/position_after_white_spaces.h
+    ${MELPHIG_SRC}/malloc.h
+    ${MELPHIG_SRC}/free.h
+    ${MELPHIG_SRC}/list.h
+    ${MELPHIG_SRC}/destroy_notation.h
+    ${MELPHIG_SRC}/plugin.h
+    ${MELPHIG_SRC}/plugins_load_all.h
+    ${MELPHIG_SRC}/plugin_load.h
+    ${MELPHIG_SRC}/library_load.h
+    ${MELPHIG_SRC}/library_sym.h
+    ${MELPHIG_SRC}/library_unload.h
+    ${MELPHIG_SRC}/modules_load_all.h
+    ${MELPHIG_SRC}/directory_list.h
+    ${MELPHIG_SRC}/destroy_directory_list.h
+    ${MELPHIG_SRC}/destroy_plugins_all.h
+    ${MELPHIG_SRC}/sequencer.h
+    ${MELPHIG_SRC}/sequencer_create.h
+    ${MELPHIG_SRC}/sequencer_create_track.h
+    ${MELPHIG_SRC}/track.h
+    ${MELPHIG_SRC}/track_create_plugin_instance.h
+    ${MELPHIG_SRC}/track_play.h
+    ${MELPHIG_SRC}/track_process_note.h
+    ${MELPHIG_SRC}/track_output_notation.h
+    ${MELPHIG_SRC}/track_output_note.h
+    ${MELPHIG_SRC}/track_output_silence.h
+    ${MELPHIG_SRC}/notation_push_note.h
+    ${MELPHIG_SRC}/notation_push_bpm.h
+    ${MELPHIG_SRC}/track_process_notation.h
+    ${MELPHIG_SRC}/output_driver.h
+    ${MELPHIG_SRC}/output_publisher_subscribe.h
+    ${MELPHIG_SRC}/output_publisher_publish.h
+    ${MELPHIG_SRC}/output_driver_load.h
+    ${MELPHIG_SRC}/output_drivers_load_all.h
+    ${MELPHIG_SRC}/destroy_output_drivers_all.h
+    ${MELPHIG_SRC}/thread.h
+    ${MELPHIG_SRC}/thread_create.h
+    ${MELPHIG_SRC}/thread_join.h
+    ${MELPHIG_SRC}/thread_exit.h
+    ${MELPHIG_SRC}/thread_cond.h
+    ${MELPHIG_SRC}/thread_cond_init.h
+    ${MELPHIG_SRC}/thread_cond_destroy.h
+    ${MELPHIG_SRC}/thread_cond_attr.h
+    ${MELPHIG_SRC}/thread_cond_attr_init.h
+    ${MELPHIG_SRC}/thread_cond_attr_destroy.h
+    ${MELPHIG_SRC}/thread_cond_signal.h
+    ${MELPHIG_SRC}/thread_cond_broadcast.h
+    ${MELPHIG_SRC}/thread_cond_wait.h
+    ${MELPHIG_SRC}/mutex.h
+    ${MELPHIG_SRC}/mutex_attr.h
+    ${MELPHIG_SRC}/mutex_init.h
+    ${MELPHIG_SRC}/mutex_destroy.h
+    ${MELPHIG_SRC}/mutex_lock.h
+    ${MELPHIG_SRC}/mutex_unlock.h
+    ${MELPHIG_SRC}/assert.h
+    ${MELPHIG_SRC}/publisher.h
+    ${MELPHIG_SRC}/publisher_create.h
+    ${MELPHIG_SRC}/publisher_destroy.h
+    ${MELPHIG_SRC}/publisher_subscribe.h
+    ${MELPHIG_SRC}/publisher_unsubscribe.h
+    ${MELPHIG_SRC}/publisher_publish.h
+    ${MELPHIG_SRC}/subscription.h
+    ${MELPHIG_SRC}/thread_pool.h
+    ${MELPHIG_SRC}/thread_pool_thread.h
+    ${MELPHIG_SRC}/thread_pool_create.h
+    ${MELPHIG_SRC}/thread_pool_thread_create.h
+    ${MELPHIG_SRC}/thread_pool_task.h
+    ${MELPHIG_SRC}/destroy_thread_pool_thread.h
+    ${MELPHIG_SRC}/destroy_thread_pool.h
+    ${MELPHIG_SRC}/strnstr.h
+    ${MELPHIG_SRC}/defer.h
+    ${MELPHIG_SRC}/sleep.h
+    ${MELPHIG_SRC}/key_octave_signature_to_integer_key.h
+    ${MELPHIG_SRC}/parse/parse_key.h
+    ${MELPHIG_SRC}/parse/parse_octave.h
+    ${MELPHIG_SRC}/parse/parse_signature.h
+    ${MELPHIG_SRC}/parse/parse_value.h
+    ${MELPHIG_SRC}/parse/parse_velocity.h
+    ${MELPHIG_SRC}/parse/parse_note_component_type.h
+    ${MELPHIG_SRC}/parse/parse_note.h
+    ${MELPHIG_SRC}/parse/parse_bpm.h
+    ${MELPHIG_SRC}/parse/parse_silence.h
+    ${MELPHIG_SRC}/parse/parse_notation.h
+    ${MELPHIG_SRC}/parse/confine_size_by_lookahead.h
+    ${MELPHIG_SRC}/parse/confine_size_by_spaced_lookahead.h
+)
+
+
+set(
+    SRC_LIST
+    ${MELPHIG_SRC}/melphig.c
+    ${MELPHIG_SRC}/syntax_error_message.c
+    ${MELPHIG_SRC}/position_after_white_spaces.c
+    ${MELPHIG_SRC}/malloc.c
+    ${MELPHIG_SRC}/free.c
+    ${MELPHIG_SRC}/free.h
+    ${MELPHIG_SRC}/list.h
+    ${MELPHIG_SRC}/list_push.c
+    ${MELPHIG_SRC}/list_shift.c
+    ${MELPHIG_SRC}/list_next.c
+    ${MELPHIG_SRC}/list_remove.c
+    ${MELPHIG_SRC}/list_copy.c
+    ${MELPHIG_SRC}/destroy_notation.c
+    ${MELPHIG_SRC}/modules_load_all.c
+    ${MELPHIG_SRC}/plugins_load_all.c
+    ${MELPHIG_SRC}/plugin_load.c
+    ${MELPHIG_SRC}/destroy_directory_list.c
+    ${MELPHIG_SRC}/destroy_plugins_all.c
+    ${MELPHIG_SRC}/sequencer_create.c
+    ${MELPHIG_SRC}/sequencer_create_track.c
+    ${MELPHIG_SRC}/track_create_plugin_instance.c
+    ${MELPHIG_SRC}/track_play.c
+    ${MELPHIG_SRC}/track_process_note.c
+    ${MELPHIG_SRC}/track_output_notation.c
+    ${MELPHIG_SRC}/track_output_note.c
+    ${MELPHIG_SRC}/track_output_silence.c
+    ${MELPHIG_SRC}/notation_push_note.c
+    ${MELPHIG_SRC}/notation_push_bpm.c
+    ${MELPHIG_SRC}/track_process_notation.c
+    ${MELPHIG_SRC}/output_driver_load.c
+    ${MELPHIG_SRC}/output_drivers_load_all.c
+    ${MELPHIG_SRC}/destroy_output_drivers_all.c
+    ${MELPHIG_SRC}/output_publisher_subscribe.c
+    ${MELPHIG_SRC}/output_publisher_publish.c
+    ${MELPHIG_SRC}/assert.c
+    ${MELPHIG_SRC}/publisher_create.c
+    ${MELPHIG_SRC}/publisher_destroy.c
+    ${MELPHIG_SRC}/publisher_subscribe.c
+    ${MELPHIG_SRC}/publisher_unsubscribe.c
+    ${MELPHIG_SRC}/publisher_publish.c
+    ${MELPHIG_SRC}/thread_pool_create.c
+    ${MELPHIG_SRC}/thread_pool_thread_create.c
+    ${MELPHIG_SRC}/thread_pool_task.c
+    ${MELPHIG_SRC}/destroy_thread_pool_thread.c
+    ${MELPHIG_SRC}/destroy_thread_pool.c
+    ${MELPHIG_SRC}/defer.c
+    ${MELPHIG_SRC}/key_octave_signature_to_integer_key.c
+    ${MELPHIG_SRC}/parse/parse_key.c
+    ${MELPHIG_SRC}/parse/parse_octave.c
+    ${MELPHIG_SRC}/parse/parse_signature.c
+    ${MELPHIG_SRC}/parse/parse_value.c
+    ${MELPHIG_SRC}/parse/parse_velocity.c
+    ${MELPHIG_SRC}/parse/parse_note_component_type.c
+    ${MELPHIG_SRC}/parse/parse_note.c
+    ${MELPHIG_SRC}/parse/parse_bpm.c
+    ${MELPHIG_SRC}/parse/parse_silence.c
+    ${MELPHIG_SRC}/parse/parse_notation.c
+    ${MELPHIG_SRC}/parse/confine_size_by_lookahead.c
+    ${MELPHIG_SRC}/parse/confine_size_by_spaced_lookahead.c
+    ${MELPHIG_SRC}/bpm_value_to_milliseconds.c
+    ${MELPHIG_SRC}/note_copy.c
+    ${MELPHIG_SRC}/snprintf_note.c
+    ${MELPHIG_SRC}/integer_key_to_key_octave_signature.c
+    ${MELPHIG_SRC}/key_octave_signature_to_enharmonic.c
+    ${MELPHIG_SRC}/snprintf_key_octave_signature.c
+
+)
+
+
+add_subdirectory("os")
+add_subdirectory("output_drivers")
+add_subdirectory("plugins")
+add_subdirectory("cli")
+add_subdirectory("daemon")
+
+add_library( melphig ${SRC_LIST} )
+
+set( HEADER_LIST ${HEADER_LIST} PARENT_SCOPE )
+set( SRC_LIST ${SRC_LIST} PARENT_SCOPE )

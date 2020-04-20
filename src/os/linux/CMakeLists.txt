@@ -1,0 +1,4 @@
+list(APPEND SRC_LIST
+     ${MELPHIG_SRC}/os/linux/strnstr.c
+)
+set( SRC_LIST ${SRC_LIST} PARENT_SCOPE)

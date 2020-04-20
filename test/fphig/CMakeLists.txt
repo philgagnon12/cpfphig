@@ -10,18 +10,6 @@ if(${BUILD_TESTING})
         include(CTest)
     endif()
 
-    # Symlink for header files
-    add_custom_command(
-        OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
-        COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
-        COMMENT "symlink include/fphig_test"
-    )
-
-    add_custom_target( symlink_include_fphig_test ALL
-        DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/../include/fphig_test
-    )
-    # Initialize a list for code coverage
-
     add_subdirectory(mock)
     add_subdirectory(unit)
     add_subdirectory(system)

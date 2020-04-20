@@ -1,4 +1,4 @@
-list(APPEND SRC_LIST
-     ${FPHIG_SRC}/os/unix/strnstr.c
+target_sources( ${CMAKE_PROJECT_NAME}
+    PRIVATE
+    strnstr.c
 )
-set( SRC_LIST ${SRC_LIST} PARENT_SCOPE)

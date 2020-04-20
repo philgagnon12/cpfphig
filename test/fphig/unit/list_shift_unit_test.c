@@ -1,7 +1,6 @@
 #include "fphig/fphig.h"
 #include "fphig/list.h"
-#include "fphig_test/mock/list_mock.h"
-#include "fphig/syntax_error_message.h"
+#include "fphig/mock/list_mock.h"
 #include "fphig/malloc.h"
 #include "fphig/free.h"
 

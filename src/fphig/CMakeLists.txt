@@ -1,87 +1,108 @@
-set(
-    HEADER_LIST
-    ${FPHIG_SRC}/fphig.h
-    ${FPHIG_SRC}/malloc.h
-    ${FPHIG_SRC}/free.h
-    ${FPHIG_SRC}/list.h
-    ${FPHIG_SRC}/library_load.h
-    ${FPHIG_SRC}/library_sym.h
-    ${FPHIG_SRC}/library_unload.h
-    ${FPHIG_SRC}/modules_load_all.h
-    ${FPHIG_SRC}/directory_list.h
-    ${FPHIG_SRC}/destroy_directory_list.h
-    ${FPHIG_SRC}/thread.h
-    ${FPHIG_SRC}/thread_create.h
-    ${FPHIG_SRC}/thread_join.h
-    ${FPHIG_SRC}/thread_exit.h
-    ${FPHIG_SRC}/thread_cond.h
-    ${FPHIG_SRC}/thread_cond_init.h
-    ${FPHIG_SRC}/thread_cond_destroy.h
-    ${FPHIG_SRC}/thread_cond_attr.h
-    ${FPHIG_SRC}/thread_cond_attr_init.h
-    ${FPHIG_SRC}/thread_cond_attr_destroy.h
-    ${FPHIG_SRC}/thread_cond_signal.h
-    ${FPHIG_SRC}/thread_cond_broadcast.h
-    ${FPHIG_SRC}/thread_cond_wait.h
-    ${FPHIG_SRC}/mutex.h
-    ${FPHIG_SRC}/mutex_attr.h
-    ${FPHIG_SRC}/mutex_init.h
-    ${FPHIG_SRC}/mutex_destroy.h
-    ${FPHIG_SRC}/mutex_lock.h
-    ${FPHIG_SRC}/mutex_unlock.h
-    ${FPHIG_SRC}/assert.h
-    ${FPHIG_SRC}/publisher.h
-    ${FPHIG_SRC}/publisher_create.h
-    ${FPHIG_SRC}/publisher_destroy.h
-    ${FPHIG_SRC}/publisher_subscribe.h
-    ${FPHIG_SRC}/publisher_unsubscribe.h
-    ${FPHIG_SRC}/publisher_publish.h
-    ${FPHIG_SRC}/subscription.h
-    ${FPHIG_SRC}/thread_pool.h
-    ${FPHIG_SRC}/thread_pool_thread.h
-    ${FPHIG_SRC}/thread_pool_create.h
-    ${FPHIG_SRC}/thread_pool_thread_create.h
-    ${FPHIG_SRC}/thread_pool_task.h
-    ${FPHIG_SRC}/destroy_thread_pool_thread.h
-    ${FPHIG_SRC}/destroy_thread_pool.h
-    ${FPHIG_SRC}/strnstr.h
-    ${FPHIG_SRC}/defer.h
-    ${FPHIG_SRC}/sleep.h
-)
-
-
-set(
-    SRC_LIST
-    ${FPHIG_SRC}/fphig.c
-    ${FPHIG_SRC}/malloc.c
-    ${FPHIG_SRC}/free.c
-    ${FPHIG_SRC}/free.h
-    ${FPHIG_SRC}/list.h
-    ${FPHIG_SRC}/list_push.c
-    ${FPHIG_SRC}/list_shift.c
-    ${FPHIG_SRC}/list_next.c
-    ${FPHIG_SRC}/list_remove.c
-    ${FPHIG_SRC}/list_copy.c
-    ${FPHIG_SRC}/modules_load_all.c
-    ${FPHIG_SRC}/destroy_directory_list.c
-    ${FPHIG_SRC}/assert.c
-    ${FPHIG_SRC}/publisher_create.c
-    ${FPHIG_SRC}/publisher_destroy.c
-    ${FPHIG_SRC}/publisher_subscribe.c
-    ${FPHIG_SRC}/publisher_unsubscribe.c
-    ${FPHIG_SRC}/publisher_publish.c
-    ${FPHIG_SRC}/thread_pool_create.c
-    ${FPHIG_SRC}/thread_pool_thread_create.c
-    ${FPHIG_SRC}/thread_pool_task.c
-    ${FPHIG_SRC}/destroy_thread_pool_thread.c
-    ${FPHIG_SRC}/destroy_thread_pool.c
-    ${FPHIG_SRC}/defer.c
-)
-
-
-add_subdirectory("os")
 
 add_library( fphig ${SRC_LIST} )
 
-set( HEADER_LIST ${HEADER_LIST} PARENT_SCOPE )
-set( SRC_LIST ${SRC_LIST} PARENT_SCOPE )
+add_subdirectory("os/linux")
+add_subdirectory("os/nix")
+add_subdirectory("os/unix")
+
+set_property( TARGET fphig
+    PROPERTY PUBLIC_HEADER
+    fphig.h
+    malloc.h
+    free.h
+    list.h
+    library_load.h
+    library_sym.h
+    library_unload.h
+    modules_load_all.h
+    directory_list.h
+    destroy_directory_list.h
+    thread.h
+    thread_create.h
+    thread_join.h
+    thread_exit.h
+    thread_cond.h
+    thread_cond_init.h
+    thread_cond_destroy.h
+    thread_cond_attr.h
+    thread_cond_attr_init.h
+    thread_cond_attr_destroy.h
+    thread_cond_signal.h
+    thread_cond_broadcast.h
+    thread_cond_wait.h
+    mutex.h
+    mutex_attr.h
+    mutex_init.h
+    mutex_destroy.h
+    mutex_lock.h
+    mutex_unlock.h
+    assert.h
+    publisher.h
+    publisher_create.h
+    publisher_destroy.h
+    publisher_subscribe.h
+    publisher_unsubscribe.h
+    publisher_publish.h
+    subscription.h
+    thread_pool.h
+    thread_pool_thread.h
+    thread_pool_create.h
+    thread_pool_thread_create.h
+    thread_pool_task.h
+    destroy_thread_pool_thread.h
+    destroy_thread_pool.h
+    strnstr.h
+    defer.h
+    sleep.h
+)
+
+target_sources( fphig
+    PRIVATE
+    fphig.c
+    malloc.c
+    free.c
+    free.h
+    list.h
+    list_push.c
+    list_shift.c
+    list_next.c
+    list_remove.c
+    list_copy.c
+    modules_load_all.c
+    destroy_directory_list.c
+    assert.c
+    publisher_create.c
+    publisher_destroy.c
+    publisher_subscribe.c
+    publisher_unsubscribe.c
+    publisher_publish.c
+    thread_pool_create.c
+    thread_pool_thread_create.c
+    thread_pool_task.c
+    destroy_thread_pool_thread.c
+    destroy_thread_pool.c
+    defer.c
+)
+
+
+set_target_properties( fphig PROPERTIES VERSION ${PROJECT_VERSION})
+
+set_target_properties( fphig PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
+
+# TODO have a Release , DEbug ReleaseWithDebugInfo
+# install(TARGETS target
+#         CONFIGURATIONS Debug
+#         RUNTIME DESTINATION Debug/bin)
+
+target_include_directories( fphig PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+  $<INSTALL_INTERFACE:include>
+)
+
+include(GNUInstallDirs)
+
+install( TARGETS fphig
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/fphig
+)

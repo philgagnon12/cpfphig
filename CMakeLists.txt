@@ -1,12 +1,16 @@
 # cmake .. -DBUILD_TESTING=YES -DCMAKE_BUILD_TYPE=Debug -DCMAKE_COMPILER_IS_GNUCXX=YES -DCOVERAGE=YES 
 
+# -DBUILD_SHARED_LIBS=YES
+# -CMAKE_INSTALL_PREFIX=.
+
 # TODO add warning flags to compiler
 
 cmake_minimum_required(VERSION 3.13.2)
 
 project( fphig
-         VERSION 0.1
-         LANGUAGES C )
+    VERSION 0.1
+    LANGUAGES C
+)
 
 
 include(CheckIncludeFiles)
@@ -22,12 +26,11 @@ include(CheckFunctionExists)
 
 check_function_exists(strnstr FPHIG_HAVE_STRNSTR)
 
-configure_file( fphig_config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/src/fphig_config.h )
+configure_file( fphig_config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/src/fphig/fphig_config.h )
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )
 
-set(FPHIG_INCLUDE ${fphig_SOURCE_DIR}/include)
-set(FPHIG_SRC ${fphig_SOURCE_DIR}/src)
+set(FPHIG_SRC ${fphig_SOURCE_DIR}/src/fphig)
 set(FPHIG_TEST ${fphig_SOURCE_DIR}/test)
 
 
@@ -41,11 +44,9 @@ endif()
 # Currently the below setting will use absolute path for RPATH, when doing an install package this needs to be dynamic
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-add_subdirectory("include")
+add_subdirectory("src/fphig")
 
-add_subdirectory("src")
-
-add_subdirectory("test")
+add_subdirectory("test/fphig")
 
 # ctags
 find_program( FPHIG_CTAGS NAMES ctags )

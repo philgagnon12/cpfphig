@@ -3,8 +3,7 @@ function(fphig_add_unit_test TEST_PREFIX )
     # Dont filter out when its has a REAL
     set( UNIT_TEST_SOURCES
          ${FPHIG_SRC}/${TEST_PREFIX}.c
-         ${FPHIG_TEST}/unit/${TEST_PREFIX}_unit_test.c
-         ${HEADER_LIST}
+         ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_PREFIX}_unit_test.c
     )
     foreach( ARG ${ARGN} )
         list( APPEND UNIT_TEST_SOURCES ${ARG} )
@@ -16,7 +15,13 @@ function(fphig_add_unit_test TEST_PREFIX )
 
     # cmocka
     find_package(cmocka REQUIRED)
-    target_include_directories( ${EXETARGET}_unit_test PRIVATE ${cmocka_INCLUDE_DIRS})
+    get_property( FPHIG_INCLUDE_DIRECTORIES TARGET ${CMAKE_PROJECT_NAME} PROPERTY INCLUDE_DIRECTORIES )
+    target_include_directories( ${EXETARGET}_unit_test
+        PRIVATE
+        ${cmocka_INCLUDE_DIRS}
+        ${FPHIG_INCLUDE_DIRECTORIES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../..
+    )
     target_link_libraries( ${EXETARGET}_unit_test ${cmocka_LIBRARIES})
 
     # REAL appending
@@ -50,7 +55,7 @@ fphig_add_unit_test(list_push
 fphig_add_unit_test(list_shift
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/fphig_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/list_push_mock.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../src/list_push.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/fphig/list_push.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
 )

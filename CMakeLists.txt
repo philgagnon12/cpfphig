@@ -8,23 +8,6 @@ project( fphig
          VERSION 0.1
          LANGUAGES C )
 
-option(FPHIG_WITH_FLUIDSYNTH  "Input_Driver and Output_Driver" OFF)
-option(FPHIG_WITH_LUA         "Lua plugin" OFF)
-
-# Default values
-set(FPHIG_CONST_MPHIG_DEFAULT_BPM             "120"     CACHE STRING "default bpm when initialized")
-set(FPHIG_CONST_MPHIG_DEFAULT_SILENCE_VALUE   "1.0"     CACHE STRING "default silence value when initialized")
-
-set(FPHIG_CONST_MPHIG_PARSED_NOTE_DEFAULT_KEY         "C"     CACHE STRING "struct fphig_parsed_note default value for member key")
-set(FPHIG_CONST_MPHIG_PARSED_NOTE_DEFAULT_OCTAVE      "5"     CACHE STRING "struct fphig_parsed_note default value for member octave")
-set(FPHIG_CONST_MPHIG_PARSED_NOTE_DEFAULT_VALUE       "1.0"   CACHE STRING "struct fphig_parsed_note default value for member value")
-set(FPHIG_CONST_MPHIG_PARSED_NOTE_DEFAULT_SIGNATURE   "0"     CACHE STRING "struct fphig_parsed_note default value for member signature")
-set(FPHIG_CONST_MPHIG_PARSED_NOTE_DEFAULT_VELOCITY    "60"    CACHE STRING "struct fphig_parsed_note default value for member velocity")
-
-set(FPHIG_CONST_MPHIG_NOTE_DEFAULT_KEY         "60"    CACHE STRING "struct fphig_note default value for member key")
-set(FPHIG_CONST_MPHIG_NOTE_DEFAULT_VALUE       "1.0"   CACHE STRING "struct fphig_note default value for member value")
-set(FPHIG_CONST_MPHIG_NOTE_DEFAULT_VELOCITY    "60"    CACHE STRING "struct fphig_note default value for member velocity")
-
 
 include(CheckIncludeFiles)
 

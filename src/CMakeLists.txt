@@ -1,7 +1,6 @@
 set(
     HEADER_LIST
     ${FPHIG_SRC}/fphig.h
-    ${FPHIG_SRC}/lexicon.h
     ${FPHIG_SRC}/malloc.h
     ${FPHIG_SRC}/free.h
     ${FPHIG_SRC}/list.h

@@ -1,9 +1,9 @@
-function(melphig_add_unit_test TEST_PREFIX )
+function(fphig_add_unit_test TEST_PREFIX )
 
     # Dont filter out when its has a REAL
     set( UNIT_TEST_SOURCES
-         ${MELPHIG_SRC}/${TEST_PREFIX}.c
-         ${MELPHIG_TEST}/unit/${TEST_PREFIX}_unit_test.c
+         ${FPHIG_SRC}/${TEST_PREFIX}.c
+         ${FPHIG_TEST}/unit/${TEST_PREFIX}_unit_test.c
          ${HEADER_LIST}
     )
     foreach( ARG ${ARGN} )
@@ -20,7 +20,7 @@ function(melphig_add_unit_test TEST_PREFIX )
     target_link_libraries( ${EXETARGET}_unit_test ${cmocka_LIBRARIES})
 
     # REAL appending
-    target_compile_definitions(${EXETARGET}_unit_test PRIVATE MELPHIG_UNIT_TESTING)
+    target_compile_definitions(${EXETARGET}_unit_test PRIVATE FPHIG_UNIT_TESTING)
 
     # coverage
     list(APPEND COVERAGE_COMMANDS_LIST "COMMAND;${EXETARGET}_unit_test" )
@@ -31,32 +31,32 @@ function(melphig_add_unit_test TEST_PREFIX )
 endfunction()
 
 
-melphig_add_unit_test(melphig)
+fphig_add_unit_test(fphig)
 
-melphig_add_unit_test(malloc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+fphig_add_unit_test(malloc
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/fphig_mock.c
 )
 
-melphig_add_unit_test(free
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+fphig_add_unit_test(free
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/fphig_mock.c
 )
 
-melphig_add_unit_test(list_push
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+fphig_add_unit_test(list_push
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/fphig_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
 )
 
-melphig_add_unit_test(list_shift
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+fphig_add_unit_test(list_shift
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/fphig_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/list_push_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../src/list_push.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
 )
 
-melphig_add_unit_test(list_next
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/melphig_mock.c
+fphig_add_unit_test(list_next
+    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/fphig_mock.c
 )
 
 

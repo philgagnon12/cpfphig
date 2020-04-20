@@ -13,7 +13,6 @@ function(fphig_add_system_test PREFIX)
 
 endfunction()
 
-add_subdirectory("plugins")
 
 fphig_add_system_test(directory_list)
 

@@ -12,8 +12,8 @@
 
 static void init_lock_unlock_destroy( void** state )
 {
-    struct fphig_mutex          mutex       = FPHIG_CONST_MPHIG_MUTEX;
-    struct fphig_mutex_attr     mutex_attr  = FPHIG_CONST_MPHIG_MUTEX_ATTR;
+    struct fphig_mutex          mutex       = FPHIG_CONST_FPHIG_MUTEX;
+    struct fphig_mutex_attr     mutex_attr  = FPHIG_CONST_FPHIG_MUTEX_ATTR;
 
     assert_int_equal( FPHIG_OK, fphig_mutex_init( &mutex,
                                                     &mutex_attr,

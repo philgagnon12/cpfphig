@@ -17,7 +17,7 @@ struct fphig_mutex
 };
 
 #ifdef FPHIG_HAVE_PTHREAD_H
-#define FPHIG_CONST_MPHIG_MUTEX { NULL }
+#define FPHIG_CONST_FPHIG_MUTEX { NULL }
 #endif
 
 #endif

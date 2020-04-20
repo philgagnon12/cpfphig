@@ -11,7 +11,7 @@ struct fphig_list_node
     struct fphig_list_node* previous;
 };
 
-#define FPHIG_CONST_MPHIG_LIST_NODE { NULL, NULL, NULL }
+#define FPHIG_CONST_FPHIG_LIST_NODE { NULL, NULL, NULL }
 
 struct fphig_list
 {
@@ -20,7 +20,7 @@ struct fphig_list
 
 };
 
-#define FPHIG_CONST_MPHIG_LIST { NULL, NULL }
+#define FPHIG_CONST_FPHIG_LIST { NULL, NULL }
 
 struct fphig_list_iterator
 {
@@ -29,7 +29,7 @@ struct fphig_list_iterator
 
 };
 
-#define FPHIG_CONST_MPHIG_LIST_ITERATOR { NULL, NULL }
+#define FPHIG_CONST_FPHIG_LIST_ITERATOR { NULL, NULL }
 
 fphig
 fphig_list_push( struct fphig_list*                      List, // TODO add const ? 

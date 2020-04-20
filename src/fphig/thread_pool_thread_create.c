@@ -110,12 +110,12 @@ fphig_thread_pool_thread_create( struct fphig_thread_pool_thread*       Thread_P
                                  FPHIG_OPTIONAL struct fphig_error*   Error )
 {
     fphig                           ret                     = FPHIG_FAIL;
-    struct fphig_mutex_attr         mutex_attr              = FPHIG_CONST_MPHIG_MUTEX_ATTR;
-    struct fphig_thread_cond_attr   thread_cond_attr        = FPHIG_CONST_MPHIG_THREAD_COND_ATTR;
-    struct fphig_thread_attr        thread_attr             = FPHIG_CONST_MPHIG_THREAD_ATTR;
-    struct fphig_error              unlock_error            = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_mutex_attr         mutex_attr              = FPHIG_CONST_FPHIG_MUTEX_ATTR;
+    struct fphig_thread_cond_attr   thread_cond_attr        = FPHIG_CONST_FPHIG_THREAD_COND_ATTR;
+    struct fphig_thread_attr        thread_attr             = FPHIG_CONST_FPHIG_THREAD_ATTR;
+    struct fphig_error              unlock_error            = FPHIG_CONST_FPHIG_ERROR;
     fphig                           timed_wait_ret          = FPHIG_FAIL;
-    struct fphig_error              timed_wait_error        = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error              timed_wait_error        = FPHIG_CONST_FPHIG_ERROR;
 
     // NULL checks
     if( Thread_Pool_Thread == NULL )

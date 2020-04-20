@@ -20,15 +20,15 @@ fphig_thread_pool_task( struct fphig_thread_pool*                   Thread_Pool,
                         FPHIG_OPTIONAL struct fphig_error*        Error )
 {
     fphig                                                   ret                                         = FPHIG_OK;
-    struct fphig_list_iterator                              thread_pool_threads_iterator                = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator                              thread_pool_threads_iterator                = FPHIG_CONST_FPHIG_LIST_ITERATOR;
     fphig                                                   next_thread_pool_thread_ret                 = FPHIG_FAIL;
-    struct fphig_error                                      next_thread_pool_thread_error               = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                                      next_thread_pool_thread_error               = FPHIG_CONST_FPHIG_ERROR;
     struct fphig_thread_pool_thread*                        thread_pool_thread                          = NULL;
-    struct fphig_error                                      unlock_busy_mutex_error                     = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                                      unlock_busy_mutex_error                     = FPHIG_CONST_FPHIG_ERROR;
     struct fphig_thread_pool_thread*                        available_thread_pool_thread                = NULL;
     struct fphig_thread_pool_thread*                        new_thread_pool_thread                      = NULL;
-    struct fphig_thread_pool_thread                         const_thread_pool_thread                    = FPHIG_CONST_MPHIG_THREAD_POOL_THREAD;
-    struct fphig_error                                      unlock_mutex_error                          = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_thread_pool_thread                         const_thread_pool_thread                    = FPHIG_CONST_FPHIG_THREAD_POOL_THREAD;
+    struct fphig_error                                      unlock_mutex_error                          = FPHIG_CONST_FPHIG_ERROR;
 
     // NULL checks
     if( Thread_Pool == NULL || Routine == NULL )

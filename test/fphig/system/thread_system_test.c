@@ -29,8 +29,8 @@ start_routine( void* Arg )
 
 static void create_exit_join( void** state )
 {
-    struct fphig_thread         thread      = FPHIG_CONST_MPHIG_THREAD;
-    struct fphig_thread_attr    thread_attr = FPHIG_CONST_MPHIG_THREAD_ATTR;
+    struct fphig_thread         thread      = FPHIG_CONST_FPHIG_THREAD;
+    struct fphig_thread_attr    thread_attr = FPHIG_CONST_FPHIG_THREAD_ATTR;
     int                         arg         = 777;
     int*                        exit_ret    = NULL;
 

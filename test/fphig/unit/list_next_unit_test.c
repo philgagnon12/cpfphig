@@ -11,9 +11,9 @@
 
 static void arguments( void** state )
 {
-    struct fphig_list_iterator  list_iterator = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator  list_iterator = FPHIG_CONST_FPHIG_LIST_ITERATOR;
     int*                        item                = NULL;
-    struct fphig_error          error               = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error               = FPHIG_CONST_FPHIG_ERROR;
 
     printf("invalid List_Iterator\n");
     assert_int_equal( FPHIG_FAIL, real_fphig_list_next( NULL,
@@ -43,9 +43,9 @@ static void arguments( void** state )
 
 static void list_null( void** state )
 {
-    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_FPHIG_LIST_ITERATOR;
     int*                        item            = NULL;
-    struct fphig_error          error           = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error           = FPHIG_CONST_FPHIG_ERROR;
 
     printf("list_null\n");
     assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
@@ -62,10 +62,10 @@ static void list_null( void** state )
 
 static void empty_list( void** state )
 {
-    struct fphig_list           list          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list           list          = FPHIG_CONST_FPHIG_LIST;
     struct fphig_list_iterator  list_iterator = { &list, NULL };
     int*                        item          = NULL;
-    struct fphig_error          error         = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error         = FPHIG_CONST_FPHIG_ERROR;
 
     printf("empty_list\n");
     assert_int_equal( FPHIG_FAIL, real_fphig_list_next( &list_iterator,
@@ -82,11 +82,11 @@ static void empty_list( void** state )
 
 static void next_item_is_null( void** state )
 {
-    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_MPHIG_LIST_ITERATOR;
-    struct fphig_list           list            = FPHIG_CONST_MPHIG_LIST;
-    struct fphig_list_node      node            = FPHIG_CONST_MPHIG_LIST_NODE;
+    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_FPHIG_LIST_ITERATOR;
+    struct fphig_list           list            = FPHIG_CONST_FPHIG_LIST;
+    struct fphig_list_node      node            = FPHIG_CONST_FPHIG_LIST_NODE;
     int*                        item            = NULL;
-    struct fphig_error          error           = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error           = FPHIG_CONST_FPHIG_ERROR;
 
     list.first = &node;
     list_iterator.list = &list;
@@ -110,12 +110,12 @@ static void next_item_is_null( void** state )
 
 static void next_item( void** state )
 {
-    struct fphig_list_iterator  list_iterator = FPHIG_CONST_MPHIG_LIST_ITERATOR;
-    struct fphig_list           list          = FPHIG_CONST_MPHIG_LIST;
-    struct fphig_list_node      node          = FPHIG_CONST_MPHIG_LIST_NODE;
+    struct fphig_list_iterator  list_iterator = FPHIG_CONST_FPHIG_LIST_ITERATOR;
+    struct fphig_list           list          = FPHIG_CONST_FPHIG_LIST;
+    struct fphig_list_node      node          = FPHIG_CONST_FPHIG_LIST_NODE;
     int*                        item          = NULL;
     int                         number        = 11;
-    struct fphig_error          error         = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error         = FPHIG_CONST_FPHIG_ERROR;
 
     node.item  = &number;
     list.first = &node;
@@ -142,12 +142,12 @@ static void next_item( void** state )
 
 static void list_iterator_rewinds( void** state )
 {
-    struct fphig_list_iterator  list_iterator = FPHIG_CONST_MPHIG_LIST_ITERATOR;
-    struct fphig_list           list          = FPHIG_CONST_MPHIG_LIST;
-    struct fphig_list_node      node          = FPHIG_CONST_MPHIG_LIST_NODE;
+    struct fphig_list_iterator  list_iterator = FPHIG_CONST_FPHIG_LIST_ITERATOR;
+    struct fphig_list           list          = FPHIG_CONST_FPHIG_LIST;
+    struct fphig_list_node      node          = FPHIG_CONST_FPHIG_LIST_NODE;
     int*                        item          = NULL;
     int                         number        = 11;
-    struct fphig_error          error         = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error          error         = FPHIG_CONST_FPHIG_ERROR;
 
     node.item  = &number;
     list.first = &node;

@@ -9,7 +9,7 @@ REAL(fphig_destroy_directory_list)( struct fphig_list*                    File_N
 {
     fphig                           ret             = FPHIG_FAIL;
     char*                           file_name       = NULL;
-    struct fphig_error              shift_error     = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error              shift_error     = FPHIG_CONST_FPHIG_ERROR;
 
     if( File_Names == NULL )
     {

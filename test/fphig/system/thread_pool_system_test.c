@@ -25,7 +25,7 @@ routine( void* Arg )
 
 static void create_task_and_destroy( void** state )
 {
-    struct fphig_thread_pool thread_pool    = FPHIG_CONST_MPHIG_THREAD_POOL;
+    struct fphig_thread_pool thread_pool    = FPHIG_CONST_FPHIG_THREAD_POOL;
     struct timespec timestamp               = { 0, 0 };
     struct timespec realtime                = { 0, 0 };
 

@@ -14,7 +14,7 @@
 static void arguments( void** state )
 {
     int                      item               = 11;
-    struct fphig_error       error              = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error       error              = FPHIG_CONST_FPHIG_ERROR;
 
     printf("invalid List\n");
     assert_int_equal( FPHIG_FAIL, real_fphig_list_push( NULL,
@@ -31,7 +31,7 @@ static void arguments( void** state )
 
 static void first_push( void** state )
 {
-    struct fphig_list   list    = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list   list    = FPHIG_CONST_FPHIG_LIST;
     int                 item    = 11;
 
     expect_value(fphig_malloc, Size, sizeof( struct fphig_list_node ) );
@@ -51,7 +51,7 @@ static void first_push( void** state )
 
 static void subsequent_push( void** state )
 {
-    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_FPHIG_LIST;
     int                     first_item      = 11;
     int                     second_item     = 22;
 
@@ -92,7 +92,7 @@ static void subsequent_push( void** state )
 
 static void push_null( void** state )
 {
-    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_FPHIG_LIST;
 
     expect_value(fphig_malloc, Size, sizeof( struct fphig_list_node ) );
     will_return( fphig_malloc, FPHIG_OK );
@@ -109,7 +109,7 @@ static void push_null( void** state )
 
 static void fail_malloc_is_fail( void** state )
 {
-    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_FPHIG_LIST;
     int                     item            = 11;
 
     expect_value(fphig_malloc, Size, sizeof( struct fphig_list_node ) );

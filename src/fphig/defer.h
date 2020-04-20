@@ -13,7 +13,7 @@ struct fphig_deferred
     int                         delay_milliseconds;
 };
 
-#define FPHIG_CONST_MPHIG_DEFERRED { \
+#define FPHIG_CONST_FPHIG_DEFERRED { \
     NULL,   \
     NULL,   \
     0,      \

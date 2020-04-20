@@ -7,11 +7,11 @@ REAL(fphig_list_copy)( struct fphig_list                       List,
                        FPHIG_OPTIONAL struct fphig_error*    Error )
 {
     fphig                       ret             = FPHIG_FAIL;
-    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator  list_iterator   = FPHIG_CONST_FPHIG_LIST_ITERATOR;
     void*                       item            = NULL;
     fphig                       next_ret        = FPHIG_FAIL;
-    struct fphig_error          next_error      = FPHIG_CONST_MPHIG_ERROR;
-    struct fphig_list           list_copy       = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_error          next_error      = FPHIG_CONST_FPHIG_ERROR;
+    struct fphig_list           list_copy       = FPHIG_CONST_FPHIG_LIST;
 
     if( List_Copy == NULL )
     {

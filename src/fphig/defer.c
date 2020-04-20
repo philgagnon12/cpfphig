@@ -39,7 +39,7 @@ fphig_defer( fphig_defer_routine_symbol*            Routine,
 {
     fphig                               ret             = FPHIG_FAIL;
     struct fphig_deferred*              deferred        = NULL;
-    static const struct fphig_deferred  const_deferred  = FPHIG_CONST_MPHIG_DEFERRED;
+    static const struct fphig_deferred  const_deferred  = FPHIG_CONST_FPHIG_DEFERRED;
 
     // NULL checks
     if( Routine == NULL || Thread_Pool == NULL )

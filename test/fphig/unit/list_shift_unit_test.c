@@ -13,7 +13,7 @@
 
 static void arguments( void** state )
 {
-    struct fphig_list       list               = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list               = FPHIG_CONST_FPHIG_LIST;
     int                     item               = 11;
     struct fphig_error      error              = {};
 
@@ -45,7 +45,7 @@ static void arguments( void** state )
 
 static void first_shift( void** state )
 {
-    struct fphig_list   list        = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list   list        = FPHIG_CONST_FPHIG_LIST;
     int                 item        = 11;
     int*                shift_item  = NULL;
 
@@ -70,7 +70,7 @@ static void first_shift( void** state )
 
 static void subsequent_shift( void** state )
 {
-    struct fphig_list       list                = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list                = FPHIG_CONST_FPHIG_LIST;
     int                     first_item          = 11;
     int                     second_item         = 22;
     int                     third_item          = 33;
@@ -150,7 +150,7 @@ static void subsequent_shift( void** state )
 
 static void shift_null( void** state )
 {
-    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_FPHIG_LIST;
     int                     item            = 11;
     void*                   shift_item      = &item;
 
@@ -172,7 +172,7 @@ static void shift_null( void** state )
 
 static void fail_free_is_fail( void** state )
 {
-    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_FPHIG_LIST;
     void*                   shift_item      = NULL;
 
     expect_value( fphig_malloc, Size, sizeof( struct fphig_list_node ) );
@@ -190,9 +190,9 @@ static void fail_free_is_fail( void** state )
 
 static void shift_empty_list( void** state )
 {
-    struct fphig_list       list            = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list       list            = FPHIG_CONST_FPHIG_LIST;
     void*                   shift_item      = NULL;
-    struct fphig_error      error           = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error      error           = FPHIG_CONST_FPHIG_ERROR;
 
     assert_int_equal(FPHIG_FAIL, real_fphig_list_shift( &list,
                                                           &shift_item,

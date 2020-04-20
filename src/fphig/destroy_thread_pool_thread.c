@@ -15,7 +15,7 @@ fphig_destroy_thread_pool_thread( struct fphig_thread_pool_thread*      Thread_P
 {
     fphig               ret                 = FPHIG_FAIL;
     int                 mutex_unlocked      = 0;
-    struct fphig_error  mutex_unlock_error  = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error  mutex_unlock_error  = FPHIG_CONST_FPHIG_ERROR;
 
     // NULL checks
     if( Thread_Pool_Thread == NULL )

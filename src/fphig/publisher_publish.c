@@ -22,9 +22,9 @@ fphig_publisher_publish( struct fphig_publisher*                     Publisher,
                          struct fphig_error*                         Error )
 {
     fphig                                           ret                         = FPHIG_FAIL;
-    struct fphig_list_iterator                      subscriptions_iterator      = FPHIG_CONST_MPHIG_LIST_ITERATOR;
+    struct fphig_list_iterator                      subscriptions_iterator      = FPHIG_CONST_FPHIG_LIST_ITERATOR;
     fphig                                           next_subscriptions_ret      = FPHIG_FAIL;
-    struct fphig_error                              next_subscriptions_error    = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                              next_subscriptions_error    = FPHIG_CONST_FPHIG_ERROR;
     struct fphig_output_scheduler_subscription*     subscription                = NULL;
     int                                             subscriptions_count         = 0;
     int                                             completed_count             = 0;

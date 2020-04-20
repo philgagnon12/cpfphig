@@ -16,5 +16,5 @@ struct fphig_mutex_attr
 
 };
 
-#define FPHIG_CONST_MPHIG_MUTEX_ATTR {}
+#define FPHIG_CONST_FPHIG_MUTEX_ATTR {}
 #endif

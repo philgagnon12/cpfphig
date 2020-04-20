@@ -11,8 +11,8 @@ REAL(fphig_list_remove)( struct fphig_list*                      List,
     void*                       item                    = NULL;
     void*                       removed_item            = NULL;
     fphig                       shift_ret               = FPHIG_FAIL;
-    struct fphig_error          shift_error             = FPHIG_CONST_MPHIG_ERROR;
-    struct fphig_list           reordered_list          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_error          shift_error             = FPHIG_CONST_FPHIG_ERROR;
+    struct fphig_list           reordered_list          = FPHIG_CONST_FPHIG_LIST;
 
     if( List == NULL || Item == NULL )
     {

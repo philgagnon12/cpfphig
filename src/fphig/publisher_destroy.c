@@ -13,10 +13,10 @@ fphig_publisher_destroy( struct fphig_publisher*                Publisher,
 {
     fphig                                           ret                 = FPHIG_FAIL;
     struct fphig_list*                              subscriptions       = NULL;
-    struct fphig_list                               subscriptions_copy  = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list                               subscriptions_copy  = FPHIG_CONST_FPHIG_LIST;
     struct fphig_subscription*                      subscription        = NULL;
     fphig                                           shift_ret           = FPHIG_FAIL;
-    struct fphig_error                              shift_error         = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                              shift_error         = FPHIG_CONST_FPHIG_ERROR;
 
     // NULL checks
     if( Publisher == NULL )

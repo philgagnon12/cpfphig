@@ -24,8 +24,8 @@
 #include <stdio.h>
 #include <string.h>
 
-static struct fphig_mutex       thread_start_mutex      = FPHIG_CONST_MPHIG_MUTEX;
-static struct fphig_mutex_attr  thread_start_mutex_attr = FPHIG_CONST_MPHIG_MUTEX_ATTR;
+static struct fphig_mutex       thread_start_mutex      = FPHIG_CONST_FPHIG_MUTEX;
+static struct fphig_mutex_attr  thread_start_mutex_attr = FPHIG_CONST_FPHIG_MUTEX_ATTR;
 static int                      thread_start_count      = 0;
 static int                      broadcasted_count       = 0;
 
@@ -76,15 +76,15 @@ start_routine( void* Arg )
 
 static void wait_broadcast( void** state )
 {
-    struct fphig_thread         first_thread        = FPHIG_CONST_MPHIG_THREAD;
-    struct fphig_thread_attr    first_thread_attr   = FPHIG_CONST_MPHIG_THREAD_ATTR;
-    struct fphig_thread         second_thread       = FPHIG_CONST_MPHIG_THREAD;
-    struct fphig_thread_attr    second_thread_attr  = FPHIG_CONST_MPHIG_THREAD_ATTR;
+    struct fphig_thread         first_thread        = FPHIG_CONST_FPHIG_THREAD;
+    struct fphig_thread_attr    first_thread_attr   = FPHIG_CONST_FPHIG_THREAD_ATTR;
+    struct fphig_thread         second_thread       = FPHIG_CONST_FPHIG_THREAD;
+    struct fphig_thread_attr    second_thread_attr  = FPHIG_CONST_FPHIG_THREAD_ATTR;
     struct cond_and_mutex       cond_and_mutex      = {
-        FPHIG_CONST_MPHIG_THREAD_COND,
-        FPHIG_CONST_MPHIG_THREAD_COND_ATTR,
-        FPHIG_CONST_MPHIG_MUTEX,
-        FPHIG_CONST_MPHIG_MUTEX_ATTR
+        FPHIG_CONST_FPHIG_THREAD_COND,
+        FPHIG_CONST_FPHIG_THREAD_COND_ATTR,
+        FPHIG_CONST_FPHIG_MUTEX,
+        FPHIG_CONST_FPHIG_MUTEX_ATTR
     };
     int                         start_count         = 0;
     int                         synchronized_count  = 0;

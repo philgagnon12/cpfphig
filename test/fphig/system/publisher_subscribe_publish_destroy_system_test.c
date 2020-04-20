@@ -29,7 +29,7 @@ subscription_routine( void*                                   Publisher_Data,
 
 static void create_subscribe_publish_destroy( void** state )
 {
-    struct fphig_publisher      publisher               = FPHIG_CONST_MPHIG_PUBLISHER;
+    struct fphig_publisher      publisher               = FPHIG_CONST_FPHIG_PUBLISHER;
     struct fphig_subscription*  first_subscription      = NULL;
     struct fphig_subscription*  second_subscription     = NULL;
     struct fphig_subscription*  third_subscription      = NULL;

@@ -39,7 +39,7 @@ struct fphig_error
     size_t                  line;
 };
 
-#define FPHIG_CONST_MPHIG_ERROR { \
+#define FPHIG_CONST_FPHIG_ERROR { \
     fphig_system_error, \
     0x00,               \
     0,                  \

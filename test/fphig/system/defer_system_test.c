@@ -21,7 +21,7 @@ routine( void* Arg )
 
 static void defer( void** state )
 {
-    struct fphig_thread_pool thread_pool    = FPHIG_CONST_MPHIG_THREAD_POOL;
+    struct fphig_thread_pool thread_pool    = FPHIG_CONST_FPHIG_THREAD_POOL;
 
     checked = 0;
 

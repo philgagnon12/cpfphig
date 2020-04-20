@@ -17,7 +17,7 @@ struct fphig_thread_cond_attr
 };
 
 #ifdef FPHIG_HAVE_PTHREAD_H
-#define FPHIG_CONST_MPHIG_THREAD_COND_ATTR { 0 }
+#define FPHIG_CONST_FPHIG_THREAD_COND_ATTR { 0 }
 #endif
 
 #endif

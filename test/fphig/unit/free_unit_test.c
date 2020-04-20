@@ -11,7 +11,7 @@
 
 static void arguments( void** state )
 {
-    struct fphig_error error = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error error = FPHIG_CONST_FPHIG_ERROR;
 
     printf("Ptr NULL\n");
     assert_int_equal( FPHIG_FAIL, fphig_free( NULL,

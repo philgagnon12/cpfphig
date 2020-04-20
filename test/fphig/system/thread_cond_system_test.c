@@ -62,13 +62,13 @@ start_routine( void* Arg )
 
 static void signal_wait( void** state )
 {
-    struct fphig_thread         thread              = FPHIG_CONST_MPHIG_THREAD;
-    struct fphig_thread_attr    thread_attr         = FPHIG_CONST_MPHIG_THREAD_ATTR;
+    struct fphig_thread         thread              = FPHIG_CONST_FPHIG_THREAD;
+    struct fphig_thread_attr    thread_attr         = FPHIG_CONST_FPHIG_THREAD_ATTR;
     struct cond_and_mutex       cond_and_mutex      = {
-        FPHIG_CONST_MPHIG_THREAD_COND,
-        FPHIG_CONST_MPHIG_THREAD_COND_ATTR,
-        FPHIG_CONST_MPHIG_MUTEX,
-        FPHIG_CONST_MPHIG_MUTEX_ATTR
+        FPHIG_CONST_FPHIG_THREAD_COND,
+        FPHIG_CONST_FPHIG_THREAD_COND_ATTR,
+        FPHIG_CONST_FPHIG_MUTEX,
+        FPHIG_CONST_FPHIG_MUTEX_ATTR
     };
 
     assert_int_equal( FPHIG_OK, fphig_mutex_init( &(cond_and_mutex.mutex),

@@ -1,5 +1,5 @@
-#ifndef MPHIG_DESTROY_DIRECTORY_LIST_MOCK_H
-#define MPHIG_DESTROY_DIRECTORY_LIST_MOCK_H
+#ifndef FPHIG_DESTROY_DIRECTORY_LIST_MOCK_H
+#define FPHIG_DESTROY_DIRECTORY_LIST_MOCK_H
 
 #include "fphig/fphig.h"
 #include "fphig/list.h"

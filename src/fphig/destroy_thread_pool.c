@@ -11,9 +11,9 @@ fphig_destroy_thread_pool( struct fphig_thread_pool*            Thread_Pool,
 {
     fphig                                                   ret                                         = FPHIG_OK;
     fphig                                                   shift_thread_pool_thread_ret                = FPHIG_FAIL;
-    struct fphig_error                                      shift_thread_pool_thread_error              = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                                      shift_thread_pool_thread_error              = FPHIG_CONST_FPHIG_ERROR;
     struct fphig_thread_pool_thread*                        thread_pool_thread                          = NULL;
-    struct fphig_error                                      mutex_destroy_error                         = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                                      mutex_destroy_error                         = FPHIG_CONST_FPHIG_ERROR;
 
     // NULL checks
     if( Thread_Pool == NULL )

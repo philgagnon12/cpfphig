@@ -20,7 +20,7 @@ fphig_thread_cond_init( struct fphig_thread_cond*               Cond,
 {
     fphig               ret                             =   FPHIG_FAIL;
     fphig               init_ret                        =   FPHIG_FAIL;
-    struct fphig_error  cond_destroy_error              = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error  cond_destroy_error              = FPHIG_CONST_FPHIG_ERROR;
 
     // NULL checks
     if( Cond == NULL || Cond_Attr == NULL )

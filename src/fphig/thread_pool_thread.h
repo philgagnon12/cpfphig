@@ -33,16 +33,16 @@ struct fphig_thread_pool_thread
     int                                         busy;
 };
 
-#define FPHIG_CONST_MPHIG_THREAD_POOL_THREAD { \
+#define FPHIG_CONST_FPHIG_THREAD_POOL_THREAD { \
     NULL,                                       \
-    FPHIG_CONST_MPHIG_THREAD,                 \
-    FPHIG_CONST_MPHIG_THREAD_COND,            \
+    FPHIG_CONST_FPHIG_THREAD,                 \
+    FPHIG_CONST_FPHIG_THREAD_COND,            \
     fphig_thread_pool_thread_cond_kind_ready,   \
-    FPHIG_CONST_MPHIG_THREAD_COND,            \
-    FPHIG_CONST_MPHIG_MUTEX,                  \
+    FPHIG_CONST_FPHIG_THREAD_COND,            \
+    FPHIG_CONST_FPHIG_MUTEX,                  \
     NULL,                                       \
     NULL,                                       \
-    FPHIG_CONST_MPHIG_MUTEX,                  \
+    FPHIG_CONST_FPHIG_MUTEX,                  \
     0,                                          \
 }
 

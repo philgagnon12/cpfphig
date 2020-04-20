@@ -16,9 +16,9 @@ fphig_publisher_create( struct fphig_publisher*                  Publisher,
                         FPHIG_OPTIONAL struct fphig_error*     Error )
 {
     fphig                           ret                 = FPHIG_FAIL;
-    struct fphig_thread_cond_attr   thread_cond_attr    = FPHIG_CONST_MPHIG_THREAD_COND_ATTR;
-    struct fphig_mutex_attr         mutex_attr          = FPHIG_CONST_MPHIG_MUTEX_ATTR;
-    static const struct fphig_list  const_list          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_thread_cond_attr   thread_cond_attr    = FPHIG_CONST_FPHIG_THREAD_COND_ATTR;
+    struct fphig_mutex_attr         mutex_attr          = FPHIG_CONST_FPHIG_MUTEX_ATTR;
+    static const struct fphig_list  const_list          = FPHIG_CONST_FPHIG_LIST;
 
     // NULL checks
     if( Publisher == NULL )

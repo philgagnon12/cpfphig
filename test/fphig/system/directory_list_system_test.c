@@ -19,7 +19,7 @@ static char* bin_dir    = NULL;
 
 static void list_at_least_this_binary( void** state )
 {
-    struct fphig_list           file_names          = FPHIG_CONST_MPHIG_LIST;
+    struct fphig_list           file_names          = FPHIG_CONST_FPHIG_LIST;
     struct fphig_list_iterator  list_iterator       = { &file_names, NULL };
     char*                       file_name           = NULL;
     int                         file_names_count    = 0;

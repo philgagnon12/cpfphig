@@ -24,12 +24,12 @@ struct fphig_subscription
     int                                             thread_ready;
 };
 
-#define FPHIG_CONST_MPHIG_SUBSCRIPTION { \
+#define FPHIG_CONST_FPHIG_SUBSCRIPTION { \
     NULL,                               \
     NULL,                               \
     NULL,                               \
-    FPHIG_CONST_MPHIG_THREAD,         \
-    FPHIG_CONST_MPHIG_THREAD_COND,    \
+    FPHIG_CONST_FPHIG_THREAD,         \
+    FPHIG_CONST_FPHIG_THREAD_COND,    \
     0,                                  \
 }
 

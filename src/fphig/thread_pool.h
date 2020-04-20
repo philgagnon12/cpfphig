@@ -11,9 +11,9 @@ struct fphig_thread_pool
     struct fphig_mutex                  mutex;
 };
 
-#define FPHIG_CONST_MPHIG_THREAD_POOL { \
-    FPHIG_CONST_MPHIG_LIST,   \
-    FPHIG_CONST_MPHIG_MUTEX   \
+#define FPHIG_CONST_FPHIG_THREAD_POOL { \
+    FPHIG_CONST_FPHIG_LIST,   \
+    FPHIG_CONST_FPHIG_MUTEX   \
 }
 
 #endif

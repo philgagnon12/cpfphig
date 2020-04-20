@@ -31,7 +31,7 @@ fphig_publisher_subscription_routine( void* Subscription )
     fphig                                           ret                         = FPHIG_FAIL;
     int                                             abort                       = 0;
     struct fphig_error*                             error                       = NULL;
-    struct fphig_error                              const_error                 = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                              const_error                 = FPHIG_CONST_FPHIG_ERROR;
     enum fphig_publisher_thread_cond_kind           published_thread_cond_kind  = fphig_publisher_thread_cond_kind_abort;
     fphig                                           ret_to_signal               = FPHIG_FAIL;
 
@@ -259,12 +259,12 @@ fphig_publisher_subscribe( struct fphig_publisher*                      Publishe
 {
     fphig                                           ret                         = FPHIG_FAIL;
     struct fphig_thread_attr                        thread_attr                 = {}; // TODO add const or does it cause problem ?
-    struct fphig_thread_cond_attr                   thread_cond_attr            = FPHIG_CONST_MPHIG_THREAD_COND_ATTR;
+    struct fphig_thread_cond_attr                   thread_cond_attr            = FPHIG_CONST_FPHIG_THREAD_COND_ATTR;
     struct fphig_subscription*                      subscription                = NULL;
-    static const struct fphig_subscription          const_subscription          = FPHIG_CONST_MPHIG_SUBSCRIPTION;
-    struct fphig_error                              unlock_error                = FPHIG_CONST_MPHIG_ERROR;
+    static const struct fphig_subscription          const_subscription          = FPHIG_CONST_FPHIG_SUBSCRIPTION;
+    struct fphig_error                              unlock_error                = FPHIG_CONST_FPHIG_ERROR;
     fphig                                           timed_wait_ret              = FPHIG_FAIL;
-    struct fphig_error                              timed_wait_error            = FPHIG_CONST_MPHIG_ERROR;
+    struct fphig_error                              timed_wait_error            = FPHIG_CONST_FPHIG_ERROR;
 
 
     // NULL checks

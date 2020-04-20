@@ -37,20 +37,20 @@ struct fphig_publisher
     struct fphig_error                              published_error;
 };
 
-#define FPHIG_CONST_MPHIG_PUBLISHER { \
+#define FPHIG_CONST_FPHIG_PUBLISHER { \
     NULL,                                   \
-    FPHIG_CONST_MPHIG_MUTEX,              \
+    FPHIG_CONST_FPHIG_MUTEX,              \
     NULL,                                   \
-    FPHIG_CONST_MPHIG_THREAD_COND,        \
+    FPHIG_CONST_FPHIG_THREAD_COND,        \
     fphig_publisher_thread_cond_kind_abort, \
-    FPHIG_CONST_MPHIG_MUTEX,              \
+    FPHIG_CONST_FPHIG_MUTEX,              \
     NULL,                                   \
-    FPHIG_CONST_MPHIG_MUTEX,              \
-    FPHIG_CONST_MPHIG_THREAD_COND,        \
+    FPHIG_CONST_FPHIG_MUTEX,              \
+    FPHIG_CONST_FPHIG_THREAD_COND,        \
     fphig_publisher_thread_cond_kind_abort, \
-    FPHIG_CONST_MPHIG_MUTEX,              \
-    FPHIG_CONST_MPHIG_THREAD_COND,        \
-    FPHIG_CONST_MPHIG_ERROR               \
+    FPHIG_CONST_FPHIG_MUTEX,              \
+    FPHIG_CONST_FPHIG_THREAD_COND,        \
+    FPHIG_CONST_FPHIG_ERROR               \
 }
 
 #endif

@@ -8,6 +8,7 @@ add_subdirectory("os/unix")
 set_property( TARGET ${CMAKE_PROJECT_NAME}
     PROPERTY PUBLIC_HEADER
     cpfphig.h
+    ${CMAKE_CURRENT_BINARY_DIR}/cpfphig_config.h
     malloc.h
     free.h
     list.h
@@ -91,7 +92,7 @@ if( NOT CMAKE_DL_LIBS )
     message( WARNING "dl lib not found" )
 endif()
 
-target_link_libraries( ${CMAKE_PROJECT_NAME} Threads::Threads ${CMAKE_DL_LIBS} )
+target_link_libraries( ${CMAKE_PROJECT_NAME} INTERFACE  Threads::Threads ${CMAKE_DL_LIBS} )
 
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 
@@ -111,6 +112,7 @@ target_include_directories( ${CMAKE_PROJECT_NAME}
 
 include(GNUInstallDirs)
 
+
 install( TARGETS ${CMAKE_PROJECT_NAME}
     EXPORT ${CMAKE_PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -120,3 +122,20 @@ install( TARGETS ${CMAKE_PROJECT_NAME}
 install( EXPORT ${CMAKE_PROJECT_NAME}
     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
 )
+
+include(CMakePackageConfigHelpers)
+
+# get_property( CPFPHIG_INCLUDE_DIRECTORIES TARGET ${CMAKE_PROJECT_NAME} PROPERTY INCLUDE_DIRECTORIES )
+
+# get_property( CPFPHIG_DEPENDENCIES TARGET ${CMAKE_PROJECT_NAME} PROPERTY INTERFACE_LINK_LIBRARIES )
+
+# message(  FATAL_ERROR "foo ${FOO}")
+
+# need to save the install paths to pass them on to here .... 
+configure_package_config_file(
+    ${PROJECT_SOURCE_DIR}/cpfphigConfig.in.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/cpfphigConfig.cmake
+    INSTALL_DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/cmake
+)
+
+

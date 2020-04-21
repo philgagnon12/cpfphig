@@ -40,29 +40,29 @@ endfunction()
 cpfphig_add_unit_test(cpfphig)
 
 cpfphig_add_unit_test(malloc
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/cpfphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
 )
 
 cpfphig_add_unit_test(free
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/cpfphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
 )
 
 cpfphig_add_unit_test(list_push
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/cpfphig_mock.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/malloc_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/free_mock.c
 )
 
 cpfphig_add_unit_test(list_shift
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/cpfphig_mock.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/list_push_mock.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/cpfphig/list_push.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/malloc_mock.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/free_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/list_push_mock.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/list_push.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/malloc_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/free_mock.c
 )
 
 cpfphig_add_unit_test(list_next
-    ${CMAKE_CURRENT_SOURCE_DIR}/../mock/cpfphig_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
 )
 
 

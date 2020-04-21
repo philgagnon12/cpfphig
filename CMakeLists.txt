@@ -30,10 +30,6 @@ configure_file( cpfphig_config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/src/cpfphig/
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )
 
-# TODO remove these
-set(CPFPHIG_SRC ${cpfphig_SOURCE_DIR}/src/cpfphig)
-set(CPFPHIG_TEST ${cpfphig_SOURCE_DIR}/test)
-
 
 if( ${BUILD_TESTING} )
     enable_testing()

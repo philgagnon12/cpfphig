@@ -10,7 +10,6 @@ if(${BUILD_TESTING})
         include(CTest)
     endif()
 
-    add_subdirectory(mock)
     add_subdirectory(unit)
     add_subdirectory(system)
 

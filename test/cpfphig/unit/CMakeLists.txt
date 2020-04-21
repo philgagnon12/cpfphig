@@ -2,8 +2,8 @@ function(cpfphig_add_unit_test TEST_PREFIX )
 
     # Dont filter out when its has a REAL
     set( UNIT_TEST_SOURCES
-         ${CPFPHIG_SRC}/${TEST_PREFIX}.c
-         ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_PREFIX}_unit_test.c
+        ${PROJECT_SOURCE_DIR}/src/${CMAKE_PROJECT_NAME}/${TEST_PREFIX}.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_PREFIX}_unit_test.c
     )
     foreach( ARG ${ARGN} )
         list( APPEND UNIT_TEST_SOURCES ${ARG} )
@@ -11,6 +11,7 @@ function(cpfphig_add_unit_test TEST_PREFIX )
 
     # Executable name
     string(REPLACE "/" "_" EXETARGET ${TEST_PREFIX})
+
     add_executable(${EXETARGET}_unit_test ${UNIT_TEST_SOURCES})
 
     # cmocka
@@ -19,7 +20,7 @@ function(cpfphig_add_unit_test TEST_PREFIX )
     target_include_directories( ${EXETARGET}_unit_test
         PRIVATE
         ${cmocka_INCLUDE_DIRS}
-        ${CPFPHIG_INCLUDE_DIRECTORIES}
+        ${CPFPHIG_INCLUDE_DIRECTORIES} # get_property up above ^
         ${CMAKE_CURRENT_SOURCE_DIR}/../..
     )
     target_link_libraries( ${EXETARGET}_unit_test ${cmocka_LIBRARIES})

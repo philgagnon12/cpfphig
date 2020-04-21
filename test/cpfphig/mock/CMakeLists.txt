@@ -1,0 +1,18 @@
+set(MOCKS_LIST 
+    ${CPFPHIG_TEST}/mock/cpfphig_mock.c
+    ${CPFPHIG_TEST}/mock/malloc_mock.c
+    ${CPFPHIG_TEST}/mock/free_mock.c
+    ${CPFPHIG_TEST}/mock/list_mock.h
+    ${CPFPHIG_TEST}/mock/list_push_mock.c
+    ${CPFPHIG_TEST}/mock/list_shift_mock.c
+    ${CPFPHIG_TEST}/mock/list_next_mock.c
+    ${CPFPHIG_TEST}/mock/list_remove_mock.c
+    ${CPFPHIG_TEST}/mock/list_copy_mock.c
+    ${CPFPHIG_TEST}/mock/directory_list_mock.c
+    ${CPFPHIG_TEST}/mock/destroy_directory_list_mock.h
+    ${CPFPHIG_TEST}/mock/destroy_directory_list_mock.c
+    ${CPFPHIG_TEST}/mock/modules_load_all_mock.c
+    ${CPFPHIG_TEST}/mock/library_unload_mock.c
+    ${CPFPHIG_TEST}/mock/strnstr_mock.c
+    PARENT_SCOPE
+)

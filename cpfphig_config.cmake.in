@@ -1,0 +1,17 @@
+#define CPFPHIG_VERSION @cpfphig_VERSION@
+
+#cmakedefine    BUILD_TESTING
+
+#cmakedefine    CPFPHIG_HAVE_DLFCN_H
+
+#cmakedefine    CPFPHIG_HAVE_WINDOWS_H
+
+#cmakedefine    CPFPHIG_HAVE_DIRENT_H
+
+#cmakedefine    CPFPHIG_HAVE_LIBGEN_H
+
+#cmakedefine    CPFPHIG_HAVE_PTHREAD_H
+
+#cmakedefine    CPFPHIG_HAVE_UNISTD_H
+
+#cmakedefine    CPFPHIG_HAVE_STRNSTR

@@ -1,7 +1,3 @@
-# TODO
-# remove this included file from test/cpfhig/CMakeLists.txt
-# link both statically AND shared object ways with the results of make install
-
 cmake_minimum_required(VERSION 3.13.2)
 
 project( cpfphig_system_tests
@@ -13,14 +9,9 @@ set( CPFPHIG_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../../.. )
 
 set( CMAKE_MODULE_PATH ${CPFPHIG_SOURCE_DIR}/cmake )
 
-if( ${BUILD_TESTING} )
-    enable_testing()
-endif()
+enable_testing()
 
-include( BuildTesting )
-# TODO probably want to build it for system tests in a sub directory here
-# or just make 2 directories, static_release, shared_release
-function(cpfphig_add_build_commands BUILD_DIRECTORY )
+function(cpfphig_install BUILD_DIRECTORY )
 
     set(BUILD_DEFINES)
     foreach( ARG ${ARGN} )
@@ -46,35 +37,25 @@ function(cpfphig_add_build_commands BUILD_DIRECTORY )
         WORKING_DIRECTORY ${BUILD_DIRECTORY}
     )
 
-set(${BUILD_DIRECTORY}_DEPEND ${BUILD_DIRECTORY}/src/cpfphig/cpfphig.cmake PARENT_SCOPE)
+set(${BUILD_DIRECTORY}_CONFIG_PATH ${BUILD_DIRECTORY}/src/cpfphig PARENT_SCOPE)
 
 endfunction()
 
-cpfphig_add_build_commands(
+cpfphig_install(
     shared_release_build
     -DBUILD_TESTING=NO
     -DBUILD_SHARED_LIBS=YES
     -DCMAKE_BUILD_TYPE=Release
     -DCMAKE_INSTALL_PREFIX=.
 )
-message( "${shared_release_build_DEPEND}" )
-get_filename_component( shared_release_build_DEPEND_DIRECTORY ${shared_release_build_DEPEND} DIRECTORY )
-# message( FATAL_ERROR "${CMAKE_CURRENT_BINARY_DIR}/${shared_release_build_DEPEND_DIRECTORY}" )
 
-find_package(
-    cpfphig
-    CONFIG
-    CONFIGS cpfphig.cmake
-    PATHS ${CMAKE_CURRENT_BINARY_DIR}/${shared_release_build_DEPEND_DIRECTORY}
+cpfphig_install(
+    static_release_build
+    -DBUILD_TESTING=NO
+    -DBUILD_SHARED_LIBS=NO
+    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_INSTALL_PREFIX=.
 )
-
-# cpfphig_add_build_commands(
-#     static_release_build
-#     -DBUILD_TESTING=NO
-#     -DBUILD_SHARED_LIBS=NO
-#     -DCMAKE_BUILD_TYPE=Release
-#     -DCMAKE_INSTALL_PREFIX=.
-# )
 
 
 # System tests
@@ -82,30 +63,48 @@ find_package(
 find_package(cmocka REQUIRED)
 
 function(cpfphig_add_system_test PREFIX )
-    add_executable(${PREFIX}_system_test ${CMAKE_CURRENT_SOURCE_DIR}/${PREFIX}_system_test.c )
 
-    target_include_directories( ${PREFIX}_system_test PRIVATE ${cmocka_INCLUDE_DIRS})
-    target_link_libraries(${PREFIX}_system_test cpfphig ${cmocka_LIBRARIES} )
+    foreach( ARG ${ARGN} )
 
-    add_test(system_${PREFIX} ${PREFIX}_system_test)
-    list(APPEND COVERAGE_COMMANDS_LIST "COMMAND;${PREFIX}_system_test" )
-    set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
+        add_executable(${PREFIX}_${ARG}_system_test ${CMAKE_CURRENT_SOURCE_DIR}/${PREFIX}_system_test.c )
+
+        find_package(
+            cpfphig
+            CONFIG
+            PATHS ${CMAKE_CURRENT_BINARY_DIR}/${${ARG}_CONFIG_PATH}
+            REQUIRED
+        )
+
+        target_include_directories( ${PREFIX}_${ARG}_system_test PRIVATE ${cmocka_INCLUDE_DIRS})
+        target_link_libraries(${PREFIX}_${ARG}_system_test cpfphig ${cmocka_LIBRARIES} )
+
+        add_test(system_${PREFIX}_${ARG} ${PREFIX}_${ARG}_system_test)
+        list(APPEND COVERAGE_COMMANDS_LIST "COMMAND;${PREFIX}_${ARG}_system_test" )
+        set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
+
+
+    endforeach()
+
 
 endfunction()
 
+set(BUILDS
+    shared_release_build
+    static_release_build
+)
 
-# cpfphig_add_system_test(directory_list)
-# 
-# cpfphig_add_system_test(mutex)
-# cpfphig_add_system_test(thread)
-# cpfphig_add_system_test(thread_cond)
-# cpfphig_add_system_test(thread_cond_broadcast)
-# cpfphig_add_system_test(thread_pool)
- cpfphig_add_system_test(defer)
-# 
-# cpfphig_add_system_test(publisher_subscribe_publish_destroy)
+cpfphig_add_system_test(directory_list ${BUILDS})
+
+cpfphig_add_system_test(mutex ${BUILDS})
+cpfphig_add_system_test(thread ${BUILDS})
+cpfphig_add_system_test(thread_cond ${BUILDS})
+cpfphig_add_system_test(thread_cond_broadcast ${BUILDS})
+cpfphig_add_system_test(thread_pool ${BUILDS})
+cpfphig_add_system_test(defer ${BUILDS})
+
+cpfphig_add_system_test(publisher_subscribe_publish_destroy ${BUILDS})
 
 
-# REMARK system tests that include "cpfphig.h" NOT "cpfphig/cpfphig.h"
-# should be last
+#REMARK system tests that include "cpfphig.h" NOT "cpfphig/cpfphig.h"
+#should be last
 

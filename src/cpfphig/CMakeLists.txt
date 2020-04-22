@@ -19,6 +19,7 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
     directory_list.h
     destroy_directory_list.h
     thread.h
+    thread_attr.h
     thread_create.h
     thread_join.h
     thread_exit.h
@@ -125,13 +126,6 @@ install( EXPORT ${CMAKE_PROJECT_NAME}
 
 include(CMakePackageConfigHelpers)
 
-# get_property( CPFPHIG_INCLUDE_DIRECTORIES TARGET ${CMAKE_PROJECT_NAME} PROPERTY INCLUDE_DIRECTORIES )
-
-# get_property( CPFPHIG_DEPENDENCIES TARGET ${CMAKE_PROJECT_NAME} PROPERTY INTERFACE_LINK_LIBRARIES )
-
-# message(  FATAL_ERROR "foo ${FOO}")
-
-# need to save the install paths to pass them on to here .... 
 configure_package_config_file(
     ${PROJECT_SOURCE_DIR}/cpfphigConfig.in.cmake
     ${CMAKE_CURRENT_BINARY_DIR}/cpfphigConfig.cmake

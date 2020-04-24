@@ -3,8 +3,8 @@
 
 #include "cpfphig/cpfphig.h"
 
-cpfphig
-cpfphig_thread_exit( void*                                Value_Ptr,
-                   CPFPHIG_OPTIONAL struct cpfphig_error* Error );
+void
+cpfphig_thread_exit( int*                                   Ret,
+                     CPFPHIG_OPTIONAL struct cpfphig_error* Error );
 
 #endif

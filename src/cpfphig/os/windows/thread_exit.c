@@ -1,10 +1,10 @@
 #include "cpfphig/cpfphig.h"
 
-#ifdef CPFPHIG_HAVE_PTHREAD_H
+#ifdef CPFPHIG_HAVE_WINDOWS_H
 
 #include "cpfphig/thread_exit.h"
 
-#include <pthread.h>
+#include <windows.h>
 
 void
 cpfphig_thread_exit( int*                                   Ret,
@@ -15,7 +15,7 @@ cpfphig_thread_exit( int*                                   Ret,
     if( Ret != NULL )
         ret = *Ret;
 
-    pthread_exit( (void*)ret );
+    ExitThread( ret );
 }
 
 #endif

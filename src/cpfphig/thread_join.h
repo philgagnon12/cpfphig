@@ -6,7 +6,7 @@
 
 cpfphig
 cpfphig_thread_join( struct cpfphig_thread*                 Thread,
-                   CPFPHIG_OPTIONAL void**              Value_Ptr,
-                   CPFPHIG_OPTIONAL struct cpfphig_error* Error );
+                     CPFPHIG_OPTIONAL int*                  Thread_Ret,
+                     CPFPHIG_OPTIONAL struct cpfphig_error* Error );
 
 #endif

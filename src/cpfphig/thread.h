@@ -7,11 +7,19 @@
 #include <pthread.h>
 #endif
 
+#ifdef CPFPHIG_HAVE_WINDOWS_H
+#include <windows.h>
+#endif
+
 struct cpfphig_thread
 {
 
 #ifdef CPFPHIG_HAVE_PTHREAD_H
     pthread_t   pthread;
+#endif
+
+#ifdef CPFPHIG_HAVE_WINDOWS_H
+    HANDLE handle;
 #endif
 
 };

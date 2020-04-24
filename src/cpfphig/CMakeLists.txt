@@ -4,6 +4,7 @@ add_library( ${CMAKE_PROJECT_NAME} )
 add_subdirectory("os/linux")
 add_subdirectory("os/nix")
 add_subdirectory("os/unix")
+add_subdirectory("os/windows")
 
 set_property( TARGET ${CMAKE_PROJECT_NAME}
     PROPERTY PUBLIC_HEADER

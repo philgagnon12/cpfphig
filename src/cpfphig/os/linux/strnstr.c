@@ -3,10 +3,12 @@
 #ifndef CPFPHIG_HAVE_STRNSTR
 
 #include "cpfphig/strnstr.h"
+#include "cpfphig/malloc.h"
+#include "cpfphig/free.h"
+
 
 #include <string.h>
 #include <stdio.h>
-
 
 cpfphig
 cpfphig_strnstr( const char*                          Haystack,
@@ -15,7 +17,8 @@ cpfphig_strnstr( const char*                          Haystack,
                char** const                         Occurence,
                CPFPHIG_OPTIONAL struct cpfphig_error* Error )
 {
-    char haystack_buffer[Len+1];
+    // char* haystack_buffer[Len+1];
+    char* haystack_buffer = NULL;
     const char* occurence = NULL;
 
     // NULL checks
@@ -33,6 +36,13 @@ cpfphig_strnstr( const char*                          Haystack,
     {
         *Occurence = NULL;
         return CPFPHIG_OK;
+    }
+
+    if( CPFPHIG_FAIL == cpfphig_malloc( Len+1,
+                                        &haystack_buffer,
+                                        Error ) )
+    {
+        return CPFPHIG_FAIL;
     }
 
     memset( haystack_buffer,
@@ -53,7 +63,8 @@ cpfphig_strnstr( const char*                          Haystack,
         *Occurence = (char* const)(Haystack + (occurence - haystack_buffer));
     }
 
-    return CPFPHIG_OK;
+    return cpfphig_free( &haystack_buffer,
+                         NULL );
 }
 
 #endif

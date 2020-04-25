@@ -10,7 +10,7 @@
 
 static void arguments( void** state )
 {
-    struct cpfphig_error error = {};
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("invalid Message\n");
     assert_int_equal( CPFPHIG_FAIL,
@@ -33,7 +33,7 @@ static void arguments( void** state )
 
 static void error_type_into_error( void** state )
 {
-    struct cpfphig_error error = {};
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("error_type same as arg\n");
     assert_int_equal( CPFPHIG_OK,
@@ -49,7 +49,7 @@ static void error_type_into_error( void** state )
 
 static void message_into_error( void** state )
 {
-    struct cpfphig_error error = {};
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("message with valid message_size and exact string length\n");
     assert_int_equal( CPFPHIG_OK,
@@ -68,7 +68,7 @@ static void message_into_error( void** state )
 
 static void file_into_error( void** state )
 {
-    struct cpfphig_error error = {};
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("file with valid file_size and exact string length\n");
     assert_int_equal( CPFPHIG_OK,
@@ -88,7 +88,7 @@ static void file_into_error( void** state )
 
 static void function_into_error( void** state )
 {
-    struct cpfphig_error error = {};
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("function with valid function_size and exact string length\n");
     assert_int_equal( CPFPHIG_OK,
@@ -107,7 +107,7 @@ static void function_into_error( void** state )
 
 static void line_into_error( void** state )
 {
-    struct cpfphig_error error = {};
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("line same as arg\n");
     assert_int_equal( CPFPHIG_OK,

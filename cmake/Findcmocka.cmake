@@ -12,7 +12,7 @@ if( NOT cmocka_POPULATED )
     FetchContent_GetProperties( cmocka )
 
     add_custom_command( OUTPUT "${cmocka_BINARY_DIR}/CMakeCache.txt"
-        COMMAND ${CMAKE_COMMAND} ${cmocka_SOURCE_DIR} -DCMAKE_INSTALL_PREFIX="${cmocka_BINARY_DIR}"
+        COMMAND ${CMAKE_COMMAND} ${cmocka_SOURCE_DIR} -DCMAKE_INSTALL_PREFIX="${cmocka_BINARY_DIR}" -DCMAKE_GENERATOR="${CMAKE_GENERATOR}" -DBUILD_SHARED_LIBS=YES
         WORKING_DIRECTORY ${cmocka_BINARY_DIR}
         COMMENT "configure cmocka"
     )
@@ -21,18 +21,18 @@ if( NOT cmocka_POPULATED )
         DEPENDS "${cmocka_BINARY_DIR}/CMakeCache.txt"
     )
 
-add_custom_command( OUTPUT "${cmocka_BINARY_DIR}/lib/libcmocka${CMAKE_SHARED_LIBRARY_SUFFIX}"
+add_custom_command( OUTPUT "${cmocka_BINARY_DIR}/lib/${CMAKE_LINK_LIBRARY_PREFIX}cmocka${CMAKE_LINK_LIBRARY_SUFFIX}"
         COMMAND ${CMAKE_COMMAND} --build ${cmocka_BINARY_DIR} --target install
         WORKING_DIRECTORY ${cmocka_BINARY_DIR}
         COMMENT "build libcmocka"
     )
 
     add_custom_target( buildlibcmocka
-        DEPENDS "${cmocka_BINARY_DIR}/lib/libcmocka${CMAKE_SHARED_LIBRARY_SUFFIX}"
+        DEPENDS "${cmocka_BINARY_DIR}/lib/${CMAKE_LINK_LIBRARY_PREFIX}cmocka${CMAKE_LINK_LIBRARY_SUFFIX}"
     )
 
     add_library(libcmocka SHARED IMPORTED GLOBAL)
-    set_target_properties(libcmocka PROPERTIES IMPORTED_LOCATION "${cmocka_BINARY_DIR}/lib/libcmocka${CMAKE_SHARED_LIBRARY_SUFFIX}")
+    set_target_properties(libcmocka PROPERTIES IMPORTED_LOCATION "${cmocka_BINARY_DIR}/lib/${CMAKE_LINK_LIBRARY_PREFIX}cmocka${CMAKE_LINK_LIBRARY_SUFFIX}")
     add_dependencies( buildlibcmocka configurelibcmocka )
     add_dependencies( libcmocka buildlibcmocka )
 endif()

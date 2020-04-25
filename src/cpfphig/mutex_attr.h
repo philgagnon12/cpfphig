@@ -14,7 +14,11 @@ struct cpfphig_mutex_attr
     pthread_mutexattr_t   pthread_mutex_attr;
 #endif
 
+#ifdef CPFPHIG_HAVE_WINDOWS_H
+    int c_require_one_member;
+#endif
+
 };
 
-#define CPFPHIG_CONST_CPFPHIG_MUTEX_ATTR {}
+#define CPFPHIG_CONST_CPFPHIG_MUTEX_ATTR { 0 }
 #endif

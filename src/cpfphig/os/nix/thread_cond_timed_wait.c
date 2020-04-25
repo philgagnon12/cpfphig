@@ -15,9 +15,9 @@
 
 cpfphig
 cpfphig_thread_cond_timed_wait( struct cpfphig_thread_cond*               Cond,
-                              struct cpfphig_mutex*                     Mutex,
-                              int                                     Milliseconds,
-                              CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+                                struct cpfphig_mutex*                     Mutex,
+                                int                                       Milliseconds,
+                                CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
     cpfphig           ret                     = CPFPHIG_FAIL;
     struct timespec milliseconds_timespec   = { 0, 0 };

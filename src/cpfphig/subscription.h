@@ -8,8 +8,8 @@
 
 
 typedef cpfphig (cpfphig_subscription_routine_symbol)( void*                                   Publisher_Data,
-                                                   void*                                   Subscription_Data,
-                                                   CPFPHIG_OPTIONAL struct cpfphig_error*    Error);
+                                                       void*                                   Subscription_Data,
+                                                       CPFPHIG_OPTIONAL struct cpfphig_error*  Error);
 
 struct cpfphig_publisher;
 
@@ -17,10 +17,10 @@ struct cpfphig_subscription
 {
     // should be for const data like "subsription on a driver"
     void*                                           data;
-    cpfphig_subscription_routine_symbol*              subscription_routine;
-    struct cpfphig_publisher*                         publisher;
-    struct cpfphig_thread                             thread;
-    struct cpfphig_thread_cond                        ready_thread_cond;
+    cpfphig_subscription_routine_symbol*            subscription_routine;
+    struct cpfphig_publisher*                       publisher;
+    struct cpfphig_thread                           thread;
+    struct cpfphig_thread_cond                      ready_thread_cond;
     int                                             thread_ready;
 };
 

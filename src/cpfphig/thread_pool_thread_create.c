@@ -22,7 +22,7 @@
 #include "cpfphig/assert.h"
 
 static
-void*
+int
 thread_pool_thread_routine( void* Thread_Pool_Thread )
 {
     struct cpfphig_thread_pool_thread*    thread_pool_thread  = NULL;
@@ -102,12 +102,12 @@ thread_pool_thread_routine( void* Thread_Pool_Thread )
                   __LINE__ );
 
 
-    return NULL;
+    return 0;
 }
 
 cpfphig
 cpfphig_thread_pool_thread_create( struct cpfphig_thread_pool_thread*       Thread_Pool_Thread,
-                                 CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
+                                   CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
 {
     cpfphig                           ret                     = CPFPHIG_FAIL;
     struct cpfphig_mutex_attr         mutex_attr              = CPFPHIG_CONST_CPFPHIG_MUTEX_ATTR;

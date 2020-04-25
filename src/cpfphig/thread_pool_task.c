@@ -11,8 +11,6 @@
 #include "cpfphig/list.h"
 
 
-#include <unistd.h> // TODO remove
-
 cpfphig
 cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_Pool,
                         cpfphig_thread_pool_thread_routine_symbol*    Routine,
@@ -41,7 +39,7 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
 
 
     if( CPFPHIG_FAIL == cpfphig_mutex_lock( &Thread_Pool->mutex,
-                                          Error ) )
+                                            Error ) )
     {
         return CPFPHIG_FAIL;
     }
@@ -55,11 +53,11 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
     while( ret == CPFPHIG_OK &&
            available_thread_pool_thread == NULL &&
            CPFPHIG_OK == ( next_thread_pool_thread_ret = cpfphig_list_next( &thread_pool_threads_iterator,
-                                                                          &thread_pool_thread,
-                                                                          &next_thread_pool_thread_error ) ) )
+                                                                            &thread_pool_thread,
+                                                                            &next_thread_pool_thread_error ) ) )
     {
         if( CPFPHIG_OK == ( ret = cpfphig_mutex_lock( &thread_pool_thread->busy_mutex,
-                                                    Error ) ) )
+                                                      Error ) ) )
         {
 
             if( thread_pool_thread->busy == 0 )
@@ -69,7 +67,7 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
 
             // Error or not , we have to unlock
             if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &thread_pool_thread->busy_mutex,
-                                                    &unlock_busy_mutex_error ) )
+                                                      &unlock_busy_mutex_error ) )
             {
                 if( ret == CPFPHIG_OK )
                 {
@@ -93,20 +91,20 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
         if( available_thread_pool_thread == NULL )
         {
             if( CPFPHIG_OK == ( ret = cpfphig_malloc( sizeof( struct cpfphig_thread_pool_thread ),
-                                                    &new_thread_pool_thread,
-                                                    Error ) ) )
+                                                      &new_thread_pool_thread,
+                                                      Error ) ) )
             {
                 // Reset
                 *new_thread_pool_thread = const_thread_pool_thread;
 
                 if( CPFPHIG_OK == ( ret = cpfphig_thread_pool_thread_create( new_thread_pool_thread,
-                                                                           Error ) ) )
+                                                                             Error ) ) )
                 {
                     available_thread_pool_thread = new_thread_pool_thread;
 
                     if( CPFPHIG_OK == ( ret = cpfphig_list_push( &Thread_Pool->thread_pool_threads,
-                                                               new_thread_pool_thread,
-                                                               Error ) ) )
+                                                                 new_thread_pool_thread,
+                                                                 Error ) ) )
                     {
                         ret = CPFPHIG_OK;
                     }
@@ -118,7 +116,7 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
                                               Error ) )
         {
             if( CPFPHIG_OK == ( ret = cpfphig_mutex_lock( &available_thread_pool_thread->busy_mutex,
-                                                        Error ) ) )
+                                                          Error ) ) )
             {
                 available_thread_pool_thread->busy = 1;
 
@@ -127,10 +125,10 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
                 available_thread_pool_thread->thread_cond_kind    = cpfphig_thread_pool_thread_cond_kind_routine;
 
                 ret = cpfphig_thread_cond_signal( &available_thread_pool_thread->thread_cond,
-                                                Error );
+                                                  Error );
 
                 if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &available_thread_pool_thread->busy_mutex,
-                                                        &unlock_busy_mutex_error ) )
+                                                          &unlock_busy_mutex_error ) )
                 {
                     if( ret == CPFPHIG_OK )
                     {
@@ -143,7 +141,7 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
             } // busy_mutex locked
 
             if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &available_thread_pool_thread->mutex,
-                                                    &unlock_mutex_error ) )
+                                                      &unlock_mutex_error ) )
             {
                 if( ret == CPFPHIG_OK )
                 {
@@ -158,7 +156,7 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
     } // OK after looping thread_pool_threads
 
     if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &Thread_Pool->mutex,
-                                            &unlock_mutex_error ) )
+                                              &unlock_mutex_error ) )
     {
         if( ret == CPFPHIG_OK )
         {

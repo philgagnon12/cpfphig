@@ -10,6 +10,7 @@
 #include "cpfphig/mutex_unlock.h"
 #include "cpfphig/free.h"
 #include "cpfphig/list.h"
+#include "cpfphig/thread.h"
 #include "cpfphig/thread_cond_wait.h"
 #include "cpfphig/thread_cond_signal.h"
 #include "cpfphig/thread_cond_timed_wait.h"
@@ -23,13 +24,13 @@
 #define CPFPHIG_BUFFER_SIZE ( 0xFF )
 
 static
-void*
+int
 cpfphig_publisher_subscription_routine( void* Subscription )
 {
     struct cpfphig_subscription*                      subscription                = NULL;
     struct cpfphig_publisher*                         publisher                   = NULL;
     cpfphig                                           ret                         = CPFPHIG_FAIL;
-    int                                             abort                       = 0;
+    int                                               abort                       = 0;
     struct cpfphig_error*                             error                       = NULL;
     struct cpfphig_error                              const_error                 = CPFPHIG_CONST_CPFPHIG_ERROR;
     enum cpfphig_publisher_thread_cond_kind           published_thread_cond_kind  = cpfphig_publisher_thread_cond_kind_abort;
@@ -247,18 +248,18 @@ cpfphig_publisher_subscription_routine( void* Subscription )
                   __FUNCTION__,
                   __LINE__ );
 
-    return NULL;
+    return 0;
 }
 
 cpfphig
 cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publisher,
-                           void*                                        Data,
-                           cpfphig_subscription_routine_symbol*           Subscription_Routine,
-                           struct cpfphig_subscription**                  Subscription,
-                           CPFPHIG_OPTIONAL struct cpfphig_error*         Error )
+                             void*                                          Data,
+                             cpfphig_subscription_routine_symbol*           Subscription_Routine,
+                             struct cpfphig_subscription**                  Subscription,
+                             CPFPHIG_OPTIONAL struct cpfphig_error*         Error )
 {
     cpfphig                                           ret                         = CPFPHIG_FAIL;
-    struct cpfphig_thread_attr                        thread_attr                 = {}; // TODO add const or does it cause problem ?
+    struct cpfphig_thread_attr                        thread_attr                 = CPFPHIG_CONST_CPFPHIG_THREAD_ATTR;
     struct cpfphig_thread_cond_attr                   thread_cond_attr            = CPFPHIG_CONST_CPFPHIG_THREAD_COND_ATTR;
     struct cpfphig_subscription*                      subscription                = NULL;
     static const struct cpfphig_subscription          const_subscription          = CPFPHIG_CONST_CPFPHIG_SUBSCRIPTION;

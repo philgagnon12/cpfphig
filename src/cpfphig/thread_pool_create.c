@@ -5,7 +5,7 @@
 
 cpfphig
 cpfphig_thread_pool_create( struct cpfphig_thread_pool*             Thread_Pool,
-                          CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+                            CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     cpfphig                       ret             = CPFPHIG_FAIL;
     struct cpfphig_mutex_attr     mutex_attr      = CPFPHIG_CONST_CPFPHIG_MUTEX_ATTR;
@@ -20,6 +20,6 @@ cpfphig_thread_pool_create( struct cpfphig_thread_pool*             Thread_Pool,
     }
 
     return cpfphig_mutex_init( &Thread_Pool->mutex,
-                             &mutex_attr,
-                             Error );
+                               &mutex_attr,
+                               Error );
 }

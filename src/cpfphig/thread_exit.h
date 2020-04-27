@@ -4,7 +4,6 @@
 #include "cpfphig/cpfphig.h"
 
 void
-cpfphig_thread_exit( int*                                   Ret,
-                     CPFPHIG_OPTIONAL struct cpfphig_error* Error );
+cpfphig_thread_exit( int Ret );
 
 #endif

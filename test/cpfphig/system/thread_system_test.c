@@ -12,19 +12,16 @@
 #include <stdio.h>
 #include <string.h>
 
-static int start_routine_ret    = 888;
-
 static
-void*
+int
 start_routine( void* Arg )
 {
     assert_non_null( Arg );
     assert_int_equal( 777, *(int*)Arg );
 
-    assert_int_equal( CPFPHIG_OK, cpfphig_thread_exit( &start_routine_ret,
-                                                     NULL ) );
+    cpfphig_thread_exit( 888 );
     assert_non_null( NULL );
-    return NULL;
+    return 0;
 }
 
 static void create_exit_join( void** state )
@@ -32,20 +29,20 @@ static void create_exit_join( void** state )
     struct cpfphig_thread         thread      = CPFPHIG_CONST_CPFPHIG_THREAD;
     struct cpfphig_thread_attr    thread_attr = CPFPHIG_CONST_CPFPHIG_THREAD_ATTR;
     int                         arg         = 777;
-    int*                        exit_ret    = NULL;
+    int                         exit_ret    = 0;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_create( &thread,
-                                                       &thread_attr,
-                                                       &start_routine,
-                                                       &arg,
-                                                       NULL ) );
+                                                         &thread_attr,
+                                                         &start_routine,
+                                                         &arg,
+                                                         NULL ) );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_join( &thread,
-                                                     (void**)&exit_ret,
-                                                     NULL ) );
+                                                       &exit_ret,
+                                                       NULL ) );
 
     assert_non_null( exit_ret );
-    assert_int_equal( 888, *exit_ret );
+    assert_int_equal( 888, exit_ret );
 }
 
 int main( int argc, char* argv[]  )

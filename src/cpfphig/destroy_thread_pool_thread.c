@@ -11,7 +11,7 @@
 
 cpfphig
 cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thread_Pool_Thread,
-                                  CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+                                    CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     cpfphig               ret                 = CPFPHIG_FAIL;
     int                 mutex_unlocked      = 0;
@@ -43,8 +43,8 @@ cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thre
             mutex_unlocked = 1;
 
             if( CPFPHIG_OK == ( ret = cpfphig_thread_join( &Thread_Pool_Thread->thread,
-                                                         NULL,
-                                                         Error ) ) )
+                                                           NULL,
+                                                           Error ) ) )
             {
                 if( CPFPHIG_OK == ( ret = cpfphig_thread_cond_destroy( &Thread_Pool_Thread->ready_thread_cond,
                                                                      Error ) ) )

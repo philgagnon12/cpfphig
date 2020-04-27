@@ -33,7 +33,7 @@ struct cond_and_mutex
 };
 
 static
-void*
+int
 start_routine( void* Arg )
 {
     struct cond_and_mutex*   cond_and_mutex = NULL;
@@ -53,11 +53,10 @@ start_routine( void* Arg )
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_unlock( &(cond_and_mutex->mutex),
                                                       NULL ) );
 
-    assert_int_equal( CPFPHIG_OK, cpfphig_thread_exit( NULL,
-                                                     NULL ) );
+    cpfphig_thread_exit( 0 );
 
     assert_non_null( NULL );
-    return NULL;
+    return 0;
 }
 
 static void signal_wait( void** state )

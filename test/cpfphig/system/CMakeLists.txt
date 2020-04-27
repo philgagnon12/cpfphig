@@ -5,6 +5,8 @@ project( cpfphig_system_tests
     LANGUAGES C
 )
 
+set( CMAKE_BUILD_TYPE RelWithDebInfo )
+
 set( CPFPHIG_SOURCE_DIR ${CMAKE_SOURCE_DIR}/../../.. )
 
 set( CMAKE_MODULE_PATH ${CPFPHIG_SOURCE_DIR}/cmake )
@@ -45,7 +47,7 @@ cpfphig_install(
     shared_release_build
     -DBUILD_TESTING=NO
     -DBUILD_SHARED_LIBS=YES
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo
     -DCMAKE_INSTALL_PREFIX=.
 )
 
@@ -53,7 +55,7 @@ cpfphig_install(
     static_release_build
     -DBUILD_TESTING=NO
     -DBUILD_SHARED_LIBS=NO
-    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo
     -DCMAKE_INSTALL_PREFIX=.
 )
 
@@ -67,6 +69,13 @@ function(cpfphig_add_system_test PREFIX )
     foreach( ARG ${ARGN} )
 
         add_executable(${PREFIX}_${ARG}_system_test ${CMAKE_CURRENT_SOURCE_DIR}/${PREFIX}_system_test.c )
+
+        foreach( RUNTIME_DLL ${cmocka_RUNTIME_DLLS})
+            add_custom_command( TARGET ${PREFIX}_${ARG}_system_test
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different "${RUNTIME_DLL}" $<TARGET_FILE_DIR:${PREFIX}_${ARG}_system_test>
+            )
+        endforeach()
 
         find_package(
             cpfphig

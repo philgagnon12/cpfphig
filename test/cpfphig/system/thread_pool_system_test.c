@@ -32,18 +32,18 @@ static void create_task_and_destroy( void** state )
     checked = 0;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_pool_create( &thread_pool,
+                                                              NULL ) );
+
+
+    assert_int_equal( CPFPHIG_OK, cpfphig_thread_pool_task( &thread_pool,
+                                                            &routine,
+                                                            NULL,
                                                             NULL ) );
 
-
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_pool_task( &thread_pool,
-                                                          &routine,
-                                                          NULL,
-                                                          NULL ) );
-
-    assert_int_equal( CPFPHIG_OK, cpfphig_thread_pool_task( &thread_pool,
-                                                          &routine,
-                                                          NULL,
-                                                          NULL ) );
+                                                            &routine,
+                                                            NULL,
+                                                            NULL ) );
 
     assert_int_equal(0, clock_gettime(CLOCK_REALTIME, &timestamp ) );
 

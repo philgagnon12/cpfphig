@@ -8,6 +8,8 @@
 
 #include <pthread.h>
 
+typedef void* (pthread_routine)(void*);
+
 cpfphig
 cpfphig_thread_create( struct cpfphig_thread*                   Thread,
                        struct cpfphig_thread_attr*              Thread_Attr,
@@ -34,7 +36,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
 
     if( 0 != pthread_create( &(Thread->pthread),
                              &(Thread_Attr->pthread_attr),
-                             Start_Routine,
+                             (pthread_routine*)Start_Routine,
                              Arg ) )
     {
          if( Error != NULL )

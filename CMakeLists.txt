@@ -57,7 +57,7 @@ if( CTAGS_RETURN EQUAL 0 )
         add_custom_target( ctags ALL )
         add_custom_command( TARGET ctags
             POST_BUILD
-            COMMAND ${CPFPHIG_CTAGS} -R --exclude=.git ${CMAKE_PROJECT_NAME}/src ${CMAKE_PROJECT_NAME}/test/mock
+            COMMAND ${CPFPHIG_CTAGS} -R --exclude=.git src/${CMAKE_PROJECT_NAME} test/${CMAKE_PROJECT_NAME}/unit/mock
             WORKING_DIRECTORY ${cpfphig_SOURCE_DIR}
             COMMENT "running ctags"
         )

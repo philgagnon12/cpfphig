@@ -32,7 +32,10 @@ cpfphig_thread_join( struct cpfphig_thread*                 Thread,
         return CPFPHIG_FAIL;
     }
 
-    *Thread_Ret = (int)value_ptr;
+    if( Thread_Ret != NULL )
+    {
+        *Thread_Ret = (int)value_ptr;
+    }
 
     return CPFPHIG_OK;
 }

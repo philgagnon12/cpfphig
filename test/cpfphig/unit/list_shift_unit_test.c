@@ -13,9 +13,9 @@
 
 static void arguments( void** state )
 {
-    struct cpfphig_list       list               = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list     list               = CPFPHIG_CONST_CPFPHIG_LIST;
     int                     item               = 11;
-    struct cpfphig_error      error              = {};
+    struct cpfphig_error    error              = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     printf("invalid List\n");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( NULL,

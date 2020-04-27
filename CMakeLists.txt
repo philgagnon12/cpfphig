@@ -45,6 +45,15 @@ add_subdirectory("src/cpfphig")
 
 add_subdirectory("test/cpfphig")
 
+# system test
+add_custom_target( system_test
+    COMMAND ${CMAKE_COMMAND} -E rm -rf "${CMAKE_CURRENT_SOURCE_DIR}/test/cpfphig/system/build"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_CURRENT_SOURCE_DIR}/test/cpfphig/system/build"
+    COMMAND ${CMAKE_COMMAND} -E chdir "${CMAKE_CURRENT_SOURCE_DIR}/test/cpfphig/system/build" ${CMAKE_COMMAND} .. -G "${CMAKE_GENERATOR}"
+    COMMAND ${CMAKE_COMMAND} --build "${CMAKE_CURRENT_SOURCE_DIR}/test/cpfphig/system/build"
+    COMMAND ${CMAKE_COMMAND} --build "${CMAKE_CURRENT_SOURCE_DIR}/test/cpfphig/system/build" --target test
+)
+
 # ctags
 find_program( CPFPHIG_CTAGS NAMES ctags )
 if( CPFPHIG_CTAGS )

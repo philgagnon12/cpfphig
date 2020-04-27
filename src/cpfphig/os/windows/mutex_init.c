@@ -25,14 +25,14 @@ cpfphig_mutex_init( struct cpfphig_mutex*                    Mutex,
     }
 
 
-    if( CPFPHIG_OK == ( ret = cpfphig_malloc( sizeof( CRITICAL_SECTION ),
-                                              &Mutex->critical_section,
-                                              Error ) ) )
+    if( CPFPHIG_OK == cpfphig_malloc( sizeof( CRITICAL_SECTION ),
+                                      &Mutex->critical_section,
+                                      Error ) )
     {
         InitializeCriticalSection( Mutex->critical_section ); // return void
     }
 
-    return MELPHIG_OK;
+    return CPFPHIG_OK;
 }
 
 #endif

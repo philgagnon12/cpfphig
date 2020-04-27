@@ -38,7 +38,7 @@ cpfphig_thread_join( struct cpfphig_thread*                 Thread,
     if( Thread_Ret != NULL )
         *Thread_Ret = (int)thread_ret;
 
-    return CPFPHIG_OK
+    return CPFPHIG_OK;
 }
 
 #endif

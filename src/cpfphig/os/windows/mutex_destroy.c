@@ -23,7 +23,7 @@ cpfphig_mutex_destroy( struct cpfphig_mutex*                    Mutex,
 
     DeleteCriticalSection( Mutex->critical_section ); // return void
 
-    return cpfphig_free( &Mutex->critical_sectiond,
+    return cpfphig_free( &Mutex->critical_section,
                          Error );
 }
 

@@ -87,7 +87,14 @@ function(cpfphig_add_system_test PREFIX )
         target_include_directories( ${PREFIX}_${ARG}_system_test PRIVATE ${cmocka_INCLUDE_DIRS})
         target_link_libraries(${PREFIX}_${ARG}_system_test cpfphig ${cmocka_LIBRARIES} )
 
+        add_custom_command( TARGET ${PREFIX}_${ARG}_system_test
+            POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:cpfphig>" $<TARGET_FILE_DIR:${PREFIX}_${ARG}_system_test>
+        )
+
+
         add_test(system_${PREFIX}_${ARG} ${PREFIX}_${ARG}_system_test)
+
         list(APPEND COVERAGE_COMMANDS_LIST "COMMAND;${PREFIX}_${ARG}_system_test" )
         set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
 
@@ -96,6 +103,7 @@ function(cpfphig_add_system_test PREFIX )
 
 
 endfunction()
+
 
 set(BUILDS
     shared_release_build

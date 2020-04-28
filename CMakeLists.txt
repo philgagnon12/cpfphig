@@ -12,8 +12,6 @@ project( cpfphig
     LANGUAGES C
 )
 
-
-# set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 include(CheckIncludeFiles)
 
 check_include_files("dlfcn.h"   CPFPHIG_HAVE_DLFCN_H)

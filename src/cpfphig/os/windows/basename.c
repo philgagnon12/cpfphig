@@ -6,6 +6,7 @@
 #include "cpfphig/free.h"
 
 #include <windows.h>
+#include <Shlwapi.h>
 #include <string.h>
 
 cpfphig

@@ -96,7 +96,7 @@ if( NOT CMAKE_DL_LIBS )
     message( WARNING "dl lib not found" )
 endif()
 
-target_link_libraries( ${CMAKE_PROJECT_NAME} INTERFACE  Threads::Threads ${CMAKE_DL_LIBS} )
+target_link_libraries( ${CMAKE_PROJECT_NAME} Threads::Threads ${CMAKE_DL_LIBS} Shlwapi Pathcch )
 
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 

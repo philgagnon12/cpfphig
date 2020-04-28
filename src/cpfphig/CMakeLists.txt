@@ -96,7 +96,12 @@ if( NOT CMAKE_DL_LIBS )
     message( WARNING "dl lib not found" )
 endif()
 
-target_link_libraries( ${CMAKE_PROJECT_NAME} Threads::Threads ${CMAKE_DL_LIBS} Shlwapi Pathcch )
+target_link_libraries( ${CMAKE_PROJECT_NAME}
+    Threads::Threads
+    ${CMAKE_DL_LIBS}
+    $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Shlwapi> # Should those have their own HAVE_H ? 
+    $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Pathcch>
+)
 
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 

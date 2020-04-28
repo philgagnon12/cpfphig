@@ -17,4 +17,6 @@ target_sources( ${CMAKE_PROJECT_NAME}
     thread_cond_attr_destroy.c
     sleep.c
     directory_list.c
+    basename.c
+    dirname.c
 )

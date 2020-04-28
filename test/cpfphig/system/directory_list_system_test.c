@@ -1,6 +1,8 @@
 #include "cpfphig/cpfphig.h"
 #include "cpfphig/directory_list.h"
 #include "cpfphig/destroy_directory_list.h"
+#include "cpfphig/basename.h"
+#include "cpfphig/dirname.h"
 
 #include <stdarg.h>
 #include <stddef.h>
@@ -10,12 +12,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef CPFPHIG_HAVE_LIBGEN_H
-#include <libgen.h>
-#endif
+#define CPFPHIG_BUFFER_SIZE ( 0x0AFF )
 
-static char* bin_name   = NULL;
-static char* bin_dir    = NULL;
+static char bin_name[CPFPHIG_BUFFER_SIZE];
+static char bin_dir[CPFPHIG_BUFFER_SIZE];
+
 
 static void list_at_least_this_binary( void** state )
 {
@@ -48,10 +49,31 @@ static void list_at_least_this_binary( void** state )
 
 int main( int argc, char* argv[]  )
 {
-    #ifdef CPFPHIG_HAVE_LIBGEN_H
-    bin_name    = basename(argv[0]);
-    bin_dir     = dirname(argv[0]);
-    #endif
+    memset( bin_name,
+            0x00,
+            CPFPHIG_BUFFER_SIZE );
+
+    memset( bin_dir,
+            0x00,
+            CPFPHIG_BUFFER_SIZE );
+
+    if( CPFPHIG_FAIL == cpfphig_basename( argv[0],
+                                          strlen( argv[0] ) + 1,
+                                          bin_name,
+                                          CPFPHIG_BUFFER_SIZE,
+                                          NULL ) )
+    {
+        return CPFPHIG_FAIL;
+    }
+
+    if( CPFPHIG_FAIL == cpfphig_dirname( argv[0],
+                                         strlen( argv[0] ) + 1,
+                                         bin_dir,
+                                         CPFPHIG_BUFFER_SIZE,
+                                         NULL ) )
+    {
+        return CPFPHIG_FAIL;
+    }
 
     // windows will be _splitpath
 

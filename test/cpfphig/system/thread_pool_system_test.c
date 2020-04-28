@@ -47,7 +47,7 @@ static void create_task_and_destroy( void** state )
     // spin lock for max 2 seconds
     while( checked != 2)
     {
-        assert_true( cpfphig_sleep( 10, NULL ) );
+        assert_true( CPFPHIG_OK == cpfphig_sleep( 10, NULL ) );
         assert_true( clock < 200 );
         clock++;
     }

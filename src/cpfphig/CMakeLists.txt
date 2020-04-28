@@ -57,6 +57,8 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
     strnstr.h
     defer.h
     sleep.h
+    basename.h
+    dirname.h
 )
 
 target_sources( ${CMAKE_PROJECT_NAME}

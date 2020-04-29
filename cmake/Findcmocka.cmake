@@ -3,6 +3,7 @@ include(FetchContent)
 FetchContent_Declare( cmocka
     GIT_REPOSITORY "https://git.cryptomilk.org/projects/cmocka.git"
     GIT_TAG        "cmocka-1.1.5"
+    SOURCE_DIR     "${PROJECT_SOURCE_DIR}/vendor/cmocka-src"
 )
 
 FetchContent_GetProperties( cmocka )

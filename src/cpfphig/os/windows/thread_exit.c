@@ -7,15 +7,9 @@
 #include <windows.h>
 
 void
-cpfphig_thread_exit( int*                                   Ret,
-                     CPFPHIG_OPTIONAL struct cpfphig_error* Error )
+cpfphig_thread_exit( int Ret )
 {
-    int ret = 0;
-
-    if( Ret != NULL )
-        ret = *Ret;
-
-    ExitThread( ret );
+    ExitThread( Ret );
 }
 
 #endif

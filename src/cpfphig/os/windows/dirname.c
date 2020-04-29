@@ -4,6 +4,7 @@
 
 #include <windows.h>
 #include <string.h>
+#include <stdio.h>
 
 #define CPFPHIG_BUFFER_SIZE ( 0xAFF )
 

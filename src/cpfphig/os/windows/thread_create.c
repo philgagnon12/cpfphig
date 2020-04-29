@@ -41,6 +41,8 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
         return CPFPHIG_FAIL;
     }
 
+    Thread->handle = handle;
+
     return CPFPHIG_OK;
 }
 

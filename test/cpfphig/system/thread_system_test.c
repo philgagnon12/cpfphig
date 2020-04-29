@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <string.h>
 
+static int arg = 0;
+
 static
 int
 start_routine( void* Arg )
@@ -28,8 +30,9 @@ static void create_exit_join( void** state )
 {
     struct cpfphig_thread         thread      = CPFPHIG_CONST_CPFPHIG_THREAD;
     struct cpfphig_thread_attr    thread_attr = CPFPHIG_CONST_CPFPHIG_THREAD_ATTR;
-    int                         arg         = 777;
-    int                         exit_ret    = 0;
+    int                           exit_ret    = 0;
+
+    arg = 777;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_create( &thread,
                                                          &thread_attr,

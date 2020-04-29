@@ -2,12 +2,10 @@
 
 #ifdef CPFPHIG_HAVE_WINDOWS_H
 
-#include "cpfphig/malloc.h"
-#include "cpfphig/free.h"
-
 #include <windows.h>
-#include <Pathcch.h>
 #include <string.h>
+
+#define CPFPHIG_BUFFER_SIZE ( 0xAFF )
 
 cpfphig
 cpfphig_dirname( const char*                               Path,
@@ -17,9 +15,9 @@ cpfphig_dirname( const char*                               Path,
                  CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
     cpfphig                 ret         = CPFPHIG_FAIL;
-    char*                   path        = NULL;
-    cpfphig                 free_ret    = CPFPHIG_FAIL;
-    struct cpfphig_error    free_error  = CPFPHIG_CONST_CPFPHIG_ERROR;
+
+    char                    drive[CPFPHIG_BUFFER_SIZE];
+    char                    dir[CPFPHIG_BUFFER_SIZE];
 
     // NULL checks
     if( Path == NULL || Buffer == NULL )
@@ -30,57 +28,45 @@ cpfphig_dirname( const char*                               Path,
         return CPFPHIG_FAIL;
     }
 
-    if( CPFPHIG_FAIL == ( ret = cpfphig_malloc( Path_Size,
-                                                &path,
-                                                Error ) ) )
-    {
-        return CPFPHIG_FAIL;
-    }
-
-    memset( path,
+    memset( drive,
             0x00,
-            Path_Size );
+            CPFPHIG_BUFFER_SIZE );
 
+    memset( dir,
+            0x00,
+            CPFPHIG_BUFFER_SIZE );
 
-    memcpy( path,
-            Path,
-            strnlen( Path, Path_Size-1 ) );
-
-
-    if( S_FALSE == PathCchRemoveFileSpec( path, Path_Size ) )
+    if( 0 != _splitpath_s( Path,
+                           drive,
+                           CPFPHIG_BUFFER_SIZE,
+                           dir,
+                           CPFPHIG_BUFFER_SIZE,
+                           NULL,
+                           0,
+                           NULL,
+                           0 ) )
     {
         if( Error != NULL )
-            cpfphig_error_message( cpfphig_system_error, "PathCchRemoveFileSpec failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "_splitpath_s failed", Error, __FILE__, __FUNCTION__, __LINE__ );
 
-        ret = CPFPHIG_FAIL;
+        return CPFPHIG_FAIL;
+
     }
 
+    // Remove backslash
+    dir[strnlen(dir, CPFPHIG_BUFFER_SIZE-1)-1] = 0x00;
 
-    if( ret == CPFPHIG_OK )
-    {
-        memset( Buffer,
-                0x00,
-                Buffer_Size );
+    memset( Buffer,
+            0x00,
+            Buffer_Size );
 
-        memcpy( Buffer,
-                path,
-                strnlen( path, Buffer_Size-1 ) );
-    }
+    snprintf( Buffer,
+              Buffer_Size,
+              "%s%s",
+              drive,
+              dir );
 
-
-    if( CPFPHIG_FAIL == ( free_ret = cpfphig_free( &path,
-                                                   &free_error ) ) )
-    {
-        if( ret == CPFPHIG_OK )
-        {
-            if( Error != NULL )
-                *Error = free_error;
-
-            ret = CPFPHIG_FAIL;
-        }
-    }
-
-    return ret;
+    return CPFPHIG_OK;
 }
 
 #endif

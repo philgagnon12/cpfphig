@@ -10,15 +10,17 @@
 
 #include <windows.h>
 #include <string.h>
+#include <stdio.h>
 
 #define CPFPHIG_BUFFER_SIZE ( 0x04FF )
 
 cpfphig
-REAL(cpfphig_directory_list)( const char*                           Directory,
-                            struct cpfphig_list*                    File_Names,
-                            CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+REAL(cpfphig_directory_list)( const char*                             Directory,
+                              struct cpfphig_list*                    File_Names,
+                              CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     cpfphig           ret         = CPFPHIG_FAIL;
+    char              directory[CPFPHIG_BUFFER_SIZE];
     HANDLE            dir         = NULL;
     WIN32_FIND_DATA   find_data   = { 0 };
     BOOL              found_data  = 1;
@@ -34,8 +36,16 @@ REAL(cpfphig_directory_list)( const char*                           Directory,
         return CPFPHIG_FAIL;
     }
 
+    memset( directory,
+            0x00,
+            CPFPHIG_BUFFER_SIZE );
 
-    if( NULL == ( dir = FindFirstFile( "\\*", &find_data ) ) )
+    snprintf( directory,
+              CPFPHIG_BUFFER_SIZE,
+              "%s\\*",
+              Directory );
+
+    if( NULL == ( dir = FindFirstFile( directory, &find_data ) ) )
     {
         if( Error != NULL )
             cpfphig_error_message(cpfphig_system_error, "FindFirstFile failed", Error, __FILE__, __FUNCTION__, __LINE__ );
@@ -49,29 +59,27 @@ REAL(cpfphig_directory_list)( const char*                           Directory,
     while( ret == CPFPHIG_OK && found_data == 1 )
     {
         file_name = NULL;
-        if( ( find_data.dwFileAttributes & FILE_ATTRIBUTE_NORMAL ) != 0 )
+
+        d_name_len = strnlen( find_data.cFileName, CPFPHIG_BUFFER_SIZE-1 );
+
+        if( CPFPHIG_FAIL == ( ret = cpfphig_malloc( d_name_len+1,
+                                                    &file_name,
+                                                    Error ) ) )
         {
-            d_name_len = strnlen( find_data.cFileName, CPFPHIG_BUFFER_SIZE-1 );
+            break;
+        }
 
-            if( CPFPHIG_FAIL == ( ret = cpfphig_malloc( d_name_len+1,
-                                                        &file_name,
-                                                        Error ) ) )
-            {
-                break;
-            }
+        memcpy( file_name,
+                find_data.cFileName,
+                d_name_len );
 
-            memcpy( file_name,
-                    find_data.cFileName,
-                    d_name_len );
+        file_name[d_name_len] = 0x00;
 
-            file_name[d_name_len] = 0x00;
-
-            if( CPFPHIG_FAIL == ( ret = cpfphig_list_push( File_Names,
-                                                           file_name,
-                                                           Error ) ) )
-            {
-                break;
-            }
+        if( CPFPHIG_FAIL == ( ret = cpfphig_list_push( File_Names,
+                                                       file_name,
+                                                       Error ) ) )
+        {
+            break;
         }
 
         found_data = FindNextFile( dir, &find_data );

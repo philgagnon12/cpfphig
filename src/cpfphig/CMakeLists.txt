@@ -101,6 +101,7 @@ target_link_libraries( ${CMAKE_PROJECT_NAME}
     ${CMAKE_DL_LIBS}
     $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Shlwapi> # Should those have their own HAVE_H ? 
     $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Pathcch>
+    $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Libloaderapi>
 )
 
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})

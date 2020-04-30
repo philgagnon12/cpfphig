@@ -19,4 +19,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     directory_list.c
     basename.c
     dirname.c
+    library_load.c
+    library_sym.c
+    library_unload.c
 )

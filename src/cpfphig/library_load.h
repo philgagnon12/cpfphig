@@ -4,8 +4,8 @@
 #include "cpfphig/cpfphig.h"
 
 cpfphig
-cpfphig_library_load( const char*                             File_Name,
-                    void**                                  Handle,
-                    CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
+cpfphig_library_load( const char*                               File_Name,
+                      void**                                    Handle,
+                      CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
 
 #endif

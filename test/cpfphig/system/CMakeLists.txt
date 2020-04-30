@@ -121,6 +121,10 @@ cpfphig_add_system_test(defer ${BUILDS})
 
 cpfphig_add_system_test(publisher_subscribe_publish_destroy ${BUILDS})
 
+cpfphig_add_system_test(library ${BUILDS})
+add_library( library MODULE library.c )
+target_compile_definitions( library_shared_release_build_system_test PUBLIC CPFPHIG_LIBRARY_PATH="$<TARGET_FILE:library>" )
+target_compile_definitions( library_static_release_build_system_test PUBLIC CPFPHIG_LIBRARY_PATH="$<TARGET_FILE:library>" )
 
 #REMARK system tests that include "cpfphig.h" NOT "cpfphig/cpfphig.h"
 #should be last

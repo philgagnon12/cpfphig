@@ -123,6 +123,7 @@ cpfphig_add_system_test(publisher_subscribe_publish_destroy ${BUILDS})
 
 cpfphig_add_system_test(library ${BUILDS})
 add_library( library MODULE library.c )
+set_target_properties( library PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 target_compile_definitions( library_shared_release_build_system_test PUBLIC CPFPHIG_LIBRARY_PATH="$<TARGET_FILE:library>" )
 target_compile_definitions( library_static_release_build_system_test PUBLIC CPFPHIG_LIBRARY_PATH="$<TARGET_FILE:library>" )
 

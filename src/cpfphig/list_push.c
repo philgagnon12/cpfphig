@@ -3,7 +3,7 @@
 #include "cpfphig/malloc.h"
 
 cpfphig
-REAL(cpfphig_list_push)( struct cpfphig_list*                      List,
+CPFPHIG_REAL(cpfphig_list_push)( struct cpfphig_list*                      List,
                        void*                                   Item,
                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {

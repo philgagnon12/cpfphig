@@ -13,9 +13,9 @@ typedef int cpfphig;
 #define CPFPHIG_OPTIONAL
 
 #ifdef CPFPHIG_UNIT_TESTING
-#define REAL( FunctionName ) real_ ## FunctionName
+#define CPFPHIG_REAL( FunctionName ) real_ ## FunctionName
 #else
-#define REAL( FunctionName ) FunctionName
+#define CPFPHIG_REAL( FunctionName ) FunctionName
 #endif
 
 enum cpfphig_error_type{ cpfphig_ok, cpfphig_system_error, cpfphig_user_error };

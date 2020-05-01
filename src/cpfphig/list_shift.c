@@ -3,7 +3,7 @@
 #include "cpfphig/free.h"
 
 cpfphig
-REAL(cpfphig_list_shift)( struct cpfphig_list*                      List,
+CPFPHIG_REAL(cpfphig_list_shift)( struct cpfphig_list*                      List,
                         void*                                   Item,
                         CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {

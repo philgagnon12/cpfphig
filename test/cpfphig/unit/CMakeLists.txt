@@ -4,7 +4,7 @@ find_package(cmocka REQUIRED)
 
 function(cpfphig_add_unit_test TEST_PREFIX )
 
-    # Dont filter out when its has a REAL
+    # Dont filter out when its has a CPFPHIG_REAL
     set( UNIT_TEST_SOURCES
         ${PROJECT_SOURCE_DIR}/src/${CMAKE_PROJECT_NAME}/${TEST_PREFIX}.c
         ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_PREFIX}_unit_test.c
@@ -34,7 +34,7 @@ function(cpfphig_add_unit_test TEST_PREFIX )
     )
     target_link_libraries( ${EXETARGET}_unit_test ${cmocka_LIBRARIES})
 
-    # REAL appending
+    # CPFPHIG_REAL appending
     target_compile_definitions(${EXETARGET}_unit_test PRIVATE CPFPHIG_UNIT_TESTING)
 
     # coverage

@@ -2,7 +2,7 @@
 #include "cpfphig/list.h"
 
 cpfphig
-REAL(cpfphig_list_next)( struct cpfphig_list_iterator* const       List_Iterator,
+CPFPHIG_REAL(cpfphig_list_next)( struct cpfphig_list_iterator* const       List_Iterator,
                        void*                                   Item,
                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {

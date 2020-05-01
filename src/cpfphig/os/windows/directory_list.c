@@ -15,7 +15,7 @@
 #define CPFPHIG_BUFFER_SIZE ( 0x04FF )
 
 cpfphig
-REAL(cpfphig_directory_list)( const char*                             Directory,
+CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Directory,
                               struct cpfphig_list*                    File_Names,
                               CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {

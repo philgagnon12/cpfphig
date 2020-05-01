@@ -2,7 +2,7 @@
 #include "cpfphig/list.h"
 
 cpfphig
-REAL(cpfphig_list_copy)( struct cpfphig_list                       List,
+CPFPHIG_REAL(cpfphig_list_copy)( struct cpfphig_list                       List,
                        struct cpfphig_list*                      List_Copy,
                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {

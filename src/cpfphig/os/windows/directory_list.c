@@ -45,7 +45,9 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
               "%s\\*",
               Directory );
 
-    if( NULL == ( dir = FindFirstFile( directory, &find_data ) ) )
+    dir = FindFirstFile(directory, &find_data);
+
+    if( dir == NULL || dir == INVALID_HANDLE_VALUE )
     {
         if( Error != NULL )
             cpfphig_error_message(cpfphig_system_error, "FindFirstFile failed", Error, __FILE__, __FUNCTION__, __LINE__ );

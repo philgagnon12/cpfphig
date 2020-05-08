@@ -66,13 +66,12 @@ target_sources( ${CMAKE_PROJECT_NAME}
     cpfphig.c
     malloc.c
     free.c
-    free.h
-    list.h
     list_push.c
     list_shift.c
     list_next.c
     list_remove.c
     list_copy.c
+    list_empty.c
     modules_load_all.c
     destroy_directory_list.c
     assert.c

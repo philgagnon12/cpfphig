@@ -1,1 +1,3 @@
 replace CPFPHIG_CONST_CPFPHIG for CPFPHIG_CONST
+
+unit test list_empty

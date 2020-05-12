@@ -49,6 +49,8 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
 
     if( dir == NULL || dir == INVALID_HANDLE_VALUE )
     {
+
+        // TODO add the directory it was trying to open in error message
         if( Error != NULL )
             cpfphig_error_message(cpfphig_system_error, "FindFirstFile failed", Error, __FILE__, __FUNCTION__, __LINE__ );
 
@@ -58,6 +60,7 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
     // Assume ok
     ret = CPFPHIG_OK;
 
+    // TODO what happens when dir is not found ?
     while( ret == CPFPHIG_OK && found_data == 1 )
     {
         file_name = NULL;

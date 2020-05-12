@@ -11,19 +11,22 @@
 #include <dirent.h>
 #include <errno.h>
 #include <string.h>
+#include <stdio.h>
 
 #define CPFPHIG_BUFFER_SIZE ( 0x04FF )
 
 cpfphig
-CPFPHIG_REAL(cpfphig_directory_list)( const char*                           Directory,
-                            struct cpfphig_list*                    File_Names,
-                            CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+CPFPHIG_REAL(cpfphig_directory_list)( const char*                               Directory,
+                                      struct cpfphig_list*                      File_Names,
+                                      CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
-    cpfphig           ret         = CPFPHIG_FAIL;
+    cpfphig         ret         = CPFPHIG_FAIL;
     DIR*            dir         = NULL;
     struct dirent*  dirent      = NULL;
     char*           file_name   = NULL;
     size_t          d_name_len  = 0;
+
+    char    error_message_buffer[CPFPHIG_BUFFER_SIZE];
 
     // NULL checks
     if( Directory == NULL || File_Names == NULL )
@@ -37,7 +40,18 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                           Dire
     if( NULL == ( dir = opendir( Directory ) ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "opendir failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+        {
+            memset( error_message_buffer,
+                    0x00,
+                    CPFPHIG_BUFFER_SIZE );
+
+            snprintf( error_message_buffer,
+                      CPFPHIG_BUFFER_SIZE,
+                      "opendir with argument '%s' failed",
+                      Directory );
+
+            cpfphig_error_message(cpfphig_system_error, error_message_buffer, Error, __FILE__, __FUNCTION__, __LINE__ );
+        }
 
         return CPFPHIG_FAIL;
     }

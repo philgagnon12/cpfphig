@@ -25,6 +25,14 @@ include(CheckFunctionExists)
 
 check_function_exists(strnstr CPFPHIG_HAVE_STRNSTR)
 
+if(MSVC)
+    add_compile_options(
+        $<$<CONFIG:>:/MT>
+        $<$<CONFIG:Debug>:/MTd>
+        $<$<CONFIG:Release>:/MT>
+    )
+endif()
+
 configure_file( cpfphig_config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/src/cpfphig/cpfphig_config.h )
 
 set( CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake )

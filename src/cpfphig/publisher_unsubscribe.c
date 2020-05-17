@@ -63,8 +63,8 @@ cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscrip
     }
 
 
-    if( CPFPHIG_FAIL == cpfphig_free( Subscription,
-                                    Error ) )
+    if( CPFPHIG_FAIL == cpfphig_free( &Subscription,
+                                      Error ) )
     {
         return CPFPHIG_FAIL;
     }

@@ -13,42 +13,42 @@
 
 cpfphig
 cpfphig_modules_load_all( struct cpfphig_list                         Modules_Directories,
-                        cpfphig_module_load_symbol*                 Mphig_Module_Load,
-                        struct cpfphig_list*                        Modules,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*      Error )
+                          cpfphig_module_load_symbol*                 Cpfphig_Module_Load,
+                          struct cpfphig_list*                        Modules,
+                          CPFPHIG_OPTIONAL struct cpfphig_error*      Error )
 {
-    cpfphig                       ret                             = CPFPHIG_FAIL;
-    struct cpfphig_list_iterator  plugins_directories_iterator    = { &Modules_Directories, NULL };
-    char*                       directory                       = NULL;
-    cpfphig                       next_directory_ret              = CPFPHIG_FAIL;
-    struct cpfphig_error          next_directory_error            = CPFPHIG_CONST_CPFPHIG_ERROR;
-    struct cpfphig_list           file_names                      = CPFPHIG_CONST_CPFPHIG_LIST;
-    struct cpfphig_list_iterator  file_names_iterator             = { &file_names, NULL };
-    char*                       file_name                       = NULL;
-    cpfphig                       next_file_name_ret              = CPFPHIG_FAIL;
-    struct cpfphig_error          next_file_name_error            = CPFPHIG_CONST_CPFPHIG_ERROR;
-    struct cpfphig_list           paths                           = CPFPHIG_CONST_CPFPHIG_LIST;
-    struct cpfphig_list_iterator  paths_iterator                  = { &paths, NULL };
-    cpfphig                       next_path_ret                   = CPFPHIG_FAIL;
-    struct cpfphig_error          next_path_error                 = CPFPHIG_CONST_CPFPHIG_ERROR;
-    char                        path_buffer[CPFPHIG_BUFFER_SIZE];
-    int                         path_buffer_len                 = 0;
-    char*                       path                            = NULL;
-    char*                       full_path                       = NULL;
+    cpfphig                         ret                             = CPFPHIG_FAIL;
+    struct cpfphig_list_iterator    plugins_directories_iterator    = { &Modules_Directories, NULL };
+    char*                           directory                       = NULL;
+    cpfphig                         next_directory_ret              = CPFPHIG_FAIL;
+    struct cpfphig_error            next_directory_error            = CPFPHIG_CONST_CPFPHIG_ERROR;
+    struct cpfphig_list             file_names                      = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list_iterator    file_names_iterator             = { &file_names, NULL };
+    char*                           file_name                       = NULL;
+    cpfphig                         next_file_name_ret              = CPFPHIG_FAIL;
+    struct cpfphig_error            next_file_name_error            = CPFPHIG_CONST_CPFPHIG_ERROR;
+    struct cpfphig_list             paths                           = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list_iterator    paths_iterator                  = { &paths, NULL };
+    cpfphig                         next_path_ret                   = CPFPHIG_FAIL;
+    struct cpfphig_error            next_path_error                 = CPFPHIG_CONST_CPFPHIG_ERROR;
+    char                            path_buffer[CPFPHIG_BUFFER_SIZE];
+    int                             path_buffer_len                 = 0;
+    char*                           path                            = NULL;
+    char*                           full_path                       = NULL;
 
 
-    int                         extension_index                 = 0;
-    char*                       extension                       = NULL;
-    char*                       module_extensions[]             = {
+    int                             extension_index                 = 0;
+    char*                           extension                       = NULL;
+    char*                           module_extensions[]             = {
         ".so",
         ".dll",
     };
 
     // NULL checks
-    if( Mphig_Module_Load == NULL || Modules == NULL )
+    if( Cpfphig_Module_Load == NULL || Modules == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Mphig_Module_Load or Modules is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Cpfphig_Module_Load or Modules is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
 
         return CPFPHIG_FAIL;
     }
@@ -58,13 +58,13 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
 
     file_names_iterator.current_node = NULL;
     while( CPFPHIG_OK == ( next_directory_ret = cpfphig_list_next( &plugins_directories_iterator,
-                                                                 &directory,
-                                                                 &next_directory_error ) ) &&
+                                                                   &directory,
+                                                                   &next_directory_error ) ) &&
            ret == CPFPHIG_OK )
     {
         if( CPFPHIG_FAIL == ( ret = cpfphig_directory_list( directory,
-                                                          &file_names,
-                                                          Error ) ) )
+                                                            &file_names,
+                                                            Error ) ) )
         {
             break;
         }
@@ -72,8 +72,8 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
         {
             while( ret == CPFPHIG_OK &&
                    CPFPHIG_OK == ( next_file_name_ret = cpfphig_list_next( &file_names_iterator,
-                                                                         &file_name,
-                                                                         &next_file_name_error ) ) )
+                                                                           &file_name,
+                                                                           &next_file_name_error ) ) )
             {
                 memset( path_buffer,
                         0x00,
@@ -91,8 +91,8 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
                 path_buffer_len = strnlen( path_buffer, CPFPHIG_BUFFER_SIZE-1);
 
                 if( CPFPHIG_OK == ( ret = cpfphig_malloc( path_buffer_len+1,
-                                                        &path,
-                                                        Error ) ) )
+                                                          &path,
+                                                          Error ) ) )
                 {
                     memset( path,
                             0x00,
@@ -103,8 +103,8 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
                             path_buffer_len );
 
                     ret = cpfphig_list_push( &paths,
-                                           path,
-                                           Error );
+                                             path,
+                                             Error );
 
                     path = NULL;
                 }
@@ -136,8 +136,8 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
     if( ret == CPFPHIG_OK )
     {
         while( CPFPHIG_OK == ( next_path_ret = cpfphig_list_next( &paths_iterator,
-                                                                &full_path,
-                                                                &next_path_error ) ) )
+                                                                  &full_path,
+                                                                  &next_path_error ) ) )
         {
             // Silently skip the file when it doesnt have one of the plugin extensions
             extension = NULL;
@@ -145,10 +145,10 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
             for( extension_index = 0; ret == CPFPHIG_OK && extension_index < sizeof( module_extensions ) / sizeof( char* ) && extension == NULL; extension_index++ )
             {
                 ret = cpfphig_strnstr( full_path,
-                                     module_extensions[extension_index],
-                                     CPFPHIG_BUFFER_SIZE,
-                                     &extension,
-                                     Error );
+                                       module_extensions[extension_index],
+                                       CPFPHIG_BUFFER_SIZE,
+                                       &extension,
+                                       Error );
             }
             if( ret == CPFPHIG_OK )
             {
@@ -157,9 +157,9 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
                     continue;
                 }
 
-                if( CPFPHIG_FAIL == ( ret = Mphig_Module_Load( full_path,
-                                                               Modules,
-                                                               Error ) ) )
+                if( CPFPHIG_FAIL == ( ret = Cpfphig_Module_Load( full_path,
+                                                                 Modules,
+                                                                 Error ) ) )
                 {
                     break;
                 }

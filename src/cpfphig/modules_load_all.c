@@ -135,6 +135,9 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
 
     if( ret == CPFPHIG_OK )
     {
+        next_path_ret               = CPFPHIG_OK;
+        next_path_error.error_type  = cpfphig_ok;
+
         while( CPFPHIG_OK == ( next_path_ret = cpfphig_list_next( &paths_iterator,
                                                                   &full_path,
                                                                   &next_path_error ) ) )
@@ -165,15 +168,14 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
                 }
             }
         } // while
-    }
+        if( next_path_ret == CPFPHIG_FAIL &&
+            next_path_error.error_type == cpfphig_system_error )
+        {
+            if( Error != NULL )
+                *Error = next_path_error;
 
-    if( next_path_ret == CPFPHIG_FAIL &&
-        next_path_error.error_type == cpfphig_system_error )
-    {
-        if( Error != NULL )
-            *Error = next_path_error;
-
-        ret = CPFPHIG_FAIL;
+            ret = CPFPHIG_FAIL;
+        }
     }
 
     // clean up

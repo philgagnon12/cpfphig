@@ -6,6 +6,7 @@
 #include "cpfphig/mutex_lock.h"
 #include "cpfphig/mutex_unlock.h"
 #include "cpfphig/thread_join.h"
+#include "cpfphig/thread_cond_destroy.h"
 #include "cpfphig/free.h"
 
 cpfphig
@@ -62,6 +63,11 @@ cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscrip
         return CPFPHIG_FAIL;
     }
 
+    if( CPFPHIG_FAIL == cpfphig_thread_cond_destroy( &Subscription->ready_thread_cond,
+                                                     Error ) )
+    {
+        return CPFPHIG_FAIL;
+    }
 
     if( CPFPHIG_FAIL == cpfphig_free( &Subscription,
                                       Error ) )

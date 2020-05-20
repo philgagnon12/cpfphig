@@ -24,12 +24,14 @@ struct cpfphig_list
 
 struct cpfphig_list_iterator
 {
-    struct cpfphig_list*      list;
-    struct cpfphig_list_node* current_node;
-
+    struct cpfphig_list*                list;
+    struct cpfphig_list_node*           current_node;
 };
 
-#define CPFPHIG_CONST_CPFPHIG_LIST_ITERATOR { NULL, NULL }
+#define CPFPHIG_CONST_CPFPHIG_LIST_ITERATOR { \
+    NULL,   \
+    NULL   \
+}
 
 cpfphig
 cpfphig_list_push( struct cpfphig_list*                     List, // TODO add const ? 
@@ -42,6 +44,11 @@ cpfphig_list_shift( struct cpfphig_list*                    List,
                     void*                                   Item,
                     CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
+cpfphig
+cpfphig_list_unshift( struct cpfphig_list*                    List,
+                      void*                                   Item,
+                      CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+
 
 // IMPORTANT, Argument Ptr is declared as void*, but is handle as void** internally
 // Declared as void* to avoid compiler warnings
@@ -53,6 +60,17 @@ cpfphig
 cpfphig_list_next( struct cpfphig_list_iterator* const      List_Iterator,
                    void*                                    Item,
                    CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+
+// IMPORTANT, Argument Ptr is declared as void*, but is handle as void** internally
+// Declared as void* to avoid compiler warnings
+// HOW TO USE
+// struct cpfphig_list_iterator list_iterator = { list, NULL };
+// int* item = NULL;
+// cpfphig_list_previous( &list_iterator, &item, NULL );
+cpfphig
+cpfphig_list_previous( struct cpfphig_list_iterator* const      List_Iterator,
+                       void*                                    Item,
+                       CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 // IMPORTANT order of list will be changed after remove
 // Is achieved through pointer equality

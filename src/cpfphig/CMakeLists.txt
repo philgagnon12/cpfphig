@@ -68,7 +68,9 @@ target_sources( ${CMAKE_PROJECT_NAME}
     free.c
     list_push.c
     list_shift.c
+    list_unshift.c
     list_next.c
+    list_previous.c
     list_remove.c
     list_copy.c
     list_empty.c

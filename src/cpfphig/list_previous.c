@@ -2,9 +2,9 @@
 #include "cpfphig/list.h"
 
 cpfphig
-CPFPHIG_REAL(cpfphig_list_next)( struct cpfphig_list_iterator* const       List_Iterator,
-                                 void*                                   Item,
-                                 CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+CPFPHIG_REAL(cpfphig_list_previous)( struct cpfphig_list_iterator* const    List_Iterator,
+                                     void*                                  Item,
+                                     CPFPHIG_OPTIONAL struct cpfphig_error* Error )
 {
     void*                       item            = NULL;
     struct cpfphig_list_node*   current_node    = NULL;
@@ -27,11 +27,11 @@ CPFPHIG_REAL(cpfphig_list_next)( struct cpfphig_list_iterator* const       List_
 
     if( List_Iterator->current_node == NULL )
     {
-        current_node = List_Iterator->list->first;
+        current_node = List_Iterator->list->last;
     }
     else
     {
-        current_node = List_Iterator->current_node->next;
+        current_node = List_Iterator->current_node->previous;
     }
 
     List_Iterator->current_node = current_node;
@@ -45,7 +45,7 @@ CPFPHIG_REAL(cpfphig_list_next)( struct cpfphig_list_iterator* const       List_
         return CPFPHIG_FAIL;
     }
 
-    // System error, we do not allow NULL items in the list when using cpfphig_list_next
+    // System error, we do not allow NULL items in the list when using cpfphig_list_previous
     // It is discouraged to iterate through list manually
     if( current_node->item == NULL )
     {

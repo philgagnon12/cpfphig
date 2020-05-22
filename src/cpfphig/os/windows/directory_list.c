@@ -27,6 +27,8 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
     char*             file_name   = NULL;
     size_t            d_name_len  = 0;
 
+    char    error_message_buffer[CPFPHIG_BUFFER_SIZE];
+
     // NULL checks
     if( Directory == NULL || File_Names == NULL )
     {
@@ -52,8 +54,18 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
 
         // TODO add the directory it was trying to open in error message
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "FindFirstFile failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+        {
+            memset( error_message_buffer,
+                    0x00,
+                    CPFPHIG_BUFFER_SIZE );
 
+            snprintf( error_message_buffer,
+                      CPFPHIG_BUFFER_SIZE,
+                      "FindFirstFile with argument '%s' failed",
+                      directory );
+
+            cpfphig_error_message(cpfphig_system_error, error_message_buffer, Error, __FILE__, __FUNCTION__, __LINE__ );
+        }
         return CPFPHIG_FAIL;
     }
 

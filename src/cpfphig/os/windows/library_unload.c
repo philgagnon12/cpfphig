@@ -6,7 +6,7 @@
 #include "cpfphig/library_unload.h"
 
 #include <windows.h>
-#include <Libloaderapi.h>
+
 
 cpfphig
 cpfphig_library_unload( void*                                   Handle,

@@ -1,4 +1,6 @@
-include( BuildTesting )
-add_subdirectory(unit)
+if(${BUILD_TESTING})
+    include( BuildTesting )
+    add_subdirectory(unit)
 
-# TODO add target for system tests
+    # TODO add target for system tests
+endif()

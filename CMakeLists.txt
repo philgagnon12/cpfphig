@@ -20,6 +20,7 @@ check_include_files("dirent.h"  CPFPHIG_HAVE_DIRENT_H)
 check_include_files("libgen.h"  CPFPHIG_HAVE_LIBGEN_H)
 check_include_files("pthread.h" CPFPHIG_HAVE_PTHREAD_H)
 check_include_files("unistd.h"  CPFPHIG_HAVE_UNISTD_H)
+check_include_files("_mingw.h"  CPFPHIG_HAVE_MINGW_H)
 
 include(CheckFunctionExists)
 

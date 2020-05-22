@@ -101,8 +101,10 @@ target_link_libraries( ${CMAKE_PROJECT_NAME}
     Threads::Threads
     ${CMAKE_DL_LIBS}
     $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Shlwapi> # Should those have their own HAVE_H ? 
-    $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Pathcch>
+
 )
+# TO remove if visual studio compile link dont complain
+#     $<$<BOOL:${CPFPHIG_HAVE_WINDOWS_H}>:Pathcch> removed for mingw 
 
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 
@@ -110,10 +112,10 @@ set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERS
 
 set_target_properties( ${CMAKE_PROJECT_NAME} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-# TODO have a Release , DEbug ReleaseWithDebugInfo
-# install(TARGETS target
-#         CONFIGURATIONS Debug
-#         RUNTIME DESTINATION Debug/bin)
+if( MINGW )
+    # TELLS it to compile for windows 10
+    target_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC _WIN32_WINNT=0x0A00 )
+endif()
 
 target_include_directories( ${CMAKE_PROJECT_NAME}
     PUBLIC

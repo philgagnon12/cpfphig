@@ -6,7 +6,7 @@
 #include "cpfphig/library_sym.h"
 
 #include <windows.h>
-#include <Libloaderapi.h>
+
 
 cpfphig
 cpfphig_library_sym( void*                                  Handle,

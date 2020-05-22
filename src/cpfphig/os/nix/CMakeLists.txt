@@ -1,3 +1,4 @@
+if( NOT MINGW )
 target_sources( ${CMAKE_PROJECT_NAME}
     PRIVATE
     library_load.c
@@ -23,3 +24,4 @@ target_sources( ${CMAKE_PROJECT_NAME}
     basename.c
     dirname.c
 )
+endif()

@@ -1,12 +1,10 @@
 #include "cpfphig/cpfphig.h"
 
 #ifdef CPFPHIG_HAVE_WINDOWS_H
-
 #include "cpfphig/cpfphig.h"
 #include "cpfphig/library_load.h"
 
 #include <windows.h>
-#include <Libloaderapi.h>
 
 #include <string.h>
 #include <stdio.h>

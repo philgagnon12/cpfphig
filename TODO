@@ -1,3 +1,14 @@
 replace CPFPHIG_CONST_CPFPHIG for CPFPHIG_CONST
 
 unit test list_empty
+
+Findcmocka needs fix like melphig Findlua
+
+CMakeLists.txt removed linking with Patcch, for mingw, gotta condition it if required by visual studio
+
+src/CMakeLists.txt
+- Try support at least windows 7 and above
+   # TELLS it to compile for windows 10
+    target_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC _WIN32_WINNT=0x0A00 )
+
+Removed a bunch of #include <Libloaderapi.h> .. to be able to compile under mingw, might need those back for visual studio

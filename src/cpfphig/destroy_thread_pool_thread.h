@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thread_Pool_Thread,
-                                  CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+                                    CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
 #endif

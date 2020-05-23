@@ -28,8 +28,8 @@ struct cpfphig_subscription
     NULL,                               \
     NULL,                               \
     NULL,                               \
-    CPFPHIG_CONST_CPFPHIG_THREAD,         \
-    CPFPHIG_CONST_CPFPHIG_THREAD_COND,    \
+    CPFPHIG_CONST_CPFPHIG_THREAD,       \
+    CPFPHIG_CONST_CPFPHIG_THREAD_COND,  \
     0,                                  \
 }
 

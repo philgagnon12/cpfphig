@@ -4,7 +4,7 @@
 #include "cpfphig/cpfphig.h"
 
 cpfphig
-cpfphig_library_unload( void*                                    Handle,
-                      CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
+cpfphig_library_unload( void*                                   Handle,
+                        CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
 #endif

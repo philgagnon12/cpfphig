@@ -37,20 +37,20 @@ struct cpfphig_publisher
     struct cpfphig_error                              published_error;
 };
 
-#define CPFPHIG_CONST_CPFPHIG_PUBLISHER { \
-    NULL,                                   \
-    CPFPHIG_CONST_CPFPHIG_MUTEX,              \
-    NULL,                                   \
-    CPFPHIG_CONST_CPFPHIG_THREAD_COND,        \
-    cpfphig_publisher_thread_cond_kind_abort, \
-    CPFPHIG_CONST_CPFPHIG_MUTEX,              \
-    NULL,                                   \
-    CPFPHIG_CONST_CPFPHIG_MUTEX,              \
-    CPFPHIG_CONST_CPFPHIG_THREAD_COND,        \
-    cpfphig_publisher_thread_cond_kind_abort, \
-    CPFPHIG_CONST_CPFPHIG_MUTEX,              \
-    CPFPHIG_CONST_CPFPHIG_THREAD_COND,        \
-    CPFPHIG_CONST_CPFPHIG_ERROR               \
+#define CPFPHIG_CONST_CPFPHIG_PUBLISHER {       \
+    NULL,                                       \
+    CPFPHIG_CONST_CPFPHIG_MUTEX,                \
+    NULL,                                       \
+    CPFPHIG_CONST_CPFPHIG_THREAD_COND,          \
+    cpfphig_publisher_thread_cond_kind_abort,   \
+    CPFPHIG_CONST_CPFPHIG_MUTEX,                \
+    NULL,                                       \
+    CPFPHIG_CONST_CPFPHIG_MUTEX,                \
+    CPFPHIG_CONST_CPFPHIG_THREAD_COND,          \
+    cpfphig_publisher_thread_cond_kind_abort,   \
+    CPFPHIG_CONST_CPFPHIG_MUTEX,                \
+    CPFPHIG_CONST_CPFPHIG_THREAD_COND,          \
+    CPFPHIG_CONST_CPFPHIG_ERROR                 \
 }
 
 #endif

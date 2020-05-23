@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_thread_cond_destroy( struct cpfphig_thread_cond*               Cond,
-                           CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
+                             CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
 
 #endif

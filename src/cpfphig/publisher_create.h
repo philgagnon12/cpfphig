@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_publisher_create( struct cpfphig_publisher*                  Publisher,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
+                          CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
 
 #endif

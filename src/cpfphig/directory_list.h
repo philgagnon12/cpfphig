@@ -5,8 +5,8 @@
 #include "cpfphig/list.h"
 
 cpfphig
-cpfphig_directory_list( const char*                           Directory,
-                      struct cpfphig_list*                    File_Names,
-                      CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+cpfphig_directory_list( const char*                             Directory,
+                        struct cpfphig_list*                    File_Names,
+                        CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
 #endif

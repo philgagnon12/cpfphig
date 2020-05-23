@@ -8,9 +8,9 @@ typedef void (cpfphig_defer_routine_symbol)( void* Arg );
 
 struct cpfphig_deferred
 {
-    cpfphig_defer_routine_symbol* routine;
-    void*                       routine_arg;
-    int                         delay_milliseconds;
+    cpfphig_defer_routine_symbol*   routine;
+    void*                           routine_arg;
+    int                             delay_milliseconds;
 };
 
 #define CPFPHIG_CONST_CPFPHIG_DEFERRED { \
@@ -21,9 +21,9 @@ struct cpfphig_deferred
 
 cpfphig
 cpfphig_defer( cpfphig_defer_routine_symbol*            Routine,
-             void*                                  Routine_Arg,
-             int                                    Delay_Milliseconds,
-             struct cpfphig_thread_pool*              Thread_Pool,
-             CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+               void*                                    Routine_Arg,
+               int                                      Delay_Milliseconds,
+               struct cpfphig_thread_pool*              Thread_Pool,
+               CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 #endif

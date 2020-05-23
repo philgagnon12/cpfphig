@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_thread_pool_create( struct cpfphig_thread_pool*             Thread_Pool,
-                          CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+                            CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
 #endif

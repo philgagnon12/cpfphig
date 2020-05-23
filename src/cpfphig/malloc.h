@@ -9,7 +9,7 @@
 // cpfphig_free( &number, NULL );
 cpfphig
 cpfphig_malloc( const size_t                          Size,
-              void*                                 Ptr,
-              CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+                void*                                 Ptr,
+                CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
 #endif

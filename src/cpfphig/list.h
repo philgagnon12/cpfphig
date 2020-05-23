@@ -17,7 +17,6 @@ struct cpfphig_list
 {
     struct cpfphig_list_node* first;
     struct cpfphig_list_node* last;
-
 };
 
 #define CPFPHIG_CONST_CPFPHIG_LIST { NULL, NULL }

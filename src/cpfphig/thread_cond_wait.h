@@ -7,7 +7,7 @@
 
 cpfphig
 cpfphig_thread_cond_wait( struct cpfphig_thread_cond*               Cond,
-                        struct cpfphig_mutex*                     Mutex,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
+                          struct cpfphig_mutex*                     Mutex,
+                          CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
 
 #endif

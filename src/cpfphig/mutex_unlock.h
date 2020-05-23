@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_mutex_unlock( struct cpfphig_mutex*                    Mutex,
-                    CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+                      CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 #endif

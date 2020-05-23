@@ -10,7 +10,7 @@
 // cpfphig_malloc( sizeof( int ), &number, NULL );
 // cpfphig_free( &number, NULL );
 cpfphig
-cpfphig_free( void*                                   Ptr,
-            CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
+cpfphig_free( void*                                     Ptr,
+              CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
 
 #endif

@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscription,
-                             CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+                               CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 #endif

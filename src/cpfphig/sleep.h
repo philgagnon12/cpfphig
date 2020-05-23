@@ -4,7 +4,7 @@
 #include "cpfphig/cpfphig.h"
 
 cpfphig
-cpfphig_sleep( int                                    Milliseconds,
-             CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+cpfphig_sleep( int                                      Milliseconds,
+               CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 #endif

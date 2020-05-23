@@ -7,7 +7,7 @@
 
 cpfphig
 cpfphig_thread_cond_init( struct cpfphig_thread_cond*               Cond,
-                        struct cpfphig_thread_cond_attr*          Cond_Attr,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
+                          struct cpfphig_thread_cond_attr*          Cond_Attr,
+                          CPFPHIG_OPTIONAL struct cpfphig_error*    Error );
 
 #endif

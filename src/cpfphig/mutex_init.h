@@ -7,7 +7,7 @@
 
 cpfphig
 cpfphig_mutex_init( struct cpfphig_mutex*                    Mutex,
-                  struct cpfphig_mutex_attr*               Mutex_Attr,
-                  CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+                    struct cpfphig_mutex_attr*               Mutex_Attr,
+                    CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 #endif

@@ -6,6 +6,6 @@
 
 cpfphig
 cpfphig_destroy_directory_list( struct cpfphig_list*                    File_Names,
-                              CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+                                CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
 
 #endif

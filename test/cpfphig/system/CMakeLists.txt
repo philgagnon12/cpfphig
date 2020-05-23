@@ -62,11 +62,9 @@ cpfphig_install(
 
 # System tests
 
-
+find_package(cmocka REQUIRED)
 
 function(cpfphig_add_system_test PREFIX )
-
-    find_package(cmocka REQUIRED)
 
     foreach( ARG ${ARGN} )
 

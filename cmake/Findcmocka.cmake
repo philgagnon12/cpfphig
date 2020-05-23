@@ -15,9 +15,12 @@ endif()
 
 FetchContent_GetProperties( cmocka )
 
-if(WIN32)
+if(WIN32 AND NOT MINGW )
     set(LIBRARY_PREFIX "")
     set(LIBRARY_SUFFIX ${CMAKE_LINK_LIBRARY_SUFFIX})
+elseif( WIN32 AND MINGW )
+    set(LIBRARY_PREFIX "")
+    set(LIBRARY_SUFFIX ${CMAKE_SHARED_LIBRARY_SUFFIX})
 else()
     set(LIBRARY_PREFIX ${CMAKE_SHARED_LIBRARY_PREFIX})
     set(LIBRARY_SUFFIX ${CMAKE_SHARED_LIBRARY_SUFFIX})
@@ -27,7 +30,15 @@ if( NOT cmocka_POPULATED )
     FetchContent_Populate( cmocka )
     FetchContent_GetProperties( cmocka )
 
-    set( LIBRARY_PATH "${cmocka_BINARY_DIR}/lib/${LIBRARY_PREFIX}cmocka${LIBRARY_SUFFIX}" )
+    if(WIN32 AND NOT MINGW )
+        set( LIBRARY_PATH "${cmocka_BINARY_DIR}/lib/${LIBRARY_PREFIX}cmocka${LIBRARY_SUFFIX}" )
+    elseif( WIN32 AND MINGW)
+        set( LIBRARY_PATH "${cmocka_BINARY_DIR}/bin/${LIBRARY_PREFIX}cmocka${LIBRARY_SUFFIX}" )
+    else()
+        set( LIBRARY_PATH "${cmocka_BINARY_DIR}/lib/${LIBRARY_PREFIX}cmocka${LIBRARY_SUFFIX}" )
+    endif()
+
+
 
     add_custom_command( OUTPUT "${cmocka_BINARY_DIR}/CMakeCache.txt"
         COMMAND ${CMAKE_COMMAND} ${cmocka_SOURCE_DIR} -G "${CMAKE_GENERATOR}" -DCMAKE_INSTALL_PREFIX="${cmocka_BINARY_DIR}" -DBUILD_SHARED_LIBS=YES
@@ -61,8 +72,8 @@ set(${CMAKE_FIND_PACKAGE_NAME}_INCLUDE_DIR "${cmocka_BINARY_DIR}/include" )
 set(${CMAKE_FIND_PACKAGE_NAME}_LIBRARY     libcmocka )
 
 # Windows start
-if( EXISTS "${cmocka_BINARY_DIR}/bin/${LIBRARY_PREFIX}cmocka${CMAKE_SHARED_LIBRARY_SUFFIX}" )
-    set(${CMAKE_FIND_PACKAGE_NAME}_RUNTIME_DLL "${cmocka_BINARY_DIR}/bin/${LIBRARY_PREFIX}cmocka${CMAKE_SHARED_LIBRARY_SUFFIX}" )
+if( WIN32 )
+    set(${CMAKE_FIND_PACKAGE_NAME}_RUNTIME_DLL ${cmocka_BINARY_DIR}/bin/${LIBRARY_PREFIX}cmocka${CMAKE_SHARED_LIBRARY_SUFFIX} )
 endif()
 # Windows end
 

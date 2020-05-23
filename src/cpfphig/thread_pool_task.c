@@ -13,26 +13,26 @@
 
 cpfphig
 cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_Pool,
-                        cpfphig_thread_pool_thread_routine_symbol*    Routine,
-                        void*                                       Routine_Arg,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*        Error )
+                          cpfphig_thread_pool_thread_routine_symbol*    Routine,
+                          void*                                         Routine_Arg,
+                          CPFPHIG_OPTIONAL struct cpfphig_error*        Error )
 {
-    cpfphig                                                   ret                                         = CPFPHIG_OK;
-    struct cpfphig_list_iterator                              thread_pool_threads_iterator                = CPFPHIG_CONST_CPFPHIG_LIST_ITERATOR;
-    cpfphig                                                   next_thread_pool_thread_ret                 = CPFPHIG_FAIL;
-    struct cpfphig_error                                      next_thread_pool_thread_error               = CPFPHIG_CONST_CPFPHIG_ERROR;
-    struct cpfphig_thread_pool_thread*                        thread_pool_thread                          = NULL;
-    struct cpfphig_error                                      unlock_busy_mutex_error                     = CPFPHIG_CONST_CPFPHIG_ERROR;
-    struct cpfphig_thread_pool_thread*                        available_thread_pool_thread                = NULL;
-    struct cpfphig_thread_pool_thread*                        new_thread_pool_thread                      = NULL;
-    struct cpfphig_thread_pool_thread                         const_thread_pool_thread                    = CPFPHIG_CONST_CPFPHIG_THREAD_POOL_THREAD;
-    struct cpfphig_error                                      unlock_mutex_error                          = CPFPHIG_CONST_CPFPHIG_ERROR;
+    cpfphig                                 ret                             = CPFPHIG_OK;
+    struct cpfphig_list_iterator            thread_pool_threads_iterator    = CPFPHIG_CONST_CPFPHIG_LIST_ITERATOR;
+    cpfphig                                 next_thread_pool_thread_ret     = CPFPHIG_FAIL;
+    struct cpfphig_error                    next_thread_pool_thread_error   = CPFPHIG_CONST_CPFPHIG_ERROR;
+    struct cpfphig_thread_pool_thread*      thread_pool_thread              = NULL;
+    struct cpfphig_error                    unlock_busy_mutex_error         = CPFPHIG_CONST_CPFPHIG_ERROR;
+    struct cpfphig_thread_pool_thread*      available_thread_pool_thread    = NULL;
+    struct cpfphig_thread_pool_thread*      new_thread_pool_thread          = NULL;
+    struct cpfphig_thread_pool_thread       const_thread_pool_thread        = CPFPHIG_CONST_CPFPHIG_THREAD_POOL_THREAD;
+    struct cpfphig_error                    unlock_mutex_error              = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     // NULL checks
     if( Thread_Pool == NULL || Routine == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Thread_Pool or Routine is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Thread_Pool or Routine is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -44,11 +44,15 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
         return CPFPHIG_FAIL;
     }
 
+    // Assume ok
+    ret = CPFPHIG_OK;
+
+    // Reset iterator
     thread_pool_threads_iterator.list           = &Thread_Pool->thread_pool_threads;
     thread_pool_threads_iterator.current_node   = NULL;
 
-    // Assume ok
-    ret = CPFPHIG_OK;
+    next_thread_pool_thread_ret                 = CPFPHIG_OK;
+    next_thread_pool_thread_error.error_type    = cpfphig_ok;
 
     while( ret == CPFPHIG_OK &&
            available_thread_pool_thread == NULL &&
@@ -79,9 +83,12 @@ cpfphig_thread_pool_task( struct cpfphig_thread_pool*                   Thread_P
             }
         } // mutex locked
     }
-    if( next_thread_pool_thread_ret == CPFPHIG_FAIL &&
-        next_thread_pool_thread_error.error_type == cpfphig_system_error )
+    if( next_thread_pool_thread_error.error_type    == cpfphig_system_error &&
+        next_thread_pool_thread_ret                 == CPFPHIG_FAIL )
     {
+        if( Error != NULL )
+            *Error = next_thread_pool_thread_error;
+
         ret = CPFPHIG_FAIL;
     }
 

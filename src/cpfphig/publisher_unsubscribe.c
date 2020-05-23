@@ -11,7 +11,7 @@
 
 cpfphig
 cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscription,
-                             CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
+                               CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
 {
     struct cpfphig_publisher*     publisher   = NULL;
 
@@ -19,7 +19,7 @@ cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscrip
     if( Subscription == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Subscription is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Subscription is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -29,13 +29,13 @@ cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscrip
     if( publisher == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Subscription->publisher is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Subscription->publisher is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
 
     if( CPFPHIG_FAIL == cpfphig_mutex_lock( &(publisher->mutex),
-                                          Error ) )
+                                            Error ) )
     {
         return CPFPHIG_FAIL;
     }
@@ -43,22 +43,22 @@ cpfphig_publisher_unsubscribe( struct cpfphig_subscription*             Subscrip
     publisher->unsubscribing_subscription = Subscription;
 
     if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &(publisher->mutex),
-                                            Error ) )
+                                              Error ) )
     {
         return CPFPHIG_FAIL;
     }
 
     if( CPFPHIG_FAIL == cpfphig_publisher_publish( publisher,
-                                                 NULL,
-                                                 cpfphig_publisher_thread_cond_kind_abort,
-                                                 Error ) )
+                                                   NULL,
+                                                   cpfphig_publisher_thread_cond_kind_abort,
+                                                   Error ) )
     {
         return CPFPHIG_FAIL;
     }
 
     if( CPFPHIG_FAIL == cpfphig_thread_join( &(Subscription->thread),
-                                           NULL,
-                                           Error ) )
+                                             NULL,
+                                             Error ) )
     {
         return CPFPHIG_FAIL;
     }

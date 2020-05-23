@@ -14,7 +14,7 @@ cpfphig_thread_pool_create( struct cpfphig_thread_pool*             Thread_Pool,
     if( Thread_Pool == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Thread_Pool is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Thread_Pool is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

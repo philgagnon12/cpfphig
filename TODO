@@ -12,3 +12,5 @@ src/CMakeLists.txt
     target_compile_definitions( ${CMAKE_PROJECT_NAME} PUBLIC _WIN32_WINNT=0x0A00 )
 
 Removed a bunch of #include <Libloaderapi.h> .. to be able to compile under mingw, might need those back for visual studio
+
+. Rework cpfphig_assert kind of like cpfphig_error_message

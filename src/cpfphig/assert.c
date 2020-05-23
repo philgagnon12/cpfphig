@@ -4,9 +4,9 @@
 
 void
 cpfphig_assert_failed( const char*    Message,
-                     const char*    File,
-                     const char*    Function,
-                     size_t         Line )
+                       const char*    File,
+                       const char*    Function,
+                       size_t         Line )
 {
     if( Message == NULL || File == NULL || Function == NULL )
     {

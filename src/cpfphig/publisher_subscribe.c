@@ -21,8 +21,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#define CPFPHIG_BUFFER_SIZE ( 0xFF )
-
 static
 int
 cpfphig_publisher_subscription_routine( void* Subscription )
@@ -36,8 +34,6 @@ cpfphig_publisher_subscription_routine( void* Subscription )
     enum cpfphig_publisher_thread_cond_kind           published_thread_cond_kind  = cpfphig_publisher_thread_cond_kind_abort;
     cpfphig                                           ret_to_signal               = CPFPHIG_FAIL;
 
-    char    error_message_buffer[CPFPHIG_BUFFER_SIZE];
-
     // When Subscription is null we have no way to signal an error, abort process
     subscription = (struct cpfphig_subscription*)Subscription;
     cpfphig_assert( subscription != NULL, "Subscription is NULL", __FILE__, __FUNCTION__, __LINE__ );
@@ -48,21 +44,21 @@ cpfphig_publisher_subscription_routine( void* Subscription )
     cpfphig_assert( publisher != NULL, "subscription->publisher is NULL", __FILE__, __FUNCTION__, __LINE__ );
 
     cpfphig_assert( CPFPHIG_OK == cpfphig_malloc( sizeof( struct cpfphig_error ),
-                                              &error,
-                                              NULL ),
-                  "cpfphig_malloc failed",
-                  __FILE__,
-                  __FUNCTION__,
-                  __LINE__ );
+                                                  &error,
+                                                  NULL ),
+                    "cpfphig_malloc failed",
+                    __FILE__,
+                    __FUNCTION__,
+                    __LINE__ );
 
     *error = const_error;
 
     cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_lock( &(publisher->broadcast_mutex),
-                                                  NULL ),
-                  "cpfphig_mutex_lock failed",
-                  __FILE__,
-                  __FUNCTION__,
-                  __LINE__ );
+                                                      NULL ),
+                    "cpfphig_mutex_lock failed",
+                    __FILE__,
+                    __FUNCTION__,
+                    __LINE__ );
 
     // Assume ok
     ret = CPFPHIG_OK;
@@ -71,8 +67,8 @@ cpfphig_publisher_subscription_routine( void* Subscription )
     {
         // unlocked when wait is called
         if( CPFPHIG_OK == ( ret = cpfphig_thread_cond_wait( &(publisher->publish_thread_cond),
-                                                          &(publisher->broadcast_mutex),
-                                                          error ) ) )
+                                                            &(publisher->broadcast_mutex),
+                                                            error ) ) )
         {
 
             if( subscription->thread_ready == 0 )
@@ -80,11 +76,11 @@ cpfphig_publisher_subscription_routine( void* Subscription )
                 subscription->thread_ready = 1;
                 // TODO is sending the signal once good enough ?
                 cpfphig_assert( CPFPHIG_OK == cpfphig_thread_cond_signal( &subscription->ready_thread_cond,
-                                                                      NULL ),
-                      "cpfphig_mutex_unlock failed",
-                      __FILE__,
-                      __FUNCTION__,
-                      __LINE__ );
+                                                                          NULL ),
+                                "cpfphig_mutex_unlock failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
                 continue;
             }
             // When publisher is null we have no way to signal an error, abort process
@@ -110,8 +106,8 @@ cpfphig_publisher_subscription_routine( void* Subscription )
 
                         // remove itself from scheduler subscriptions
                         ret_to_signal = cpfphig_list_remove( publisher->subscriptions,
-                                                           subscription,
-                                                           error );
+                                                             subscription,
+                                                             error );
 
                         publisher->unsubscribing_subscription = NULL;
                     }
@@ -128,36 +124,30 @@ cpfphig_publisher_subscription_routine( void* Subscription )
 
                     // Unlock broadcast mutex to allow subscription routines to run in parrallel
                     cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_unlock( &(publisher->broadcast_mutex),
-                                                                NULL ),
-                              "cpfphig_mutex_unlock failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                        NULL ),
+                                    "cpfphig_mutex_unlock failed",
+                                    __FILE__,
+                                    __FUNCTION__,
+                                    __LINE__ );
 
                     ret_to_signal = subscription->subscription_routine( publisher->data,
                                                                         subscription->data,
                                                                         error );
 
                     cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_lock( &(publisher->broadcast_mutex),
-                                                                NULL ),
-                              "cpfphig_mutex_unlock failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                      NULL ),
+                                    "cpfphig_mutex_unlock failed",
+                                    __FILE__,
+                                    __FUNCTION__,
+                                    __LINE__ );
 
                     break;
                 case cpfphig_publisher_thread_cond_kind_completed:
                 default:
-                    memset( error_message_buffer,
-                            0x00,
-                            CPFPHIG_BUFFER_SIZE );
-
-                    snprintf( error_message_buffer,
-                              CPFPHIG_BUFFER_SIZE,
-                              "Unsupported published_thread_cond_kind %02X",
-                              published_thread_cond_kind );
-
-                    cpfphig_error_message(cpfphig_system_error, error_message_buffer, error, __FILE__, __FUNCTION__, __LINE__ );
+                    cpfphig_error_message( cpfphig_system_error,
+                                           "Unsupported published_thread_cond_kind %#02hhx",
+                                           error,
+                                           (const char)published_thread_cond_kind );
 
                     ret = CPFPHIG_FAIL;
             } // switch
@@ -177,52 +167,52 @@ cpfphig_publisher_subscription_routine( void* Subscription )
 
                 // Only a single subscriber can receive a complete ack from the publisher
                 cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_lock( &(publisher->completed_ack_mutex),
-                                                              NULL ),
-                              "cpfphig_mutex_lock failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                  NULL ),
+                                "cpfphig_mutex_lock failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
 
 
                 // Lock to be able to receive our completed ack signal from publisher
                 cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_lock( &(publisher->completed_mutex),
-                                                              NULL ),
-                              "cpfphig_mutex_lock failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                  NULL ),
+                                "cpfphig_mutex_lock failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
 
                 // Send complete signal
                 cpfphig_assert( CPFPHIG_OK == cpfphig_thread_cond_signal( &(publisher->completed_thread_cond),
-                                                                      NULL ),
-                              "cpfphig_thread_cond_signal failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                          NULL ),
+                                "cpfphig_thread_cond_signal failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
 
                 // wait unlocks the mutex and blocks
                 cpfphig_assert( CPFPHIG_OK == cpfphig_thread_cond_wait( &(publisher->completed_ack_thread_cond),
-                                                                    &(publisher->completed_mutex),
-                                                                    NULL ),
-                              "cpfphig_thread_cond_wait failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                        &(publisher->completed_mutex),
+                                                                        NULL ),
+                                "cpfphig_thread_cond_wait failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
 
                 cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_unlock( &(publisher->completed_mutex),
-                                                                NULL ),
-                              "cpfphig_mutex_unlock failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                    NULL ),
+                                "cpfphig_mutex_unlock failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
 
                 // Publisher is in state where it can receive a complete signal from another subscriber
                 cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_unlock( &(publisher->completed_ack_mutex),
-                                                                NULL ),
-                              "cpfphig_mutex_unlock failed",
-                              __FILE__,
-                              __FUNCTION__,
-                              __LINE__ );
+                                                                    NULL ),
+                                "cpfphig_mutex_unlock failed",
+                                __FILE__,
+                                __FUNCTION__,
+                                __LINE__ );
             }
         } // thread cond wait triggered
     } // while abort
@@ -235,28 +225,28 @@ cpfphig_publisher_subscription_routine( void* Subscription )
     // mutex is expected to be locked
     // If somehow the system fails to unlock the mutex, the whole system might deadlock, have to kill process
     cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_unlock( &(publisher->broadcast_mutex),
-                                                    NULL ),
-                  "cpfphig_mutex_unlock failed",
-                  __FILE__,
-                  __FUNCTION__,
-                  __LINE__ );
+                                                        NULL ),
+                    "cpfphig_mutex_unlock failed",
+                    __FILE__,
+                    __FUNCTION__,
+                    __LINE__ );
 
     cpfphig_assert( CPFPHIG_OK == cpfphig_free( &error,
-                                            NULL ),
-                  "cpfphig_free failed",
-                  __FILE__,
-                  __FUNCTION__,
-                  __LINE__ );
+                                                NULL ),
+                    "cpfphig_free failed",
+                    __FILE__,
+                    __FUNCTION__,
+                    __LINE__ );
 
     return 0;
 }
 
 cpfphig
-cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publisher,
-                             void*                                          Data,
-                             cpfphig_subscription_routine_symbol*           Subscription_Routine,
-                             struct cpfphig_subscription**                  Subscription,
-                             CPFPHIG_OPTIONAL struct cpfphig_error*         Error )
+cpfphig_publisher_subscribe( struct cpfphig_publisher*              Publisher,
+                             void*                                  Data,
+                             cpfphig_subscription_routine_symbol*   Subscription_Routine,
+                             struct cpfphig_subscription**          Subscription,
+                             CPFPHIG_OPTIONAL struct cpfphig_error* Error )
 {
     cpfphig                                           ret                         = CPFPHIG_FAIL;
     struct cpfphig_thread_attr                        thread_attr                 = CPFPHIG_CONST_CPFPHIG_THREAD_ATTR;
@@ -272,13 +262,13 @@ cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publ
     if( Publisher == NULL || Subscription_Routine == NULL || Subscription == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Publisher, Subscription_Routine or Subscription is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Publisher, Subscription_Routine or Subscription is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
     ret = cpfphig_malloc( sizeof( struct cpfphig_subscription ),
-                        &subscription,
-                        Error );
+                          &subscription,
+                          Error );
 
     if( ret == CPFPHIG_OK )
     {
@@ -289,29 +279,29 @@ cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publ
         subscription->subscription_routine              = Subscription_Routine;
 
         ret = cpfphig_mutex_lock( &(Publisher->mutex),
-                                Error );
+                                  Error );
 
         if( ret == CPFPHIG_OK )
         {
             ret = cpfphig_list_push( Publisher->subscriptions,
-                                   subscription,
-                                   Error );
+                                     subscription,
+                                     Error );
 
             if( ret == CPFPHIG_OK )
             {
                 ret = cpfphig_thread_cond_init( &subscription->ready_thread_cond,
-                                              &thread_cond_attr,
-                                              Error );
+                                                &thread_cond_attr,
+                                                Error );
                 if( ret == CPFPHIG_OK )
                 {
                     ret = cpfphig_thread_create( &(subscription->thread),
-                                               &thread_attr,
-                                               &cpfphig_publisher_subscription_routine,
-                                               subscription,
-                                               Error );
+                                                 &thread_attr,
+                                                 &cpfphig_publisher_subscription_routine,
+                                                 subscription,
+                                                 Error );
 
                     if( CPFPHIG_OK == ( ret = cpfphig_mutex_lock( &Publisher->broadcast_mutex,
-                                                                Error ) ) )
+                                                                  Error ) ) )
                     {
                         // Assume fail
                         timed_wait_ret = CPFPHIG_FAIL;
@@ -325,13 +315,13 @@ cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publ
 
                             // Signal alot , dont wait for long
                             if( CPFPHIG_OK == ( ret = cpfphig_thread_cond_signal( &Publisher->publish_thread_cond,
-                                                                                Error ) ) )
+                                                                                  Error ) ) )
                             {
                                 // TODO max number of attemps ? otherwise this might deadlock when something goes wrong
                                 if( CPFPHIG_FAIL == ( timed_wait_ret = cpfphig_thread_cond_timed_wait( &subscription->ready_thread_cond,
-                                                                                                     &Publisher->broadcast_mutex,
-                                                                                                     1,
-                                                                                                     &timed_wait_error ) ) )
+                                                                                                       &Publisher->broadcast_mutex,
+                                                                                                       1,
+                                                                                                       &timed_wait_error ) ) )
                                 {
                                     if( timed_wait_error.error_type == cpfphig_system_error )
                                     {
@@ -347,10 +337,9 @@ cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publ
                         if( ret == CPFPHIG_OK )
                         {
                             *Subscription = subscription;
-                        } // thread created
-
+                        } // thread created 
                         if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &Publisher->broadcast_mutex,
-                                                                &unlock_error ) )
+                                                                  &unlock_error ) )
                         {
                             if( ret == CPFPHIG_OK )
                             {
@@ -366,13 +355,13 @@ cpfphig_publisher_subscribe( struct cpfphig_publisher*                      Publ
                     if( ret == CPFPHIG_FAIL )
                     {
                         cpfphig_thread_cond_destroy( &subscription->ready_thread_cond,
-                                                   NULL );
+                                                     NULL );
                     }
                 } // ready_thread_cond init
             } // driver pushed
 
             if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &(Publisher->mutex),
-                                                    Error ) )
+                                                      Error ) )
             {
                 ret = CPFPHIG_FAIL;
             }

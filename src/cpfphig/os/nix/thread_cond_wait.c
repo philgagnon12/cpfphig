@@ -10,14 +10,14 @@
 
 cpfphig
 cpfphig_thread_cond_wait( struct cpfphig_thread_cond*               Cond,
-                        struct cpfphig_mutex*                     Mutex,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+                          struct cpfphig_mutex*                     Mutex,
+                          CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
     // NULL checks
     if( Cond == NULL || Mutex == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Cond or Mutex is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Cond or Mutex is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -26,7 +26,7 @@ cpfphig_thread_cond_wait( struct cpfphig_thread_cond*               Cond,
                                 Mutex->pthread_mutex ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "pthread_cond_wait failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "pthread_cond_wait failed", Error );
 
         return CPFPHIG_FAIL;
     }

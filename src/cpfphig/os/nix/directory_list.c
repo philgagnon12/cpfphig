@@ -13,8 +13,6 @@
 #include <string.h>
 #include <stdio.h>
 
-#define CPFPHIG_BUFFER_SIZE ( 0x04FF )
-
 cpfphig
 CPFPHIG_REAL(cpfphig_directory_list)( const char*                               Directory,
                                       struct cpfphig_list*                      File_Names,
@@ -26,13 +24,11 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                               
     char*           file_name   = NULL;
     size_t          d_name_len  = 0;
 
-    char    error_message_buffer[CPFPHIG_BUFFER_SIZE];
-
     // NULL checks
     if( Directory == NULL || File_Names == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Directory or File_Names is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Directory or File_Names is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -41,16 +37,7 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                               
     {
         if( Error != NULL )
         {
-            memset( error_message_buffer,
-                    0x00,
-                    CPFPHIG_BUFFER_SIZE );
-
-            snprintf( error_message_buffer,
-                      CPFPHIG_BUFFER_SIZE,
-                      "opendir with argument '%s' failed",
-                      Directory );
-
-            cpfphig_error_message(cpfphig_system_error, error_message_buffer, Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "opendir with argument '%s' failed", Error, Directory );
         }
 
         return CPFPHIG_FAIL;
@@ -68,8 +55,8 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                               
             d_name_len = strnlen( dirent->d_name, CPFPHIG_BUFFER_SIZE-1 );
 
             if( CPFPHIG_FAIL == ( ret = cpfphig_malloc( d_name_len+1,
-                                                      &file_name,
-                                                      Error ) ) )
+                                                        &file_name,
+                                                        Error ) ) )
             {
                 break;
             }
@@ -81,8 +68,8 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                               
             file_name[d_name_len] = 0x00;
 
             if( CPFPHIG_FAIL == ( ret = cpfphig_list_push( File_Names,
-                                                         file_name,
-                                                         Error ) ) )
+                                                           file_name,
+                                                           Error ) ) )
             {
                 break;
             }
@@ -92,7 +79,7 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                               
     if( dirent == NULL && errno != 0 )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "readdir failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "readdir failed", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -100,7 +87,7 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                               
     if( 0 != closedir( dir ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "closedir failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "closedir failed", Error );
 
         return CPFPHIG_FAIL;
     }

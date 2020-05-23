@@ -14,3 +14,5 @@ src/CMakeLists.txt
 Removed a bunch of #include <Libloaderapi.h> .. to be able to compile under mingw, might need those back for visual studio
 
 . Rework cpfphig_assert kind of like cpfphig_error_message
+
+. usleep deprecated , use nanosleep, nix/thread_cond_timed_wait sgot milliseconds conversion

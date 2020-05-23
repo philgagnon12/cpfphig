@@ -21,7 +21,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
     if( Thread == NULL || Thread_Attr == NULL || Start_Routine == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Thread, Thread_Attr or Start_Routine is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Thread, Thread_Attr or Start_Routine is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -29,7 +29,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
     if( 0 != pthread_attr_init( &(Thread_Attr->pthread_attr) ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "pthread_attr_init failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "pthread_attr_init failed", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -40,7 +40,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
                              Arg ) )
     {
          if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "pthread_create failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "pthread_create failed", Error );
 
          return CPFPHIG_FAIL;
     }
@@ -48,7 +48,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
     if( 0 != pthread_attr_destroy( &(Thread_Attr->pthread_attr) ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "pthread_attr_destroy failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "pthread_attr_destroy failed", Error );
 
         return CPFPHIG_FAIL;
     }

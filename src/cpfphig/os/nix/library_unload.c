@@ -8,14 +8,14 @@
 #include <dlfcn.h>
 
 cpfphig
-cpfphig_library_unload( void*                                    Handle,
-                      CPFPHIG_OPTIONAL struct cpfphig_error*     Error )
+cpfphig_library_unload( void*                                   Handle,
+                        CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     // NULL checks
     if( Handle == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Handle is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Handle is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -23,7 +23,7 @@ cpfphig_library_unload( void*                                    Handle,
     if( 0 != dlclose( Handle ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "dlclose failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "dlclose failed", Error );
 
         return CPFPHIG_FAIL;
     }

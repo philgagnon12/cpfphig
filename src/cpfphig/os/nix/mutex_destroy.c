@@ -10,13 +10,13 @@
 
 cpfphig
 cpfphig_mutex_destroy( struct cpfphig_mutex*                    Mutex,
-                     CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
+                       CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
 {
     // NULL checks
     if( Mutex == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Mutex is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Mutex is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -24,13 +24,13 @@ cpfphig_mutex_destroy( struct cpfphig_mutex*                    Mutex,
     if( 0 != pthread_mutex_destroy( Mutex->pthread_mutex ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "pthread_mutex_destroy failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "pthread_mutex_destroy failed", Error );
 
         return CPFPHIG_FAIL;
     }
 
     return cpfphig_free( &Mutex->pthread_mutex,
-                       Error );
+                         Error );
 }
 
 #endif

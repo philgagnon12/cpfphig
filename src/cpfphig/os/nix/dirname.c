@@ -25,7 +25,7 @@ cpfphig_dirname( const char*                               Path,
     if( Path == NULL || Buffer == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Path or Buffer is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Path or Buffer is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -50,7 +50,7 @@ cpfphig_dirname( const char*                               Path,
     if( NULL == ( name = dirname( path ) ) )
     {
         if( Error != NULL )
-            cpfphig_error_message( cpfphig_system_error, "dirname failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "dirname failed", Error );
 
         ret = CPFPHIG_FAIL;
     }

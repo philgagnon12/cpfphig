@@ -4,15 +4,15 @@
 #include <stdlib.h>
 
 cpfphig
-cpfphig_malloc( const size_t                          Size,
-              void*                                 Ptr,
-              CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+cpfphig_malloc( const size_t                            Size,
+                void*                                   Ptr,
+                CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     // NULL checks
     if( Ptr == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Ptr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Ptr is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -22,7 +22,7 @@ cpfphig_malloc( const size_t                          Size,
     if( *(void**)Ptr == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "malloc did not allocate", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "malloc did not allocate", Error );
 
         return CPFPHIG_FAIL;
     }

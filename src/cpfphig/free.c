@@ -4,14 +4,14 @@
 #include "stdlib.h"
 
 cpfphig
-cpfphig_free( void*                                   Ptr,
-            CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+cpfphig_free( void*                                     Ptr,
+              CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
     // NULL check
     if( Ptr == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Ptr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Ptr is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

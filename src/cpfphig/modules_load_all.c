@@ -48,7 +48,7 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
     if( Cpfphig_Module_Load == NULL || Modules == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Cpfphig_Module_Load or Modules is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Cpfphig_Module_Load or Modules is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

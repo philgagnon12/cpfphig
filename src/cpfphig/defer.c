@@ -32,10 +32,10 @@ defer_routine( void* Arg )
 
 cpfphig
 cpfphig_defer( cpfphig_defer_routine_symbol*            Routine,
-             void*                                  Routine_Arg,
-             int                                    Delay_Milliseconds,
-             struct cpfphig_thread_pool*              Thread_Pool,
-             CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
+               void*                                    Routine_Arg,
+               int                                      Delay_Milliseconds,
+               struct cpfphig_thread_pool*              Thread_Pool,
+               CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
 {
     cpfphig                               ret             = CPFPHIG_FAIL;
     struct cpfphig_deferred*              deferred        = NULL;
@@ -45,14 +45,14 @@ cpfphig_defer( cpfphig_defer_routine_symbol*            Routine,
     if( Routine == NULL || Thread_Pool == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Routine or Thread_Pool is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Routine or Thread_Pool is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
 
     if( CPFPHIG_FAIL == cpfphig_malloc( sizeof( struct cpfphig_deferred ),
-                                      &deferred,
-                                      Error ) )
+                                        &deferred,
+                                        Error ) )
     {
         return CPFPHIG_FAIL;
     }
@@ -64,9 +64,9 @@ cpfphig_defer( cpfphig_defer_routine_symbol*            Routine,
     deferred->delay_milliseconds    = Delay_Milliseconds;
 
     if( CPFPHIG_OK == ( ret = cpfphig_thread_pool_task( Thread_Pool,
-                                                      &defer_routine,
-                                                      deferred,
-                                                      Error ) ) )
+                                                        &defer_routine,
+                                                        deferred,
+                                                        Error ) ) )
     {
         ret = CPFPHIG_OK;
     }
@@ -74,7 +74,7 @@ cpfphig_defer( cpfphig_defer_routine_symbol*            Routine,
     if( ret == CPFPHIG_FAIL )
     {
         cpfphig_free( &deferred,
-                    NULL );
+                      NULL );
     }
 
     return ret;

@@ -13,15 +13,15 @@ cpfphig
 cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thread_Pool_Thread,
                                     CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
-    cpfphig               ret                 = CPFPHIG_FAIL;
-    int                 mutex_unlocked      = 0;
-    struct cpfphig_error  mutex_unlock_error  = CPFPHIG_CONST_CPFPHIG_ERROR;
+    cpfphig                 ret                 = CPFPHIG_FAIL;
+    int                     mutex_unlocked      = 0;
+    struct cpfphig_error    mutex_unlock_error  = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     // NULL checks
     if( Thread_Pool_Thread == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Thread_Pool_Thread is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Thread_Pool_Thread is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -35,10 +35,10 @@ cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thre
     Thread_Pool_Thread->thread_cond_kind    = cpfphig_thread_pool_thread_cond_kind_abort;
 
     if( CPFPHIG_OK == ( ret = cpfphig_thread_cond_signal( &Thread_Pool_Thread->thread_cond,
-                                                        Error ) ) )
+                                                          Error ) ) )
     {
         if( CPFPHIG_OK == ( ret = cpfphig_mutex_unlock( &Thread_Pool_Thread->mutex,
-                                                      Error ) ) )
+                                                        Error ) ) )
         {
             mutex_unlocked = 1;
 
@@ -47,17 +47,17 @@ cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thre
                                                            Error ) ) )
             {
                 if( CPFPHIG_OK == ( ret = cpfphig_thread_cond_destroy( &Thread_Pool_Thread->ready_thread_cond,
-                                                                     Error ) ) )
+                                                                       Error ) ) )
                 {
                     if( CPFPHIG_OK == ( ret = cpfphig_thread_cond_destroy( &Thread_Pool_Thread->thread_cond,
-                                                                         Error ) ) )
+                                                                           Error ) ) )
                     {
                         if( CPFPHIG_OK == ( ret = cpfphig_mutex_destroy( &Thread_Pool_Thread->busy_mutex,
-                                                                       Error ) ) )
+                                                                         Error ) ) )
                         {
 
                             if( CPFPHIG_OK == ( ret = cpfphig_mutex_destroy( &Thread_Pool_Thread->mutex,
-                                                                           Error ) ) )
+                                                                             Error ) ) )
                             {
                                 ret = CPFPHIG_OK;
                             }
@@ -71,7 +71,7 @@ cpfphig_destroy_thread_pool_thread( struct cpfphig_thread_pool_thread*      Thre
     if( mutex_unlocked == 0 )
     {
         if( CPFPHIG_FAIL == cpfphig_mutex_unlock( &Thread_Pool_Thread->mutex,
-                                                &mutex_unlock_error ) )
+                                                  &mutex_unlock_error ) )
         {
             if( ret == CPFPHIG_OK )
             {

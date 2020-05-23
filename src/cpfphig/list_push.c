@@ -3,9 +3,9 @@
 #include "cpfphig/malloc.h"
 
 cpfphig
-CPFPHIG_REAL(cpfphig_list_push)( struct cpfphig_list*                      List,
-                       void*                                   Item,
-                       CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+CPFPHIG_REAL(cpfphig_list_push)( struct cpfphig_list*                   List,
+                                 void*                                  Item,
+                                 CPFPHIG_OPTIONAL struct cpfphig_error* Error )
 {
     struct cpfphig_list_node* node     = NULL;
     struct cpfphig_list_node* previous = NULL;
@@ -13,14 +13,14 @@ CPFPHIG_REAL(cpfphig_list_push)( struct cpfphig_list*                      List,
     if( List == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "List is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "List is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
 
     if( CPFPHIG_FAIL == cpfphig_malloc( sizeof( struct cpfphig_list_node ),
-                                      &node,
-                                      Error ) )
+                                        &node,
+                                        Error ) )
     {
         return CPFPHIG_FAIL;
     }

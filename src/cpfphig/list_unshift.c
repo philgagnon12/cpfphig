@@ -13,7 +13,7 @@ CPFPHIG_REAL(cpfphig_list_unshift)( struct cpfphig_list*                      Li
     if( List == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "List is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "List is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

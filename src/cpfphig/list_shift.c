@@ -4,16 +4,16 @@
 
 cpfphig
 CPFPHIG_REAL(cpfphig_list_shift)( struct cpfphig_list*                      List,
-                        void*                                   Item,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+                                  void*                                     Item,
+                                  CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
-    void*                   item    = NULL;
-    struct cpfphig_list_node* node    = NULL;
+    void*                       item    = NULL;
+    struct cpfphig_list_node*   node    = NULL;
 
     if( List == NULL || Item == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "List or Item is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "List or Item is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -23,7 +23,7 @@ CPFPHIG_REAL(cpfphig_list_shift)( struct cpfphig_list*                      List
     if( node == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_user_error, "List is empty", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_user_error, "List is empty", Error );
 
         *(void**)Item = NULL;
 
@@ -37,7 +37,7 @@ CPFPHIG_REAL(cpfphig_list_shift)( struct cpfphig_list*                      List
     item = node->item;
 
     if( CPFPHIG_FAIL == cpfphig_free( &node,
-                                    Error ) )
+                                      Error ) )
     {
         return CPFPHIG_FAIL;
     }

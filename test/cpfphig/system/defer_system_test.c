@@ -26,21 +26,21 @@ static void defer( void** state )
     checked = 0;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_pool_create( &thread_pool,
-                                                            NULL ) );
+                                                              NULL ) );
 
 
     assert_int_equal( CPFPHIG_OK, cpfphig_defer( &routine,
-                                               NULL,
-                                               1000,
-                                               &thread_pool,
-                                               NULL ) );
+                                                 NULL,
+                                                 1000,
+                                                 &thread_pool,
+                                                 NULL ) );
 
     // Dont destroy too soon
     assert_int_equal( CPFPHIG_OK, cpfphig_sleep( 1100, NULL ) );
     assert_int_equal( 1, checked );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_destroy_thread_pool( &thread_pool,
-                                                             NULL ) );
+                                                               NULL ) );
 }
 
 int main( int argc, char* argv[]  )

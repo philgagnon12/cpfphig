@@ -20,19 +20,19 @@ static char bin_dir[CPFPHIG_BUFFER_SIZE];
 
 static void list_at_least_this_binary( void** state )
 {
-    struct cpfphig_list           file_names          = CPFPHIG_CONST_CPFPHIG_LIST;
-    struct cpfphig_list_iterator  list_iterator       = { &file_names, NULL };
-    char*                       file_name           = NULL;
-    int                         file_names_count    = 0;
-    int                         this_bin_count      = 0;
+    struct cpfphig_list             file_names          = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list_iterator    list_iterator       = { &file_names, NULL };
+    char*                           file_name           = NULL;
+    int                             file_names_count    = 0;
+    int                             this_bin_count      = 0;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_directory_list( bin_dir,
-                                                        &file_names,
-                                                        NULL ) );
+                                                          &file_names,
+                                                          NULL ) );
 
     while( CPFPHIG_OK == cpfphig_list_next( &list_iterator,
-                                          &file_name,
-                                          NULL ) )
+                                            &file_name,
+                                            NULL ) )
     {
         if( 0 == strncmp( bin_name, file_name, 0xFF ) )
         {
@@ -79,7 +79,6 @@ int main( int argc, char* argv[]  )
 
     const struct CMUnitTest tests[] = {
         cmocka_unit_test(list_at_least_this_binary),
-
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);

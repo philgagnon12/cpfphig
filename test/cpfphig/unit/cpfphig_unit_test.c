@@ -8,9 +8,13 @@
 #include <stdio.h>
 #include <string.h>
 
-// TODO remove
-#include <unistd.h>
 #include <stdlib.h>
+
+#ifdef CPFPHIG_HAVE_UNISTD_H
+#include <unistd.h>
+#else
+#include <windows.h>
+#endif
 
 #define CPFPHIG_BUFFER_SIZE ( 0x0F )
 #define CPFPHIG_STDERR_BUFFER_SIZE ( 0xFF )

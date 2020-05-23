@@ -60,3 +60,5 @@ build/*
 tags
 
 *~
+
+vendor

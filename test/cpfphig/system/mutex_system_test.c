@@ -16,17 +16,17 @@ static void init_lock_unlock_destroy( void** state )
     struct cpfphig_mutex_attr     mutex_attr  = CPFPHIG_CONST_CPFPHIG_MUTEX_ATTR;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_init( &mutex,
-                                                    &mutex_attr,
-                                                    NULL ) );
-
-    assert_int_equal( CPFPHIG_OK, cpfphig_mutex_lock( &mutex,
-                                                    NULL ) );
-
-    assert_int_equal( CPFPHIG_OK, cpfphig_mutex_unlock( &mutex,
+                                                      &mutex_attr,
                                                       NULL ) );
 
+    assert_int_equal( CPFPHIG_OK, cpfphig_mutex_lock( &mutex,
+                                                      NULL ) );
+
+    assert_int_equal( CPFPHIG_OK, cpfphig_mutex_unlock( &mutex,
+                                                        NULL ) );
+
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_destroy( &mutex,
-                                                       NULL ) );
+                                                         NULL ) );
 
 }
 

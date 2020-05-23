@@ -43,15 +43,15 @@ start_routine( void* Arg )
     cond_and_mutex = (struct cond_and_mutex*)Arg;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_lock( &(cond_and_mutex->mutex),
-                                                    NULL ) );
+                                                      NULL ) );
 
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_cond_signal( &(cond_and_mutex->cond),
-                                                            NULL ) );
+                                                              NULL ) );
 
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_unlock( &(cond_and_mutex->mutex),
-                                                      NULL ) );
+                                                        NULL ) );
 
     cpfphig_thread_exit( 0 );
 
@@ -71,36 +71,36 @@ static void signal_wait( void** state )
     };
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_init( &(cond_and_mutex.mutex),
-                                                    &(cond_and_mutex.mutex_attr),
-                                                    NULL ) );
+                                                      &(cond_and_mutex.mutex_attr),
+                                                      NULL ) );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_cond_init( &(cond_and_mutex.cond),
-                                                          &(cond_and_mutex.cond_attr),
-                                                          NULL ) );
+                                                            &(cond_and_mutex.cond_attr),
+                                                            NULL ) );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_lock( &(cond_and_mutex.mutex),
                                                     NULL ) );
 
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_create( &thread,
-                                                       &thread_attr,
-                                                       &start_routine,
-                                                       &cond_and_mutex,
-                                                       NULL ) );
+                                                         &thread_attr,
+                                                         &start_routine,
+                                                         &cond_and_mutex,
+                                                         NULL ) );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_cond_wait( &(cond_and_mutex.cond),
-                                                          &(cond_and_mutex.mutex),
-                                                          NULL ) );
+                                                            &(cond_and_mutex.mutex),
+                                                            NULL ) );
 
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_unlock( &(cond_and_mutex.mutex),
-                                                      NULL ) );
+                                                        NULL ) );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_thread_cond_destroy( &(cond_and_mutex.cond),
-                                                             NULL ) );
+                                                               NULL ) );
 
     assert_int_equal( CPFPHIG_OK, cpfphig_mutex_destroy( &(cond_and_mutex.mutex),
-                                                       NULL ) );
+                                                         NULL ) );
 
 
 }

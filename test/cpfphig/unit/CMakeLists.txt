@@ -18,12 +18,14 @@ function(cpfphig_add_unit_test TEST_PREFIX )
 
     add_executable(${EXETARGET}_unit_test ${UNIT_TEST_SOURCES})
 
-    foreach( RUNTIME_DLL "${cmocka_RUNTIME_DLLS}" )
-        add_custom_command( TARGET ${EXETARGET}_unit_test
-            POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different "${RUNTIME_DLL}" $<TARGET_FILE_DIR:${EXETARGET}_unit_test>
-        )
-    endforeach()
+    if( WIN32 )
+        foreach( RUNTIME_DLL "${cmocka_RUNTIME_DLLS}" )
+            add_custom_command( TARGET ${EXETARGET}_unit_test
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different "${RUNTIME_DLL}" $<TARGET_FILE_DIR:${EXETARGET}_unit_test>
+            )
+        endforeach()
+    endif()
 
     get_property( CPFPHIG_INCLUDE_DIRECTORIES TARGET ${CMAKE_PROJECT_NAME} PROPERTY INCLUDE_DIRECTORIES )
     target_include_directories( ${EXETARGET}_unit_test

@@ -8,9 +8,9 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_list_remove( struct cpfphig_list*                      List,
-                   void*                                   Item,
-                   CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+cpfphig_list_remove( struct cpfphig_list*                   List,
+                     void*                                  Item,
+                     CPFPHIG_OPTIONAL struct cpfphig_error* Error )
 {
     assert_non_null( List );
 
@@ -21,8 +21,8 @@ cpfphig_list_remove( struct cpfphig_list*                      List,
     {
         // Expecting the real thing to work but if it doesnt, have to make sure CPFPHIG_FAIL is returned
         ret = real_cpfphig_list_remove( List,
-                                      Item,
-                                      Error );
+                                        Item,
+                                        Error );
     }
     else
     {

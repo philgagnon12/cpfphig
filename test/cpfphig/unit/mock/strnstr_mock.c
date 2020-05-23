@@ -7,13 +7,13 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_strnstr( const char*                          Haystack,
-               const char*                          Needle,
-               size_t                               Len,
-               char** const                         Occurence,
-               CPFPHIG_OPTIONAL struct cpfphig_error* Error )
+cpfphig_strnstr( const char*                            Haystack,
+                 const char*                            Needle,
+                 size_t                                 Len,
+                 char** const                           Occurence,
+                 CPFPHIG_OPTIONAL struct cpfphig_error* Error )
 {
-    cpfphig   ret         = CPFPHIG_FAIL;
+    cpfphig ret         = CPFPHIG_FAIL;
     char*   occurence   = NULL;
 
     assert_non_null( Haystack );

@@ -7,10 +7,10 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_library_unload( void*                                    Handle,
-                      CPFPHIG_OPTIONAL struct cpfphig_error*     Error )
+cpfphig_library_unload( void*                                   Handle,
+                        CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
-    cpfphig                   ret    = CPFPHIG_FAIL;
+    cpfphig ret = CPFPHIG_FAIL;
 
     assert_non_null( Handle );
 

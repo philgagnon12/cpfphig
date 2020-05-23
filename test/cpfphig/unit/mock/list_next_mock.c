@@ -8,9 +8,9 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_list_next( struct cpfphig_list_iterator* const       List_Iterator,
-                 void*                                   Item,
-                 CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
+cpfphig_list_next( struct cpfphig_list_iterator* const      List_Iterator,
+                   void*                                    Item,
+                   CPFPHIG_OPTIONAL struct cpfphig_error*   Error )
 {
     assert_non_null( List_Iterator );
 
@@ -21,8 +21,8 @@ cpfphig_list_next( struct cpfphig_list_iterator* const       List_Iterator,
     {
         // Expecting the real thing to work but if it doesnt, have to make sure CPFPHIG_FAIL is returned
         ret = real_cpfphig_list_next( List_Iterator,
-                                    Item,
-                                    Error );
+                                      Item,
+                                      Error );
     }
     else
     {

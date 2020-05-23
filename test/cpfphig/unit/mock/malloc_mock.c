@@ -7,9 +7,9 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_malloc( const size_t                          Size,
-              void*                                 Ptr,
-              CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+cpfphig_malloc( const size_t                            Size,
+                void*                                   Ptr,
+                CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     cpfphig ret;
 

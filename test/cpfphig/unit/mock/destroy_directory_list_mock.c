@@ -9,7 +9,7 @@
 
 cpfphig
 cpfphig_destroy_directory_list( struct cpfphig_list*                    File_Names,
-                              CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
+                                CPFPHIG_OPTIONAL struct cpfphig_error*  Error )
 {
     // Call the real function to prevent memory leaks in tests
     cpfphig ret = (cpfphig)mock();
@@ -18,7 +18,7 @@ cpfphig_destroy_directory_list( struct cpfphig_list*                    File_Nam
     {
         // Expecting the real thing to work but if it doesnt, have to make sure CPFPHIG_FAIL is returned
         ret = real_cpfphig_destroy_directory_list( File_Names,
-                                                 Error );
+                                                   Error );
     }
 
     return ret;

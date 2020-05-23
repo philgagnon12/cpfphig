@@ -8,10 +8,10 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_modules_load_all( struct cpfphig_list                         Modules_Directories,
-                        cpfphig_module_load_symbol*                 Mphig_Module_Load,
-                        struct cpfphig_list*                        Modules,
-                        CPFPHIG_OPTIONAL struct cpfphig_error*      Error )
+cpfphig_modules_load_all( struct cpfphig_list                       Modules_Directories,
+                          cpfphig_module_load_symbol*               Mphig_Module_Load,
+                          struct cpfphig_list*                      Modules,
+                          CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
     struct cpfphig_list*      modules = NULL;
     cpfphig                   ret     = CPFPHIG_FAIL;

@@ -2,64 +2,33 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdarg.h>
 
 cpfphig
-cpfphig_error_message( enum cpfphig_error_type          Error_Type,
-                     const char*                    Message,
-                     struct cpfphig_error*            Error,
-                     CPFPHIG_OPTIONAL const char*   File,
-                     CPFPHIG_OPTIONAL const char*   Function,
-                     CPFPHIG_OPTIONAL size_t        Line )
+cpfphig_stderr_printf( enum cpfphig_error_type          Error_Type,
+                       const char*                      Format,
+                       CPFPHIG_OPTIONAL const char*     File,
+                       CPFPHIG_OPTIONAL const char*     Function,
+                       CPFPHIG_OPTIONAL int             Line,
+                       struct cpfphig_error*            Error,
+                       ... )
 {
+    va_list args;
+
     // The return fail can never really be caught but prevent further damage
-    if( Message == NULL || Error == NULL )
+    if( Format == NULL || Error == NULL )
         return CPFPHIG_FAIL;
 
     Error->error_type       = Error_Type;
-    Error->message_size     = CPFPHIG_ERROR_MESSAGE_SIZE;
-    Error->file_size        = CPFPHIG_ERROR_FILE_SIZE;
-    Error->function_size    = CPFPHIG_ERROR_FUNCTION_SIZE;
-    Error->line             = 0;
+    Error->stderr_pos       = ftell( stderr );
 
-    memset( Error->message,
-            0x00,
-            Error->message_size );
+    Error->log_len = fprintf( stderr, "%s(%s):%d; ", File, Function, Line );
 
-    snprintf( Error->message,
-              Error->message_size,
-              "%s",
-              Message );
+    va_start( args, Error );
+    Error->log_len += vfprintf( stderr, Format, args );
+    va_end( args );
 
-
-    if( File != NULL )
-    {
-        memset( Error->file,
-                0x00,
-                Error->file_size );
-
-        snprintf( Error->file,
-                  Error->file_size,
-                  "%s",
-                  File );
-    }
-
-    if( Function != NULL )
-    {
-        memset( Error->function,
-                0x00,
-                Error->function_size );
-
-        snprintf( Error->function,
-                  Error->function_size,
-                  "%s",
-                  Function );
-    }
-
-
-    if( Line != 0 )
-    {
-        Error->line = Line;
-    }
+    Error->log_len += fprintf( stderr, "\n" );
 
     return CPFPHIG_OK;
 }

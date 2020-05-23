@@ -13,6 +13,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#define CPFPHIG_BUFFER_SIZE ( 0xFFFF )
+
 cpfphig
 CPFPHIG_REAL(cpfphig_directory_list)( const char*                               Directory,
                                       struct cpfphig_list*                      File_Names,

@@ -20,7 +20,7 @@ cpfphig_thread_cond_wait( struct cpfphig_thread_cond*               Cond,
     if( Cond == NULL || Mutex == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Cond or Mutex is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Cond or Mutex is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -40,13 +40,13 @@ cpfphig_thread_cond_wait( struct cpfphig_thread_cond*               Cond,
         {
             case ERROR_TIMEOUT:
                 if( Error != NULL )
-                    cpfphig_error_message( cpfphig_user_error, "SleepConditionVariableCS time exceeded", Error, __FILE__, __FUNCTION__, __LINE__ );
+                    cpfphig_error_message( cpfphig_user_error, "SleepConditionVariableCS time exceeded", Error );
 
                 ret = CPFPHIG_FAIL;
                 break;
             default:
                 if( Error != NULL )
-                    cpfphig_error_message( cpfphig_user_error, "SleepConditionVariableCS failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+                    cpfphig_error_message( cpfphig_user_error, "SleepConditionVariableCS failed", Error );
 
                 ret = CPFPHIG_FAIL;
         }

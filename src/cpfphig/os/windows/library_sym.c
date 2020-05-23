@@ -20,7 +20,7 @@ cpfphig_library_sym( void*                                  Handle,
     if( Handle == NULL || Sym_Name == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Handle or Sym_Name is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Handle or Sym_Name is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -29,7 +29,7 @@ cpfphig_library_sym( void*                                  Handle,
                                         Sym_Name ) ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "GetProcAddress failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "GetProcAddress failed", Error );
 
         return CPFPHIG_FAIL;
     }

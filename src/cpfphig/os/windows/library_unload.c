@@ -16,7 +16,7 @@ cpfphig_library_unload( void*                                   Handle,
     if( Handle == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Handle is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Handle is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -24,7 +24,7 @@ cpfphig_library_unload( void*                                   Handle,
     if( 0 == FreeLibrary( (HMODULE)Handle ) )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "FreeLibrary failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "FreeLibrary failed", Error );
 
         return CPFPHIG_FAIL;
     }

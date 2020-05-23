@@ -2,11 +2,14 @@
 
 #ifdef CPFPHIG_HAVE_WINDOWS_H
 
+#include "cpfphig/malloc.h"
+#include "cpfphig/free.h"
+
 #include <windows.h>
 #include <string.h>
 #include <stdio.h>
 
-#define CPFPHIG_BUFFER_SIZE ( 0xAFF )
+#define CPFPHIG_BUFFER_SIZE ( 0xFFFF )
 
 cpfphig
 cpfphig_dirname( const char*                               Path,
@@ -15,59 +18,104 @@ cpfphig_dirname( const char*                               Path,
                  int                                       Buffer_Size,
                  CPFPHIG_OPTIONAL struct cpfphig_error*    Error )
 {
-    cpfphig                 ret         = CPFPHIG_FAIL;
+    cpfphig ret     = CPFPHIG_FAIL;
 
-    char                    drive[CPFPHIG_BUFFER_SIZE];
-    char                    dir[CPFPHIG_BUFFER_SIZE];
+    char*   drive   = NULL;
+    char*   dir     = NULL;
+
+    struct cpfphig_error    free_error  = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     // NULL checks
     if( Path == NULL || Buffer == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Path or Buffer is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message(cpfphig_system_error, "Path or Buffer is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
 
-    memset( drive,
-            0x00,
-            CPFPHIG_BUFFER_SIZE );
+    ret = cpfphig_malloc( &drive,
+                          Path_Size,
+                          Error );
 
-    memset( dir,
-            0x00,
-            CPFPHIG_BUFFER_SIZE );
-
-    if( 0 != _splitpath_s( Path,
-                           drive,
-                           CPFPHIG_BUFFER_SIZE,
-                           dir,
-                           CPFPHIG_BUFFER_SIZE,
-                           NULL,
-                           0,
-                           NULL,
-                           0 ) )
+    if( ret == CPFPHIG_OK )
     {
-        if( Error != NULL )
-            cpfphig_error_message( cpfphig_system_error, "_splitpath_s failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+        memset( drive,
+                0x00,
+                Path_Size );
 
-        return CPFPHIG_FAIL;
-
+        ret = cpfphig_malloc( &dir,
+                              Path_size,
+                              Error );
     }
 
-    // Remove backslash
-    dir[strnlen(dir, CPFPHIG_BUFFER_SIZE-1)-1] = 0x00;
+    if( ret == CPFPHIG_OK )
+    {
+        memset( dir,
+                0x00,
+                Path_Size );
 
-    memset( Buffer,
-            0x00,
-            Buffer_Size );
+        if( 0 != _splitpath_s( Path,
+                               drive,
+                               Path_Size,
+                               dir,
+                               Path_Size,
+                               NULL,
+                               0,
+                               NULL,
+                               0 ) )
+        {
+            if( Error != NULL )
+                cpfphig_error_message( cpfphig_system_error, "_splitpath_s failed", Error );
 
-    snprintf( Buffer,
-              Buffer_Size,
-              "%s%s",
-              drive,
-              dir );
+            ret = CPFPHIG_FAIL;
 
-    return CPFPHIG_OK;
+        }
+    }
+
+    if( ret == CPFPHIG_OK )
+    {
+        // Remove backslash
+        dir[strnlen(dir, CPFPHIG_BUFFER_SIZE-1)-1] = 0x00;
+
+        memset( Buffer,
+                0x00,
+                Buffer_Size );
+
+        snprintf( Buffer,
+                  Buffer_Size,
+                  "%s%s",
+                  drive,
+                  dir );
+    }
+
+    free_error.error_type = cpfphig_ok;
+
+    if( CPFPHIG_FAIL == cpfphig_free( &drive,
+                                      &free_error ) )
+    {
+        if( ret == CPFPHIG_OK )
+        {
+            if( Error != NULL )
+                *Error = free_error;
+
+            ret = CPFPHIG_FAIL;
+        }
+    }
+
+    if( CPFPHIG_FAIL == cpfphig_free( &dir,
+                                      &free_error ) )
+    {
+        if( ret == CPFPHIG_OK )
+        {
+            if( Error != NULL )
+                *Error = free_error;
+
+            ret = CPFPHIG_FAIL;
+        }
+    }
+
+    return ret;
 }
 
 #endif

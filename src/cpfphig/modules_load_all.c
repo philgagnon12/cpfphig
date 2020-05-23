@@ -91,8 +91,8 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
                 path_buffer_len = strnlen( file_name, CPFPHIG_BUFFER_SIZE - sizeof(char) );
 
 
-                ret = cpfphig_malloc( &path_buffer,
-                                      path_buffer_len + sizeof( char ),
+                ret = cpfphig_malloc( path_buffer_len + sizeof( char ),
+                                      &path_buffer,
                                       Error );
 
                 if( ret == CPFPHIG_OK )

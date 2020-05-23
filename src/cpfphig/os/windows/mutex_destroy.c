@@ -16,7 +16,7 @@ cpfphig_mutex_destroy( struct cpfphig_mutex*                    Mutex,
     if( Mutex == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Mutex is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Mutex is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

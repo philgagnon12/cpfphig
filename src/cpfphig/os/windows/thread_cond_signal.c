@@ -16,7 +16,7 @@ cpfphig_thread_cond_signal( struct cpfphig_thread_cond*             Cond,
     if( Cond == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Cond is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Cond is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

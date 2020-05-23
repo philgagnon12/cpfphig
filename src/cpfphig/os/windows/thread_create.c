@@ -21,7 +21,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
     if( Thread == NULL || Thread_Attr == NULL || Start_Routine == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Thread, Thread_Attr or Start_Routine is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Thread, Thread_Attr or Start_Routine is NULL", Error );
 
         return CPFPHIG_FAIL;
     }
@@ -36,7 +36,7 @@ cpfphig_thread_create( struct cpfphig_thread*                   Thread,
     if( handle == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "CreateThread failed", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "CreateThread failed", Error );
 
         return CPFPHIG_FAIL;
     }

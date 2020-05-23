@@ -18,7 +18,7 @@ cpfphig_thread_join( struct cpfphig_thread*                 Thread,
     if( Thread == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Thread is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Thread is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

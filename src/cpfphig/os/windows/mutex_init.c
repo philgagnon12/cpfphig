@@ -19,7 +19,7 @@ cpfphig_mutex_init( struct cpfphig_mutex*                    Mutex,
     if( Mutex == NULL || Mutex_Attr == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message(cpfphig_system_error, "Mutex or Mutex_Attr is NULL", Error, __FILE__, __FUNCTION__, __LINE__ );
+            cpfphig_error_message( cpfphig_system_error, "Mutex or Mutex_Attr is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

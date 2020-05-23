@@ -14,6 +14,9 @@
 #include <unistd.h>
 #else
 #include <windows.h>
+#include <io.h>
+#define close _close
+#define fileno _fileno
 #endif
 
 #define CPFPHIG_BUFFER_SIZE ( 0x0F )
@@ -55,7 +58,8 @@ static void error_type_and_pos_and_len_into_error( void** state )
     assert_true( 0 == setvbuf( stderr, stderr_buffer, _IOFBF, CPFPHIG_STDERR_BUFFER_SIZE ) );
 
     // Hide stderr
-    close( STDERR_FILENO );
+    // TODO need to do actual redirection instead of close
+    // close( fileno( stderr ) );
 
     assert_true( CPFPHIG_OK == cpfphig_error_message( cpfphig_system_error,
                                                       "%s",

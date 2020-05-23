@@ -15,7 +15,7 @@ cpfphig_mutex_lock( struct cpfphig_mutex*                    Mutex,
     if( Mutex == NULL )
     {
         if( Error != NULL )
-            cpfphig_error_message( cpfphig_system_error, "Mutex is NULL", Error )
+            cpfphig_error_message( cpfphig_system_error, "Mutex is NULL", Error );
 
         return CPFPHIG_FAIL;
     }

@@ -34,8 +34,8 @@ cpfphig_dirname( const char*                               Path,
         return CPFPHIG_FAIL;
     }
 
-    ret = cpfphig_malloc( &drive,
-                          Path_Size,
+    ret = cpfphig_malloc( Path_Size,
+                          &drive,
                           Error );
 
     if( ret == CPFPHIG_OK )
@@ -44,8 +44,8 @@ cpfphig_dirname( const char*                               Path,
                 0x00,
                 Path_Size );
 
-        ret = cpfphig_malloc( &dir,
-                              Path_size,
+        ret = cpfphig_malloc( Path_Size,
+                              &dir,
                               Error );
     }
 

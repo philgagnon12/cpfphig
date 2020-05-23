@@ -21,7 +21,7 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
 {
     cpfphig                 ret                 = CPFPHIG_FAIL;
     char*                   directory           = NULL;
-    int                     directory_len       = NULL;
+    size_t                  directory_len       = 0;
     HANDLE                  dir                 = NULL;
     WIN32_FIND_DATA         find_data           = { 0 };
     BOOL                    found_data          = 1;
@@ -42,9 +42,9 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
 
     directory_len += sizeof("\\*") - sizeof( char ); // remove null char
 
-    if( CPFPHIG_FAIL == ret = mphig_malloc( &directory,
-                              directory_len + sizeof( char ), // add null char
-                              Error ) )
+    if( CPFPHIG_FAIL == ( ret = cpfphig_malloc( directory_len + sizeof( char ), // add null char
+                                                &directory,
+                                                Error ) ) )
     {
         return CPFPHIG_FAIL;
     }
@@ -52,7 +52,7 @@ CPFPHIG_REAL(cpfphig_directory_list)( const char*                             Di
 
     memset( directory,
             0x00,
-            CPFPHIG_BUFFER_SIZE );
+            directory_len + sizeof( char ) );
 
     snprintf( directory,
               directory_len + sizeof( char ),

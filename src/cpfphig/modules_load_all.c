@@ -32,7 +32,7 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
     cpfphig                         next_path_ret                   = CPFPHIG_FAIL;
     struct cpfphig_error            next_path_error                 = CPFPHIG_CONST_CPFPHIG_ERROR;
     char*                           path_buffer                     = NULL;
-    int                             path_buffer_len                 = 0;
+    size_t                          path_buffer_len                 = 0;
     char*                           full_path                       = NULL;
 
 

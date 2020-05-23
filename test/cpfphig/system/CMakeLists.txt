@@ -62,15 +62,17 @@ cpfphig_install(
 
 # System tests
 
-find_package(cmocka REQUIRED)
+
 
 function(cpfphig_add_system_test PREFIX )
+
+    find_package(cmocka REQUIRED)
 
     foreach( ARG ${ARGN} )
 
         add_executable(${PREFIX}_${ARG}_system_test ${CMAKE_CURRENT_SOURCE_DIR}/${PREFIX}_system_test.c )
 
-        foreach( RUNTIME_DLL ${cmocka_RUNTIME_DLLS})
+        foreach( RUNTIME_DLL "${cmocka_RUNTIME_DLLS}")
             add_custom_command( TARGET ${PREFIX}_${ARG}_system_test
                 POST_BUILD
                 COMMAND ${CMAKE_COMMAND} -E copy_if_different "${RUNTIME_DLL}" $<TARGET_FILE_DIR:${PREFIX}_${ARG}_system_test>

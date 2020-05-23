@@ -14,7 +14,7 @@ cpfphig_assert_failed( const char*    Message,
 
         assert( !( Message == NULL || File == NULL || Function == NULL ) );
     }
-    fprintf( stderr, "%s(%s):%lu; %s !\n", File, Function, Line, Message );
+    fprintf( stderr, "%s(%s):%zu; %s !\n", File, Function, Line, Message );
 }
 
 

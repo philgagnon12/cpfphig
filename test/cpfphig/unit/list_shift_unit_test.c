@@ -19,33 +19,33 @@ static void arguments( void** state )
 
     printf("invalid List\n");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( NULL,
-                                                           &item,
-                                                           NULL ) );
+                                                             &item,
+                                                             NULL ) );
 
     printf("invalid List with error\n");
-    expect_value( cpfphig_error_message, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_error_message, Message, "List or Item is NULL");
+    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_stderr_printf, Format, "List or Item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( NULL,
-                                                           &item,
-                                                           &error ) );
+                                                             &item,
+                                                             &error ) );
 
     printf("invalid Item\n");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
-                                                           NULL,
-                                                           NULL ) );
+                                                             NULL,
+                                                             NULL ) );
 
     printf("invalid Item with error\n");
-    expect_value( cpfphig_error_message, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_error_message, Message, "List or Item is NULL");
+    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_stderr_printf, Format, "List or Item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
-                                                           NULL,
-                                                           &error ) );
+                                                             NULL,
+                                                             &error ) );
 
 }
 
 static void first_shift( void** state )
 {
-    struct cpfphig_list   list        = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list   list      = CPFPHIG_CONST_CPFPHIG_LIST;
     int                 item        = 11;
     int*                shift_item  = NULL;
 
@@ -53,14 +53,14 @@ static void first_shift( void** state )
     expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_list_node ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_push( &list,
-                                                       &item,
-                                                       NULL ) );
+                                                         &item,
+                                                         NULL ) );
 
     expect_any( cpfphig_free, Ptr );
     will_return( cpfphig_free, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_shift( &list,
-                                                        &shift_item,
-                                                        NULL ) );
+                                                          &shift_item,
+                                                          NULL ) );
 
     assert_null( list.first );
     assert_null( list.last );
@@ -70,7 +70,7 @@ static void first_shift( void** state )
 
 static void subsequent_shift( void** state )
 {
-    struct cpfphig_list       list                = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list       list              = CPFPHIG_CONST_CPFPHIG_LIST;
     int                     first_item          = 11;
     int                     second_item         = 22;
     int                     third_item          = 33;
@@ -81,27 +81,27 @@ static void subsequent_shift( void** state )
     expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_list_node ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_push( &list,
-                                                       &first_item,
-                                                       NULL ) );
+                                                         &first_item,
+                                                         NULL ) );
 
     expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_list_node ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_push( &list,
-                                                       &second_item,
-                                                       NULL ) );
+                                                         &second_item,
+                                                         NULL ) );
 
     expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_list_node ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_push( &list,
-                                                       &third_item,
-                                                       NULL ) );
+                                                         &third_item,
+                                                         NULL ) );
 
 
     expect_any( cpfphig_free, Ptr );
     will_return( cpfphig_free, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_shift( &list,
-                                                        &first_shift_item,
-                                                        NULL ) );
+                                                          &first_shift_item,
+                                                          NULL ) );
 
     assert_non_null( list.first );
     assert_non_null( list.last );
@@ -119,8 +119,8 @@ static void subsequent_shift( void** state )
     expect_any( cpfphig_free, Ptr );
     will_return( cpfphig_free, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_shift( &list,
-                                                        &second_shift_item,
-                                                        NULL ) );
+                                                          &second_shift_item,
+                                                          NULL ) );
 
     assert_non_null( list.first );
     assert_non_null( list.last );
@@ -150,60 +150,60 @@ static void subsequent_shift( void** state )
 
 static void shift_null( void** state )
 {
-    struct cpfphig_list       list            = CPFPHIG_CONST_CPFPHIG_LIST;
+    struct cpfphig_list     list            = CPFPHIG_CONST_CPFPHIG_LIST;
     int                     item            = 11;
     void*                   shift_item      = &item;
 
     expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_list_node ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_push( &list,
-                                                       NULL,
-                                                       NULL ) );
+                                                         NULL,
+                                                         NULL ) );
 
 
     expect_any( cpfphig_free, Ptr );
     will_return( cpfphig_free, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_shift( &list,
-                                                        &shift_item,
-                                                        NULL ) );
+                                                          &shift_item,
+                                                          NULL ) );
 
     assert_null( shift_item );
 }
 
 static void fail_free_is_fail( void** state )
 {
-    struct cpfphig_list       list            = CPFPHIG_CONST_CPFPHIG_LIST;
-    void*                   shift_item      = NULL;
+    struct cpfphig_list list            = CPFPHIG_CONST_CPFPHIG_LIST;
+    void*               shift_item      = NULL;
 
     expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_list_node ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
     assert_int_equal(CPFPHIG_OK, real_cpfphig_list_push( &list,
-                                                       NULL,
-                                                       NULL ) );
+                                                         NULL,
+                                                         NULL ) );
 
     expect_any( cpfphig_free, Ptr );
     will_return( cpfphig_free, CPFPHIG_FAIL );
     assert_int_equal(CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
-                                                          &shift_item,
-                                                          NULL ) );
+                                                            &shift_item,
+                                                            NULL ) );
 }
 
 static void shift_empty_list( void** state )
 {
-    struct cpfphig_list       list            = CPFPHIG_CONST_CPFPHIG_LIST;
-    void*                   shift_item      = NULL;
-    struct cpfphig_error      error           = CPFPHIG_CONST_CPFPHIG_ERROR;
+    struct cpfphig_list     list        = CPFPHIG_CONST_CPFPHIG_LIST;
+    void*                   shift_item  = NULL;
+    struct cpfphig_error    error       = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     assert_int_equal(CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
-                                                          &shift_item,
-                                                          NULL ) );
+                                                            &shift_item,
+                                                            NULL ) );
 
 
-    expect_value( cpfphig_error_message, Error_Type, cpfphig_user_error );
-    expect_string( cpfphig_error_message, Message, "List is empty");
+    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_user_error );
+    expect_string( cpfphig_stderr_printf, Format, "List is empty");
     assert_int_equal(CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
-                                                          &shift_item,
-                                                          &error ) );
+                                                            &shift_item,
+                                                            &error ) );
 }
 
 int main( void )

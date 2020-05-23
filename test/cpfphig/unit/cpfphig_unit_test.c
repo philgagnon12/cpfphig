@@ -8,8 +8,12 @@
 #include <stdio.h>
 #include <string.h>
 
+// TODO remove
+#include <unistd.h>
+#include <stdlib.h>
 
 #define CPFPHIG_BUFFER_SIZE ( 0x0F )
+#define CPFPHIG_STDERR_BUFFER_SIZE ( 0xFF )
 
 static void arguments( void** state )
 {
@@ -29,22 +33,32 @@ static void error_type_and_pos_and_len_into_error( void** state )
     struct cpfphig_error error          = CPFPHIG_CONST_CPFPHIG_ERROR;
     int                  expected_len   = 0;
     char                 line_buffer[ CPFPHIG_BUFFER_SIZE ];
-    char                 file_buffer[ CPFPHIG_BUFFER_SIZE ];
+    char*                stderr_buffer = NULL;
+
+    stderr_buffer = malloc( CPFPHIG_STDERR_BUFFER_SIZE );
+    assert_non_null( stderr_buffer );
 
     // Reset
     memset( line_buffer,
             0x00,
             CPFPHIG_BUFFER_SIZE );
 
-    memset( file_buffer,
+    memset( stderr_buffer,
             0x00,
-            CPFPHIG_BUFFER_SIZE );
+            CPFPHIG_STDERR_BUFFER_SIZE );
 
+    // print into buffer
+    assert_true( 0 == setvbuf( stderr, stderr_buffer, _IOFBF, CPFPHIG_STDERR_BUFFER_SIZE ) );
+
+    // Hide stderr
+    close( STDERR_FILENO );
 
     assert_true( CPFPHIG_OK == cpfphig_error_message( cpfphig_system_error,
                                                       "%s",
                                                       &error,
                                                       "Test") );
+
+    fflush( stderr );
 
     assert_int_equal( cpfphig_system_error, error.error_type );
 
@@ -65,13 +79,11 @@ static void error_type_and_pos_and_len_into_error( void** state )
 
     assert_int_equal( expected_len, error.log_len );
 
-    // Expect first charcter of this file to  be at stderr_pos
-    fseek( stderr, error.stderr_pos, SEEK_SET );
-    fread( file_buffer, sizeof( char ), sizeof( char ), stderr );
-    assert_true( file_buffer[0] == __FILE__[0] );
-    // Reposition stderr
-    fseek( stderr, 0, SEEK_END );
+    assert_memory_equal( "Test", (stderr_buffer + expected_len) - sizeof( "Test" ), sizeof( "Test" ) - sizeof( char ) );
+    assert_true( 0 == setvbuf( stderr, NULL, _IONBF, 0 ) );
+    free( stderr_buffer );
 }
+
 int main( void )
 {
     const struct CMUnitTest tests[] = {

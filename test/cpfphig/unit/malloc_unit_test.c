@@ -15,15 +15,15 @@ static void arguments( void** state )
 
     printf("Ptr NULL\n");
     assert_int_equal( CPFPHIG_FAIL, cpfphig_malloc( sizeof( cpfphig ),
-                                                  NULL,
-                                                  NULL ) );
+                                                    NULL,
+                                                    NULL ) );
 
     printf("Ptr NULL with error\n");
-    expect_value( cpfphig_error_message, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_error_message, Message, "Ptr is NULL" );
+    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_stderr_printf, Format, "Ptr is NULL" );
     assert_int_equal( CPFPHIG_FAIL, cpfphig_malloc( sizeof( cpfphig ),
-                                                  NULL,
-                                                  &error ) );
+                                                    NULL,
+                                                    &error ) );
 }
 
 static void allocated( void** state )
@@ -31,8 +31,8 @@ static void allocated( void** state )
     cpfphig* allocated_cpfphig = NULL;
 
     assert_int_equal( CPFPHIG_OK, cpfphig_malloc( sizeof( cpfphig ),
-                                                &allocated_cpfphig,
-                                                NULL ) );
+                                                  &allocated_cpfphig,
+                                                  NULL ) );
 
     assert_non_null( allocated_cpfphig );
     *allocated_cpfphig = CPFPHIG_OK;

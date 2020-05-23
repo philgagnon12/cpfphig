@@ -13,15 +13,13 @@ static void arguments( void** state )
 {
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
-    printf("Ptr NULL\n");
     assert_int_equal( CPFPHIG_FAIL, cpfphig_free( NULL,
-                                                NULL ) );
+                                                  NULL ) );
 
-    printf("Ptr NULL with error\n");
-    expect_value( cpfphig_error_message, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_error_message, Message, "Ptr is NULL" );
+    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_stderr_printf, Format, "Ptr is NULL" );
     assert_int_equal( CPFPHIG_FAIL, cpfphig_free( NULL,
-                                                &error ) );
+                                                  &error ) );
 }
 
 static void deallocated( void** state )
@@ -31,7 +29,7 @@ static void deallocated( void** state )
     allocated_cpfphig = malloc( sizeof( cpfphig ) );
     assert_non_null( allocated_cpfphig );
     assert_int_equal( CPFPHIG_OK, cpfphig_free( &allocated_cpfphig,
-                                              NULL ) );
+                                                NULL ) );
 
     assert_null( allocated_cpfphig );
 }

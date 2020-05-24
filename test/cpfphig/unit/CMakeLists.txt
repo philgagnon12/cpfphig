@@ -48,7 +48,18 @@ function(cpfphig_add_unit_test TEST_PREFIX )
 endfunction()
 
 
-cpfphig_add_unit_test(cpfphig)
+cpfphig_add_unit_test(cpfphig
+    mock/error_message_fprintf_mock.c
+    mock/error_message_allocated_message_mock.c
+)
+
+cpfphig_add_unit_test(error_message_fprintf)
+
+cpfphig_add_unit_test( error_message_allocated_message
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/malloc_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/free_mock.c
+)
+
 
 cpfphig_add_unit_test(malloc
     ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c

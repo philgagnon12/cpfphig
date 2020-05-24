@@ -16,8 +16,8 @@ static void arguments( void** state )
     assert_int_equal( CPFPHIG_FAIL, cpfphig_free( NULL,
                                                   NULL ) );
 
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "Ptr is NULL" );
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "Ptr is NULL" );
     assert_int_equal( CPFPHIG_FAIL, cpfphig_free( NULL,
                                                   &error ) );
 }

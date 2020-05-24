@@ -19,8 +19,8 @@ static void arguments( void** state )
                                                     NULL ) );
 
     printf("Ptr NULL with error\n");
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "Ptr is NULL" );
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "Ptr is NULL" );
     assert_int_equal( CPFPHIG_FAIL, cpfphig_malloc( sizeof( cpfphig ),
                                                     NULL,
                                                     &error ) );

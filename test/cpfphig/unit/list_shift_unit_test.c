@@ -23,8 +23,8 @@ static void arguments( void** state )
                                                              NULL ) );
 
     printf("invalid List with error\n");
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "List or Item is NULL");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "List or Item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( NULL,
                                                              &item,
                                                              &error ) );
@@ -35,8 +35,8 @@ static void arguments( void** state )
                                                              NULL ) );
 
     printf("invalid Item with error\n");
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "List or Item is NULL");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "List or Item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
                                                              NULL,
                                                              &error ) );
@@ -199,8 +199,8 @@ static void shift_empty_list( void** state )
                                                             NULL ) );
 
 
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_user_error );
-    expect_string( cpfphig_stderr_printf, Format, "List is empty");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_user_error );
+    expect_string( cpfphig_error_message_call, Format, "List is empty");
     assert_int_equal(CPFPHIG_FAIL, real_cpfphig_list_shift( &list,
                                                             &shift_item,
                                                             &error ) );

@@ -19,8 +19,8 @@ static void arguments( void** state )
                                                             &item,
                                                             NULL ) );
 
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "List_Iterator or Item is NULL");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "List_Iterator or Item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( NULL,
                                                             &item,
                                                             &error ) );
@@ -29,8 +29,8 @@ static void arguments( void** state )
                                                             NULL,
                                                             NULL ) );
 
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "List_Iterator or Item is NULL");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "List_Iterator or Item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( &list_iterator,
                                                             NULL,
                                                             &error ) );
@@ -49,8 +49,8 @@ static void list_null( void** state )
                                                             NULL ) );
 
     printf("list_null with error\n");
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "List_Iterator->list is NULL");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "List_Iterator->list is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( &list_iterator,
                                                             &item,
                                                             &error ) );
@@ -69,8 +69,8 @@ static void empty_list( void** state )
                                                             NULL ) );
 
     printf("empty_list with error\n");
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_user_error );
-    expect_string( cpfphig_stderr_printf, Format, "End of list has been reached");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_user_error );
+    expect_string( cpfphig_error_message_call, Format, "End of list has been reached");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( &list_iterator,
                                                             &item,
                                                             &error ) );
@@ -97,8 +97,8 @@ static void next_item_is_null( void** state )
     list_iterator.current_node = NULL;
 
     printf("next_item_is_null with error\n");
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_system_error );
-    expect_string( cpfphig_stderr_printf, Format, "current_node->item is NULL");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "current_node->item is NULL");
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( &list_iterator,
                                                             &item,
                                                             &error ) );
@@ -124,8 +124,8 @@ static void next_item( void** state )
     assert_non_null( item );
     assert_int_equal( 11, *item );
 
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_user_error );
-    expect_string( cpfphig_stderr_printf, Format, "End of list has been reached");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_user_error );
+    expect_string( cpfphig_error_message_call, Format, "End of list has been reached");
 
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( &list_iterator,
                                                             &item,
@@ -156,8 +156,8 @@ static void list_iterator_rewinds( void** state )
     assert_non_null( item );
     assert_int_equal( 11, *item );
 
-    expect_value( cpfphig_stderr_printf, Error_Type, cpfphig_user_error );
-    expect_string( cpfphig_stderr_printf, Format, "End of list has been reached");
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_user_error );
+    expect_string( cpfphig_error_message_call, Format, "End of list has been reached");
 
     assert_int_equal( CPFPHIG_FAIL, real_cpfphig_list_next( &list_iterator,
                                                             &item,

@@ -16,6 +16,7 @@ cpfphig_error_message_allocated_message( struct cpfphig_error*            Error,
                                          va_list                          Args )
 {
     cpfphig ret             = CPFPHIG_FAIL;
+    va_list args_copy;
 
     char    message_predict_buffer[sizeof(char)];
     char*   message         = NULL;
@@ -27,6 +28,8 @@ cpfphig_error_message_allocated_message( struct cpfphig_error*            Error,
 
     if( Error->error_component_type != cpfphig_error_allocated_message )
         return CPFPHIG_FAIL;
+
+    va_copy( args_copy, Args );
 
     message_len = vsnprintf( message_predict_buffer,
                              sizeof( char ),
@@ -42,11 +45,13 @@ cpfphig_error_message_allocated_message( struct cpfphig_error*            Error,
         if( 0 > vsnprintf( message,
                            CPFPHIG_BUFFER_SIZE,
                            Format,
-                           Args ) )
+                           args_copy ) )
         {
             ret = CPFPHIG_FAIL;
         }
     }
+
+    va_end( args_copy );
 
     if( ret == CPFPHIG_OK )
     {

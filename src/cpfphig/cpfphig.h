@@ -26,17 +26,27 @@ enum cpfphig_error_type
     cpfphig_user_error      = 0x03
 };
 
+enum cpfphig_error_fprintf_log_type
+{
+    cpfphig_error_fprintf_log_all               = 0x01,
+    cpfphig_error_fprintf_log_none              = 0x02,
+    cpfphig_error_fprintf_log_type_system_error = 0x04,
+    cpfphig_error_fprintf_log_type_user_error   = 0x08
+};
+
 struct cpfphig_error_fprintf
 {
     FILE*   file;
     long    file_pos;
     int     log_len;
+    int     log_type;
 };
 
 #define CPFPHIG_CONST_CPFPHIG_ERROR_FPRINTF { \
     NULL,   \
     0,      \
-    0       \
+    0,      \
+    cpfphig_error_fprintf_log_type_system_error \
 }
 
 struct cpfphig_error_allocated_message

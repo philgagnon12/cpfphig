@@ -17,6 +17,26 @@ cpfphig_error_message_fprintf( struct cpfphig_error*            Error,
     if( Error->error_component_type != cpfphig_error_fprintf )
         return CPFPHIG_FAIL;
 
+    if( 0 != ( Error->error_component.fprintf.log_type & cpfphig_error_fprintf_log_none ) )
+        return CPFPHIG_OK;
+
+    if( 0 == ( Error->error_component.fprintf.log_type & cpfphig_error_fprintf_log_all ) )
+    {
+        switch( Error->error_type )
+        {
+            case cpfphig_system_error:
+                if( 0 == (Error->error_component.fprintf.log_type & cpfphig_error_fprintf_log_type_system_error ) )
+                    return CPFPHIG_OK;
+                break;
+            case cpfphig_user_error:
+                if( 0 == (Error->error_component.fprintf.log_type & cpfphig_error_fprintf_log_type_user_error ) )
+                    return CPFPHIG_OK;
+                break;
+            default:
+                return CPFPHIG_FAIL;
+        }
+    }
+
     if( Error->error_component.fprintf.file == NULL )
         Error->error_component.fprintf.file = stderr;
 

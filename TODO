@@ -18,3 +18,5 @@
 
     i could also put in a error_type ( allocated message type ) 
     would fix being able to "get" message from an error struct
+
+7. the error structs dont contain "error_message" ... "message" being the important bit

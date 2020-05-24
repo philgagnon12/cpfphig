@@ -34,7 +34,7 @@ struct cpfphig_error_fprintf
 };
 
 #define CPFPHIG_CONST_CPFPHIG_ERROR_FPRINTF { \
-    stderr, \
+    NULL,   \
     0,      \
     0       \
 }

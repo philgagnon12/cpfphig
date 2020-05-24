@@ -18,7 +18,7 @@ cpfphig_error_message_fprintf( struct cpfphig_error*            Error,
         return CPFPHIG_FAIL;
 
     if( Error->error_component.fprintf.file == NULL )
-        return CPFPHIG_FAIL;
+        Error->error_component.fprintf.file = stderr;
 
     Error->error_component.fprintf.file_pos = ftell( Error->error_component.fprintf.file );
 

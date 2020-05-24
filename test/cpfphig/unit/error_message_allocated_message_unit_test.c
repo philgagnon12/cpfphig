@@ -31,9 +31,7 @@ va_error_message_allocated_message( struct cpfphig_error*            Error,
 
 static void arguments( void** state )
 {
-    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
-
-    error.error_component_type = cpfphig_error_allocated_message;
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ALLOCATED_MESSAGE_ERROR;
 
     assert_true( CPFPHIG_FAIL == va_error_message_allocated_message( NULL,
                                                                      "error_message" ) );
@@ -43,9 +41,7 @@ static void arguments( void** state )
 }
 static void allocated_message( void** state )
 {
-    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
-
-    error.error_component_type = cpfphig_error_allocated_message;
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ALLOCATED_MESSAGE_ERROR;
 
     expect_value( cpfphig_malloc, Size, sizeof("error_message") + sizeof("test") - sizeof( char ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );

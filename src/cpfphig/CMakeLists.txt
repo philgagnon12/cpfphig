@@ -11,6 +11,8 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
     cpfphig.h
     error_message_fprintf.h
     error_message_allocated_message.h
+    error_message_get_message.h
+    error_message_destroy_message.h
     ${CMAKE_CURRENT_BINARY_DIR}/cpfphig_config.h
     malloc.h
     free.h
@@ -68,6 +70,8 @@ target_sources( ${CMAKE_PROJECT_NAME}
     cpfphig.c
     error_message_fprintf.c
     error_message_allocated_message.c
+    error_message_get_message.c
+    error_message_destroy_message.c
     malloc.c
     free.c
     list_push.c

@@ -86,6 +86,24 @@ struct cpfphig_error
     CPFPHIG_CONST_CPFPHIG_ERROR_COMPONENT   \
 }
 
+#define CPFPHIG_CONST_CPFPHIG_FPRINTF_ERROR { \
+    cpfphig_system_error,                   \
+    NULL,                                   \
+    NULL,                                   \
+    0,                                      \
+    cpfphig_error_fprintf,                  \
+    CPFPHIG_CONST_CPFPHIG_ERROR_FPRINTF     \
+}
+
+#define CPFPHIG_CONST_CPFPHIG_ALLOCATED_MESSAGE_ERROR { \
+    cpfphig_system_error,                           \
+    NULL,                                           \
+    NULL,                                           \
+    0,                                              \
+    cpfphig_error_allocated_message,                \
+    CPFPHIG_CONST_CPFPHIG_ERROR_ALLOCATED_MESSAGE   \
+}
+
 cpfphig
 cpfphig_error_message_call( enum cpfphig_error_type          Error_Type,
                             const char*                      Format,

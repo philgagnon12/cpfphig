@@ -3,6 +3,7 @@
 
 #include "cpfphig_config.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef int cpfphig;
 
@@ -25,29 +26,76 @@ enum cpfphig_error_type
     cpfphig_user_error      = 0x03
 };
 
-struct cpfphig_error
+struct cpfphig_error_fprintf
 {
-    enum cpfphig_error_type     error_type;
-    long                        stderr_pos;
-    int                         log_len;
+    FILE*   file;
+    long    file_pos;
+    int     log_len;
 };
 
-#define CPFPHIG_CONST_CPFPHIG_ERROR { \
-    cpfphig_system_error,   \
-    0,                      \
-    0,                      \
+#define CPFPHIG_CONST_CPFPHIG_ERROR_FPRINTF { \
+    stderr, \
+    0,      \
+    0       \
+}
+
+struct cpfphig_error_allocated_message
+{
+    char*  message;
+    int    message_len;
+};
+
+#define CPFPHIG_CONST_CPFPHIG_ERROR_ALLOCATED_MESSAGE { \
+    NULL,   \
+    0,      \
+}
+
+enum cpfphig_error_component_type
+{
+    cpfphig_error_fprintf           = 0x01,
+    cpfphig_error_allocated_message = 0x02
+};
+
+union cpfphig_error_component
+{
+    struct cpfphig_error_fprintf            fprintf;
+    struct cpfphig_error_allocated_message  allocated_message;
+};
+
+#define CPFPHIG_CONST_CPFPHIG_ERROR_COMPONENT { \
+    CPFPHIG_CONST_CPFPHIG_ERROR_FPRINTF \
+}
+
+struct cpfphig_error
+{
+    enum cpfphig_error_type             error_type;
+    const char*                         file;
+    const char*                         function;
+    int                                 line;
+    enum cpfphig_error_component_type   error_component_type;
+    union cpfphig_error_component       error_component;
+
+};
+
+#define CPFPHIG_CONST_CPFPHIG_ERROR {       \
+    cpfphig_system_error,                   \
+    NULL,                                   \
+    NULL,                                   \
+    0,                                      \
+    cpfphig_error_fprintf,                  \
+    CPFPHIG_CONST_CPFPHIG_ERROR_COMPONENT   \
 }
 
 cpfphig
-cpfphig_stderr_printf( enum cpfphig_error_type          Error_Type,
-                       const char*                      Format,
-                       CPFPHIG_OPTIONAL const char*     File,
-                       CPFPHIG_OPTIONAL const char*     Function,
-                       CPFPHIG_OPTIONAL int             Line,
-                       struct cpfphig_error*            Error,
-                       ... );
+cpfphig_error_message_call( enum cpfphig_error_type          Error_Type,
+                            const char*                      Format,
+                            CPFPHIG_OPTIONAL const char*     File,
+                            CPFPHIG_OPTIONAL const char*     Function,
+                            CPFPHIG_OPTIONAL int             Line,
+                            struct cpfphig_error*            Error,
+                            ... );
 
 // Hide Error arg , to not have empty argument for '...' / __VAR_ARGS__
-#define cpfphig_error_message( Error_Type, Format, ... ) cpfphig_stderr_printf( Error_Type, Format, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__ )
+#define cpfphig_error_message( Error_Type, Format, ... ) cpfphig_error_message_call( Error_Type, Format, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__ )
 
 #endif

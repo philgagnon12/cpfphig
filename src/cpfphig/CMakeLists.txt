@@ -9,6 +9,8 @@ add_subdirectory("os/windows")
 set_property( TARGET ${CMAKE_PROJECT_NAME}
     PROPERTY PUBLIC_HEADER
     cpfphig.h
+    error_message_fprintf.h
+    error_message_allocated_message.h
     ${CMAKE_CURRENT_BINARY_DIR}/cpfphig_config.h
     malloc.h
     free.h
@@ -64,6 +66,8 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
 target_sources( ${CMAKE_PROJECT_NAME}
     PRIVATE
     cpfphig.c
+    error_message_fprintf.c
+    error_message_allocated_message.c
     malloc.c
     free.c
     list_push.c

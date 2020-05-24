@@ -88,7 +88,7 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
 
                 path_buffer_len = strnlen( directory, CPFPHIG_BUFFER_SIZE - sizeof(char) );
                 path_buffer_len += sizeof("/") - sizeof( char ); // remove null char
-                path_buffer_len = strnlen( file_name, CPFPHIG_BUFFER_SIZE - sizeof(char) );
+                path_buffer_len += strnlen( file_name, CPFPHIG_BUFFER_SIZE - sizeof(char) );
 
 
                 ret = cpfphig_malloc( path_buffer_len + sizeof( char ),

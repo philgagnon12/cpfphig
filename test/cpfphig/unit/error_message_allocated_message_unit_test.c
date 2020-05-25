@@ -46,6 +46,8 @@ static void allocated_message( void** state )
     expect_value( cpfphig_malloc, Size, sizeof("error_message") + sizeof("test") - sizeof( char ) );
     will_return( cpfphig_malloc, CPFPHIG_OK );
 
+    expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
+    expect_string( cpfphig_error_message_call, Format, "error_messagetest" );
     assert_true( CPFPHIG_OK == va_error_message_allocated_message( &error,
                                                                    "error_message%s",
                                                                    "test") );

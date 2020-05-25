@@ -60,7 +60,6 @@ cpfphig_error_message_fprintf( struct cpfphig_error*            Error,
 
     if( file == NULL )
     {
-        printf( "NO FILE HANDLE\n" ); // TODO remove
             return CPFPHIG_FAIL;
     }
 

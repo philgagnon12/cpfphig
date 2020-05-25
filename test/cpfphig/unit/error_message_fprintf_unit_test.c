@@ -56,6 +56,7 @@ static void error_type_and_pos_and_len_into_error( void** state )
     int                  expected_len   = 0;
     char                 line_buffer[ CPFPHIG_BUFFER_SIZE ];
     char*                stderr_buffer = NULL;
+    FILE*                stderr_file    = NULL;
 
     stderr_buffer = malloc( CPFPHIG_STDERR_BUFFER_SIZE );
     assert_non_null( stderr_buffer );
@@ -69,8 +70,10 @@ static void error_type_and_pos_and_len_into_error( void** state )
             0x00,
             CPFPHIG_STDERR_BUFFER_SIZE );
 
+    assert_non_null( ( stderr_file = fdopen( STDERR_FILENO, "a" ) ) );
+
     // print into buffer
-    assert_true( 0 == setvbuf( stderr, stderr_buffer, _IOFBF, CPFPHIG_STDERR_BUFFER_SIZE ) );
+    assert_true( 0 == setvbuf( stderr_file, stderr_buffer, _IOFBF, CPFPHIG_STDERR_BUFFER_SIZE ) );
 
     // Hide stderr
     // TODO need to do actual redirection instead of close
@@ -84,7 +87,7 @@ static void error_type_and_pos_and_len_into_error( void** state )
                                                          "%s",
                                                          "Test" ) );
 
-    fflush( stderr );
+    fflush( stderr_file );
 
     expected_len =  sizeof( __FILE__ ) - sizeof( char ); // __FILE__ without null char
     expected_len += sizeof( char ); // '('
@@ -104,7 +107,7 @@ static void error_type_and_pos_and_len_into_error( void** state )
     assert_int_equal( expected_len, error.error_component.fprintf.log_len );
 
     assert_memory_equal( "Test", (stderr_buffer + expected_len) - sizeof( "Test" ), sizeof( "Test" ) - sizeof( char ) );
-    assert_true( 0 == setvbuf( stderr, NULL, _IONBF, 0 ) );
+    assert_true( 0 == setvbuf( stderr_file, NULL, _IONBF, 0 ) );
     free( stderr_buffer );
 }
 

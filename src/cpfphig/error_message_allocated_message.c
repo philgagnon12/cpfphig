@@ -1,5 +1,6 @@
 #include "cpfphig/cpfphig.h"
 #include "cpfphig/error_message_allocated_message.h"
+#include "cpfphig/error_message_fprintf.h"
 
 #include "cpfphig/malloc.h"
 #include "cpfphig/free.h"
@@ -18,6 +19,11 @@ cpfphig_error_message_allocated_message( struct cpfphig_error*            Error,
     cpfphig ret             = CPFPHIG_FAIL;
     va_list args_copy;
 
+    // Safety net, in case allocated errors are not consumed / SEGFAULT
+    struct cpfphig_error    fprintf_error           = CPFPHIG_CONST_CPFPHIG_ERROR;
+    static const char*      fprintf_error_file_path = "error.log";
+
+
     char    message_predict_buffer[sizeof(char)];
     char*   message         = NULL;
     int     message_len     = 0;
@@ -28,6 +34,8 @@ cpfphig_error_message_allocated_message( struct cpfphig_error*            Error,
 
     if( Error->error_component_type != cpfphig_error_allocated_message )
         return CPFPHIG_FAIL;
+
+    fprintf_error.error_component.fprintf.file_path = fprintf_error_file_path;
 
     va_copy( args_copy, Args );
 
@@ -58,6 +66,8 @@ cpfphig_error_message_allocated_message( struct cpfphig_error*            Error,
         message[ message_len ] = 0x00;
         Error->error_component.allocated_message.message        = message;
         Error->error_component.allocated_message.message_len    = message_len;
+
+        ret = cpfphig_error_message( cpfphig_system_error, message, &fprintf_error );
     }
 
     if( ret == CPFPHIG_FAIL )

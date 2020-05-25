@@ -58,6 +58,7 @@ cpfphig_add_unit_test(error_message_fprintf)
 cpfphig_add_unit_test( error_message_allocated_message
     ${CMAKE_CURRENT_SOURCE_DIR}/mock/malloc_mock.c
     ${CMAKE_CURRENT_SOURCE_DIR}/mock/free_mock.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
 )
 
 

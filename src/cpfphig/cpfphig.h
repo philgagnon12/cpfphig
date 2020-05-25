@@ -36,10 +36,10 @@ enum cpfphig_error_fprintf_log_type
 
 struct cpfphig_error_fprintf
 {
-    FILE*   file;
-    long    file_pos;
-    int     log_len;
-    int     log_type;
+    const char* file_path;
+    long        file_pos;
+    int         log_len;
+    int         log_type;
 };
 
 #define CPFPHIG_CONST_CPFPHIG_ERROR_FPRINTF { \

@@ -5,11 +5,22 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#ifdef CPFPHIG_HAVE_UNISTD_H
+#include <unistd.h>
+#else
+#include <windows.h>
+#include <io.h>
+#define close _close
+#endif
+
 cpfphig
 cpfphig_error_message_fprintf( struct cpfphig_error*            Error,
                                const char*                      Format,
                                va_list                          Args )
 {
+    FILE* file          = NULL;
+    int   will_close    = 1;
+
     // The return fail can never really be caught but prevent further damage
     if( Error == NULL || Format == NULL )
         return CPFPHIG_FAIL;
@@ -37,33 +48,52 @@ cpfphig_error_message_fprintf( struct cpfphig_error*            Error,
         }
     }
 
-    if( Error->error_component.fprintf.file == NULL )
-        Error->error_component.fprintf.file = stderr;
+    if( Error->error_component.fprintf.file_path == NULL )
+    {
+        file        = fdopen( STDERR_FILENO, "a" );
+        will_close  = 0;
+    }
+    else
+    {
+        file = fopen( Error->error_component.fprintf.file_path, "a" );
+    }
 
-    Error->error_component.fprintf.file_pos = ftell( Error->error_component.fprintf.file );
+    if( file == NULL )
+    {
+        printf( "NO FILE HANDLE\n" ); // TODO remove
+            return CPFPHIG_FAIL;
+    }
+
+    Error->error_component.fprintf.file_pos = ftell( file );
 
     Error->error_component.fprintf.log_len = 0;
 
     if( Error->file != NULL )
     {
-        Error->error_component.fprintf.log_len += fprintf( Error->error_component.fprintf.file,
+        Error->error_component.fprintf.log_len += fprintf( file,
                                                            "%s",
                                                            Error->file );
     }
     if( Error->function != NULL )
     {
-        Error->error_component.fprintf.log_len += fprintf( Error->error_component.fprintf.file,
+        Error->error_component.fprintf.log_len += fprintf( file,
                                                            "(%s):",
                                                            Error->function );
     }
 
-    Error->error_component.fprintf.log_len += fprintf( Error->error_component.fprintf.file,
+    Error->error_component.fprintf.log_len += fprintf( file,
                                                        "%d; ",
                                                        Error->line );
 
-    Error->error_component.fprintf.log_len += vfprintf( Error->error_component.fprintf.file, Format, Args );
+    Error->error_component.fprintf.log_len += vfprintf( file, Format, Args );
 
-    Error->error_component.fprintf.log_len += fprintf( Error->error_component.fprintf.file, "\n" );
+    Error->error_component.fprintf.log_len += fprintf( file, "\n" );
+
+    // Mainly prevent to close stderr
+    if( will_close == 1 )
+    {
+        fclose( file );
+    }
 
     return CPFPHIG_OK;
 }

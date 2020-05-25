@@ -35,6 +35,7 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
     size_t                          path_buffer_len                 = 0;
     char*                           full_path                       = NULL;
 
+    struct cpfphig_error            module_load_error               = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     int                             extension_index                 = 0;
     char*                           extension                       = NULL;
@@ -174,9 +175,20 @@ cpfphig_modules_load_all( struct cpfphig_list                         Modules_Di
                     continue;
                 }
 
-                ret = Cpfphig_Module_Load( full_path,
-                                           Modules,
-                                           Error );
+                module_load_error.error_type = cpfphig_ok;
+
+                if( CPFPHIG_FAIL == Cpfphig_Module_Load( full_path,
+                                                         Modules,
+                                                         &module_load_error ) )
+                {
+                    if( module_load_error.error_type == cpfphig_system_error )
+                    {
+                        if( Error != NULL )
+                            *Error = module_load_error;
+
+                        ret = CPFPHIG_FAIL;
+                    }
+                }
             }
         } // while
         if( next_path_ret == CPFPHIG_FAIL &&

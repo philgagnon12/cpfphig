@@ -22,3 +22,5 @@
 7. the error structs dont contain "error_message" ... "message" being the important bit
 
 8. currently fdopen STDERR_FILENO for error_message_fprintf, make sure it works on all platform
+
+9. add an error type "stacking" multiple errors within one, for multithreaded, specifically publisher_publish... when it receives an error, it overwrittes ... it would need to stack em 

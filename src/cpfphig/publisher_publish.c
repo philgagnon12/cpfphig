@@ -25,6 +25,8 @@ cpfphig_publisher_publish( struct cpfphig_publisher*                Publisher,
     struct cpfphig_output_scheduler_subscription*   subscription                = NULL;
     int                                             subscriptions_count         = 0;
     int                                             completed_count             = 0;
+    int                                             error_count                 = 0;
+    struct cpfphig_error                            completed_error             = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     // NULL checks
     if( Publisher == NULL )
@@ -117,9 +119,14 @@ cpfphig_publisher_publish( struct cpfphig_publisher*                Publisher,
                                                                   Error );
                                 break;
                             case cpfphig_publisher_thread_cond_kind_abort:
-                                if( Error != NULL )
-                                    *Error = Publisher->published_error;
-                                ret = CPFPHIG_FAIL;
+                                completed_count++;
+                                error_count++;
+
+                                // Overwritte with latest received error
+                                completed_error = Publisher->published_error;
+
+                                ret = cpfphig_thread_cond_signal( &(Publisher->completed_ack_thread_cond),
+                                                                  Error );
                                 break;
                             default:
                                 if( Error != NULL )
@@ -163,6 +170,14 @@ cpfphig_publisher_publish( struct cpfphig_publisher*                Publisher,
         ret = CPFPHIG_FAIL;
     }
 
+    if( error_count > 0 )
+    {
+        if( Error != NULL )
+            *Error = completed_error;
+
+        ret = CPFPHIG_FAIL;
+    }
+    
     return ret;
 }
 

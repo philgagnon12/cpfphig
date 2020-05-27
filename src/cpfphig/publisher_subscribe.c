@@ -136,7 +136,7 @@ cpfphig_publisher_subscription_routine( void* Subscription )
 
                     cpfphig_assert( CPFPHIG_OK == cpfphig_mutex_lock( &(publisher->broadcast_mutex),
                                                                       NULL ),
-                                    "cpfphig_mutex_unlock failed",
+                                    "cpfphig_mutex_lock failed",
                                     __FILE__,
                                     __FUNCTION__,
                                     __LINE__ );
@@ -156,7 +156,6 @@ cpfphig_publisher_subscription_routine( void* Subscription )
             {
                 if( ret_to_signal == CPFPHIG_FAIL )
                 {
-                    abort = 1;
                     publisher->published_error            = *error;
                     publisher->completed_thread_cond_kind = cpfphig_publisher_thread_cond_kind_abort;
                 }

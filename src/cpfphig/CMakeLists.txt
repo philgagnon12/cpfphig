@@ -98,6 +98,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     destroy_thread_pool.c
     defer.c
     binary_search_tree_insert.c
+    binary_search_tree_find.c
 )
 
 find_package(Threads REQUIRED)

@@ -5,11 +5,12 @@
 #include "cpfphig/free.h"
 
 cpfphig
-CPFPHIG_REAL(cpfphig_binary_search_tree_insert)( struct cpfphig_binary_search_tree*         Tree,
-                                                 void*                                      Key,
-                                                 void*                                      Item,
-                                                 cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
-                                                 CPFPHIG_OPTIONAL struct cpfphig_error*     Error )
+CPFPHIG_REAL(cpfphig_binary_search_tree_insert)( struct cpfphig_binary_search_tree*                     Tree,
+                                                 void*                                                  Key,
+                                                 void*                                                  Item,
+                                                 cpfphig_binary_search_tree_compare_symbol*             Compare_Symbol,
+                                                 CPFPHIG_OPTIONAL struct cpfphig_binary_search_tree**   Tree_At_Key,
+                                                 CPFPHIG_OPTIONAL struct cpfphig_error*                 Error )
 {
     cpfphig ret                         = CPFPHIG_FAIL;
     int     compare                     = 0;
@@ -38,6 +39,10 @@ CPFPHIG_REAL(cpfphig_binary_search_tree_insert)( struct cpfphig_binary_search_tr
     {
         Tree->key   = Key;
         Tree->item  = Item;
+
+        if( Tree_At_Key != NULL )
+            *Tree_At_Key = Tree;
+
         return CPFPHIG_OK;
     }
 
@@ -80,6 +85,9 @@ CPFPHIG_REAL(cpfphig_binary_search_tree_insert)( struct cpfphig_binary_search_tr
                 allocated_tree->item    = Item;
 
                 *tree                   = allocated_tree;
+
+                if( Tree_At_Key != NULL )
+                    *Tree_At_Key            = *tree;
             }
         }
         else
@@ -88,6 +96,7 @@ CPFPHIG_REAL(cpfphig_binary_search_tree_insert)( struct cpfphig_binary_search_tr
                                                      Key,
                                                      Item,
                                                      Compare_Symbol,
+                                                     Tree_At_Key,
                                                      Error );
         }
     }

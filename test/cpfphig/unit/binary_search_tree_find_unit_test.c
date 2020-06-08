@@ -163,6 +163,7 @@ static void find_root( void** state )
                                                                   &key_a,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_find( &tree,
@@ -193,6 +194,7 @@ static void find_root_not_found( void** state )
                                                                   &key_a,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     expect_value( cpfphig_error_message_call, Error_Type, cpfphig_user_error );
@@ -226,6 +228,7 @@ static void find_left( void** state )
                                                                   &key_a,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
 
@@ -237,6 +240,7 @@ static void find_left( void** state )
                                                                   &key_b,
                                                                   item_b,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_find( &tree,
@@ -272,6 +276,7 @@ static void find_right( void** state )
                                                                   &key_a,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
 
@@ -283,6 +288,7 @@ static void find_right( void** state )
                                                                   &key_b,
                                                                   item_b,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_find( &tree,

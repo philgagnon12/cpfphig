@@ -8,11 +8,12 @@
 #include <cmocka.h>
 
 cpfphig
-cpfphig_binary_search_tree_insert( struct cpfphig_binary_search_tree*         Tree,
-                                   void*                                      Key,
-                                   void*                                      Item,
-                                   cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
-                                   CPFPHIG_OPTIONAL struct cpfphig_error*     Error )
+cpfphig_binary_search_tree_insert( struct cpfphig_binary_search_tree*                   Tree,
+                                   void*                                                Key,
+                                   void*                                                Item,
+                                   cpfphig_binary_search_tree_compare_symbol*           Compare_Symbol,
+                                   CPFPHIG_OPTIONAL struct cpfphig_binary_search_tree** Tree_At_Key,
+                                   CPFPHIG_OPTIONAL struct cpfphig_error*               Error )
 {
 #ifndef CPFPHIG_BINARY_SEARCH_TREE_RECURSIVE_MOCK
     assert_non_null( Tree );
@@ -29,6 +30,7 @@ cpfphig_binary_search_tree_insert( struct cpfphig_binary_search_tree*         Tr
                                                       Key,
                                                       Item,
                                                       Compare_Symbol,
+                                                      Tree_At_Key,
                                                       Error );
     }
 
@@ -39,6 +41,7 @@ cpfphig_binary_search_tree_insert( struct cpfphig_binary_search_tree*         Tr
                                                    Key,
                                                    Item,
                                                    Compare_Symbol,
+                                                   Tree_At_Key,
                                                    Error );
 #endif
 }

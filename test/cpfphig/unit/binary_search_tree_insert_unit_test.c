@@ -44,6 +44,8 @@ static void argument_tree_null( void** state )
     int key         = 50;
     char* item_a    = "50";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
     expect_value( cpfphig_error_message_call, Error_Type, cpfphig_system_error );
@@ -53,6 +55,7 @@ static void argument_tree_null( void** state )
                                                                     &key,
                                                                     item_a,
                                                                     &cpfphig_binary_search_tree_compare_number,
+                                                                    NULL,
                                                                     &error ) );
 }
 
@@ -63,6 +66,8 @@ static void argument_key_null( void** state )
     int key         = 50;
     char* item_a    = "50";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
 
@@ -73,6 +78,7 @@ static void argument_key_null( void** state )
                                                                     NULL,
                                                                     item_a,
                                                                     &cpfphig_binary_search_tree_compare_number,
+                                                                    NULL,
                                                                     &error ) );
 }
 
@@ -83,6 +89,8 @@ static void argument_item_null( void** state )
     int key         = 50;
     char* item_a    = "50";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
 
@@ -93,6 +101,7 @@ static void argument_item_null( void** state )
                                                                     &key,
                                                                     NULL,
                                                                     &cpfphig_binary_search_tree_compare_number,
+                                                                    NULL,
                                                                     &error ) );
 }
 
@@ -103,6 +112,8 @@ static void argument_compare_symbol_null( void** state )
     int key         = 50;
     char* item_a    = "50";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
 
@@ -112,6 +123,7 @@ static void argument_compare_symbol_null( void** state )
     assert_true( CPFPHIG_FAIL == cpfphig_binary_search_tree_insert( &tree,
                                                                     &key,
                                                                     item_a,
+                                                                    NULL,
                                                                     NULL,
                                                                     &error ) );
 }
@@ -123,6 +135,8 @@ static void insert_root( void** state )
     int key         = 50;
     char* item_a    = "50";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
 
@@ -131,6 +145,7 @@ static void insert_root( void** state )
                                                                   &key,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  &tree_at_key,
                                                                   &error ) );
 
     assert_int_equal( key, *(int*)tree.key );
@@ -138,6 +153,8 @@ static void insert_root( void** state )
     assert_null( tree.left );
     assert_null( tree.parent );
     assert_null( tree.right );
+
+    assert_true( &tree == tree_at_key );
 }
 
 static void insert_root_duplicate( void** state )
@@ -147,6 +164,8 @@ static void insert_root_duplicate( void** state )
     int key         = 50;
     char* item_a    = "50";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
 
@@ -155,6 +174,7 @@ static void insert_root_duplicate( void** state )
                                                                   &key,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
 
@@ -168,6 +188,7 @@ static void insert_root_duplicate( void** state )
                                                                     &key,
                                                                     item_a,
                                                                     &cpfphig_binary_search_tree_compare_number,
+                                                                    NULL,
                                                                     &error ) );
 }
 
@@ -181,6 +202,8 @@ static void insert_left( void** state )
     int    key_b    = 45;
     char* item_b    = "45";
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
+
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
 
@@ -189,6 +212,7 @@ static void insert_left( void** state )
                                                                   &key_a,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_int_equal( key_a, *(int*)tree.key );
@@ -204,6 +228,7 @@ static void insert_left( void** state )
                                                                   &key_b,
                                                                   item_b,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_non_null( tree.left );
@@ -238,6 +263,7 @@ static void insert_left_left_right( void** state )
     char* item_d    = "42";
 
 
+    struct cpfphig_binary_search_tree*   tree_at_key = NULL;
 
     struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
 
@@ -247,6 +273,7 @@ static void insert_left_left_right( void** state )
                                                                   &key_a,
                                                                   item_a,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_int_equal( key_a, *(int*)tree.key );
@@ -263,6 +290,7 @@ static void insert_left_left_right( void** state )
                                                                   &key_b,
                                                                   item_b,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_non_null( tree.left );
@@ -282,6 +310,7 @@ static void insert_left_left_right( void** state )
                                                                   &key_c,
                                                                   item_c,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
     assert_non_null( tree.left->left );
@@ -300,6 +329,7 @@ static void insert_left_left_right( void** state )
                                                                   &key_d,
                                                                   item_d,
                                                                   &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
                                                                   &error ) );
 
 

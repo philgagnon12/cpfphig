@@ -63,6 +63,7 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
     sleep.h
     basename.h
     dirname.h
+    binary_search_tree.h
 )
 
 target_sources( ${CMAKE_PROJECT_NAME}
@@ -96,6 +97,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     destroy_thread_pool_thread.c
     destroy_thread_pool.c
     defer.c
+    binary_search_tree_insert.c
 )
 
 find_package(Threads REQUIRED)

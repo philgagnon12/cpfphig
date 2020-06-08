@@ -88,6 +88,14 @@ cpfphig_add_unit_test(list_next
     ${CMAKE_CURRENT_SOURCE_DIR}/mock/cpfphig_mock.c
 )
 
+cpfphig_add_unit_test( binary_search_tree_insert
+    mock/binary_search_tree_insert_mock.c
+    mock/cpfphig_mock.c
+    mock/malloc_mock.c
+    mock/free_mock.c
+)
+
+target_compile_definitions(binary_search_tree_insert_unit_test PRIVATE CPFPHIG_BINARY_SEARCH_TREE_RECURSIVE_MOCK )
 
 set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
 

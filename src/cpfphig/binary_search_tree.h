@@ -52,6 +52,15 @@ cpfphig_binary_search_tree_find_tree( struct cpfphig_binary_search_tree*        
                                       cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
                                       CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
 
+// IF we wouldnt want to alter Dest, deep_copy() the tree
+// could also have a int force, to not stop when a key already exists in Dest
+cpfphig
+cpfphig_binary_search_tree_merge( struct cpfphig_binary_search_tree*            Tree_Dest,
+                                  struct cpfphig_binary_search_tree*            Tree_Src,
+                                  cpfphig_binary_search_tree_compare_symbol*    Compare_Symbol,
+                                  CPFPHIG_OPTIONAL struct cpfphig_error*        Error );
+
+
 
 cpfphig
 cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tree,

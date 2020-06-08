@@ -99,6 +99,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     defer.c
     binary_search_tree_insert.c
     binary_search_tree_find.c
+    binary_search_tree_merge.c
 )
 
 find_package(Threads REQUIRED)

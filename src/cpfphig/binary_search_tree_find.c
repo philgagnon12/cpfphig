@@ -10,9 +10,8 @@ cpfphig_binary_search_tree_find( struct cpfphig_binary_search_tree*         Tree
                                  CPFPHIG_OPTIONAL struct cpfphig_error*     Error )
 {
     cpfphig ret                         = CPFPHIG_FAIL;
-    int     compare                     = 0;
 
-    struct cpfphig_binary_search_tree** tree                = NULL;
+    struct cpfphig_binary_search_tree*      tree_at_key = NULL;
 
 
     // NULL checks
@@ -24,51 +23,15 @@ cpfphig_binary_search_tree_find( struct cpfphig_binary_search_tree*         Tree
         return CPFPHIG_FAIL;
     }
 
-    if( Tree->key == NULL )
-    {
-        if( Error != NULL )
-            cpfphig_error_message( cpfphig_system_error, "Tree->key is NULL", Error );
-
-        return CPFPHIG_FAIL;
-    }
-
-    ret  = Compare_Symbol( Key, Tree->key, &compare, Error );
+    ret = cpfphig_binary_search_tree_find_tree( Tree,
+                                                Key,
+                                                &tree_at_key,
+                                                Compare_Symbol,
+                                                Error );
 
     if( ret == CPFPHIG_OK )
     {
-        if( compare < 0 )
-        {
-            tree = &Tree->left;
-        }
-        else if( compare > 0 )
-        {
-            tree = &Tree->right;
-        }
-        else
-        {
-            *Item = Tree->item;
-
-            return CPFPHIG_OK;
-        }
-    }
-
-    if( ret == CPFPHIG_OK )
-    {
-        if( *tree == NULL )
-        {
-             if( Error != NULL )
-                cpfphig_error_message( cpfphig_user_error, "Key not found", Error );
-
-             ret = CPFPHIG_FAIL;
-        }
-        else
-        {
-            ret = cpfphig_binary_search_tree_find( *tree,
-                                                   Key,
-                                                   Item,
-                                                   Compare_Symbol,
-                                                   Error );
-        }
+        *Item = tree_at_key->item;
     }
 
     return ret;

@@ -97,10 +97,12 @@ cpfphig_add_unit_test( binary_search_tree_insert
 
 target_compile_definitions(binary_search_tree_insert_unit_test PRIVATE CPFPHIG_BINARY_SEARCH_TREE_RECURSIVE_MOCK )
 
+
 cpfphig_add_unit_test( binary_search_tree_find
     mock/cpfphig_mock.c
     mock/binary_search_tree_insert_mock.c
     ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_insert.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_find_tree.c
     mock/malloc_mock.c
     mock/free_mock.c
 )

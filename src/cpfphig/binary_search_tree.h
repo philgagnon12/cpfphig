@@ -44,6 +44,21 @@ cpfphig_binary_search_tree_find( struct cpfphig_binary_search_tree*         Tree
                                  cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
                                  CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
 
+cpfphig
+cpfphig_binary_search_tree_find_tree( struct cpfphig_binary_search_tree*         Tree,
+                                      void*                                      Key,
+                                      struct cpfphig_binary_search_tree**        Tree_At_Key,
+                                      cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
+                                      CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
+
+
+cpfphig
+cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tree,
+                                   void*                                      Key,
+                                   void**                                     Item,
+                                   cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
+                                   CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
+
 
 
 

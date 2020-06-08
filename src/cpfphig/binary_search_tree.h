@@ -69,8 +69,8 @@ cpfphig_binary_search_tree_empty( struct cpfphig_binary_search_tree*            
 cpfphig
 cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tree,
                                    void*                                      Key,
-                                   void**                                     Item,
                                    cpfphig_binary_search_tree_compare_symbol* Compare_Symbol,
+                                   CPFPHIG_OPTIONAL void**                    Item,
                                    CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
 
 

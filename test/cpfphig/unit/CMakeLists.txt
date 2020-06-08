@@ -123,5 +123,17 @@ cpfphig_add_unit_test( binary_search_tree_empty
     ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_insert.c
 )
 
+cpfphig_add_unit_test( binary_search_tree_remove
+    mock/cpfphig_mock.c
+    mock/free_mock.c
+    mock/malloc_mock.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_find_tree.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_merge.c
+    mock/binary_search_tree_insert_mock.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_insert.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_empty.c
+)
+
+
 set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
 

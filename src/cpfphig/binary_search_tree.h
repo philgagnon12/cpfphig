@@ -60,6 +60,10 @@ cpfphig_binary_search_tree_merge( struct cpfphig_binary_search_tree*            
                                   cpfphig_binary_search_tree_compare_symbol*    Compare_Symbol,
                                   CPFPHIG_OPTIONAL struct cpfphig_error*        Error );
 
+cpfphig
+cpfphig_binary_search_tree_empty( struct cpfphig_binary_search_tree*            Tree,
+                                  CPFPHIG_OPTIONAL struct cpfphig_error*        Error );
+
 
 
 cpfphig

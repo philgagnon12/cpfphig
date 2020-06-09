@@ -13,7 +13,10 @@ cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tr
     cpfphig ret                         = CPFPHIG_FAIL;
 
     struct cpfphig_binary_search_tree*      tree_at_key = NULL;
+    struct cpfphig_binary_search_tree*      parent      = NULL;
 
+    struct cpfphig_binary_search_tree*      trees[] = { NULL, NULL };
+    struct cpfphig_binary_search_tree*      tree    = NULL;
 
     // NULL checks
     if( Tree == NULL || Key == NULL || Compare_Symbol == NULL )
@@ -38,15 +41,19 @@ cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tr
             *Item = tree_at_key->item;
         }
 
+        trees[0] = tree_at_key->left;
+        trees[1] = tree_at_key->right;
+        parent   = tree_at_key->parent;
+
         // Disconnect tree from parent
 
-        if( tree_at_key->parent->left == tree_at_key )
+        if( parent->left == tree_at_key )
         {
-            tree_at_key->parent->left = NULL;
+            parent->left = NULL;
         }
-        else if( tree_at_key->parent->right == tree_at_key )
+        else if( parent->right == tree_at_key )
         {
-            tree_at_key->parent->right = NULL;
+            parent->right = NULL;
         }
         else
         {
@@ -57,51 +64,34 @@ cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tr
         }
     }
 
-    if( ret == CPFPHIG_OK )
+    for( int i = 0;
+         ret == CPFPHIG_OK &&
+         i < sizeof( trees ) / sizeof( struct cpfphig_binary_search_tree*);
+         i++ )
     {
-        if( tree_at_key->left != NULL )
+        tree = trees[i];
+
+        if( tree != NULL )
         {
-            ret = cpfphig_binary_search_tree_merge( tree_at_key->parent,
-                                                    tree_at_key->left,
+            ret = cpfphig_binary_search_tree_merge( parent,
+                                                    tree,
                                                     Compare_Symbol,
                                                     Error );
 
             if( ret == CPFPHIG_OK )
             {
-                ret = cpfphig_binary_search_tree_empty( tree_at_key->left,
+                ret = cpfphig_binary_search_tree_empty( tree,
                                                         Error );
             }
 
             if( ret == CPFPHIG_OK )
             {
-                ret = cpfphig_free( &tree_at_key->left,
+                ret = cpfphig_free( &tree,
                                     Error );
             }
         }
     }
 
-    if( ret == CPFPHIG_OK )
-    {
-        if( tree_at_key->right != NULL )
-        {
-            ret = cpfphig_binary_search_tree_merge( tree_at_key->parent,
-                                                    tree_at_key->right,
-                                                    Compare_Symbol,
-                                                    Error );
-
-            if( ret == CPFPHIG_OK )
-            {
-                ret = cpfphig_binary_search_tree_empty( tree_at_key->right,
-                                                        Error );
-            }
-
-            if( ret == CPFPHIG_OK )
-            {
-                ret = cpfphig_free( &tree_at_key->left,
-                                    Error );
-            }
-        }
-    }
 
     if( ret == CPFPHIG_OK )
     {

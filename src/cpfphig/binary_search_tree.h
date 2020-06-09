@@ -2,6 +2,7 @@
 #define CPFPHIG_BINARY_TREE_H
 
 #include "cpfphig/cpfphig.h"
+#include "cpfphig/list.h"
 
 struct cpfphig_binary_search_tree;
 
@@ -73,6 +74,14 @@ cpfphig_binary_search_tree_remove( struct cpfphig_binary_search_tree*         Tr
                                    CPFPHIG_OPTIONAL void**                    Item,
                                    CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
 
+
+cpfphig
+cpfphig_binary_search_tree_find_all( struct cpfphig_binary_search_tree*           Tree,
+                                     void*                                        Key_Min,
+                                     void*                                        Key_Max,
+                                     cpfphig_binary_search_tree_compare_symbol*   Compare_Symbol,
+                                     struct cpfphig_list*                         Items,
+                                     CPFPHIG_OPTIONAL struct cpfphig_error*       Error );
 
 
 

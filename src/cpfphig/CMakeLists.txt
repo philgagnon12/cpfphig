@@ -101,6 +101,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     binary_search_tree_find.c
     binary_search_tree_merge.c
     binary_search_tree_empty.c
+    binary_search_tree_find_all.c
 )
 
 find_package(Threads REQUIRED)

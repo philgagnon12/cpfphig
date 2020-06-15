@@ -15,6 +15,7 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
     error_message_destroy_message.h
     ${CMAKE_CURRENT_BINARY_DIR}/cpfphig_config.h
     malloc.h
+    realloc.h
     free.h
     list.h
     library_load.h
@@ -74,6 +75,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     error_message_get_message.c
     error_message_destroy_message.c
     malloc.c
+    realloc.c
     free.c
     list_push.c
     list_shift.c

@@ -30,6 +30,8 @@ cpfphig_realloc( const size_t                               Size,
         return CPFPHIG_FAIL;
     }
 
+    *Ptr_Dest = ptr_dest;
+
     return CPFPHIG_OK;
 }
 

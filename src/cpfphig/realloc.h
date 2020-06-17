@@ -5,7 +5,7 @@
 
 cpfphig
 cpfphig_realloc( const size_t                               Size,
-                 void*                                      Ptr_Src,
+                 CPFPHIG_OPTIONAL void*                     Ptr_Src,
                  void**                                     Ptr_Dest,
                  CPFPHIG_OPTIONAL struct cpfphig_error*     Error );
 

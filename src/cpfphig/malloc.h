@@ -1,6 +1,11 @@
 #ifndef CPFPHIG_MALLOC_H
 #define CPFPHIG_MALLOC_H
 
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
 // IMPORTANT, Argument Ptr is declared as void*, but is handle as void** internally
 // Declared as void* to avoid compiler warnings
 // HOW TO USE
@@ -11,5 +16,10 @@ cpfphig
 cpfphig_malloc( const size_t                          Size,
                 void*                                 Ptr,
                 CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif

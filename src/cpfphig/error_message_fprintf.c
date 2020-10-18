@@ -50,7 +50,11 @@ cpfphig_error_message_fprintf( struct cpfphig_error*            Error,
 
     if( Error->error_component.fprintf.file_path == NULL )
     {
+#ifdef CPFPHIG_HAVE_UNISTD_H
         file        = fdopen( STDERR_FILENO, "a" );
+#else
+        file        = _fdopen( _fileno( stderr ), "a" );
+#endif
         will_close  = 0;
     }
     else

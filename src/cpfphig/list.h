@@ -32,6 +32,11 @@ struct cpfphig_list_iterator
     NULL   \
 }
 
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
 cpfphig
 cpfphig_list_push( struct cpfphig_list*                     List, // TODO add const ? 
                    void*                                    Item,
@@ -88,5 +93,9 @@ cpfphig_list_copy( struct cpfphig_list                       List,
 cpfphig
 cpfphig_list_empty( struct cpfphig_list*                    List,
                     CPFPHIG_OPTIONAL struct cpfphig_error*  Error );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

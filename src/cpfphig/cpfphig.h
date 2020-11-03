@@ -114,6 +114,14 @@ struct cpfphig_error
     CPFPHIG_CONST_CPFPHIG_ERROR_ALLOCATED_MESSAGE   \
 }
 
+
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
+
+
 cpfphig
 cpfphig_error_message_call( enum cpfphig_error_type          Error_Type,
                             const char*                      Format,
@@ -122,6 +130,11 @@ cpfphig_error_message_call( enum cpfphig_error_type          Error_Type,
                             CPFPHIG_OPTIONAL int             Line,
                             struct cpfphig_error*            Error,
                             ... );
+
+#ifdef __cplusplus
+}
+#endif
+
 
 // Hide Error arg , to not have empty argument for '...' / __VAR_ARGS__
 #define cpfphig_error_message( Error_Type, Format, ... ) cpfphig_error_message_call( Error_Type, Format, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__ )

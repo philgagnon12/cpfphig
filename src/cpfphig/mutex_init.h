@@ -5,9 +5,18 @@
 #include "cpfphig/mutex.h"
 #include "cpfphig/mutex_attr.h"
 
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
 cpfphig
 cpfphig_mutex_init( struct cpfphig_mutex*                    Mutex,
                     struct cpfphig_mutex_attr*               Mutex_Attr,
                     CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -11,6 +11,11 @@
 #include <windows.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
 struct cpfphig_mutex
 {
 
@@ -23,6 +28,10 @@ struct cpfphig_mutex
 #endif
 
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #ifdef CPFPHIG_HAVE_PTHREAD_H
 #define CPFPHIG_CONST_CPFPHIG_MUTEX { NULL }

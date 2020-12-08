@@ -4,6 +4,12 @@
 #include "cpfphig/cpfphig.h"
 #include "cpfphig/list.h"
 
+#ifdef __cplusplus
+extern "C" 
+{
+#endif
+
+
 struct cpfphig_binary_search_tree;
 
 struct cpfphig_binary_search_tree
@@ -84,5 +90,8 @@ cpfphig_binary_search_tree_find_all( struct cpfphig_binary_search_tree*         
                                      CPFPHIG_OPTIONAL struct cpfphig_error*       Error );
 
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif

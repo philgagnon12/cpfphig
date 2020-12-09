@@ -89,6 +89,11 @@ cpfphig_binary_search_tree_find_all( struct cpfphig_binary_search_tree*         
                                      struct cpfphig_list*                         Items,
                                      CPFPHIG_OPTIONAL struct cpfphig_error*       Error );
 
+// NOT ORDERED
+cpfphig
+cpfphig_binary_search_tree_copy_items_to_list( struct cpfphig_binary_search_tree*       Tree,
+                                               struct cpfphig_list*                     Items,
+                                               CPFPHIG_OPTIONAL struct cpfphig_error*   Error );
 
 #ifdef __cplusplus
 }

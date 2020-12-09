@@ -106,6 +106,7 @@ target_sources( ${CMAKE_PROJECT_NAME}
     binary_search_tree_find_all.c
     binary_search_tree_find_tree.c
     binary_search_tree_remove.c
+    binary_search_tree_copy_items_to_list.c
 
 )
 

@@ -148,5 +148,19 @@ cpfphig_add_unit_test( binary_search_tree_find_all
     ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_empty.c
 )
 
+cpfphig_add_unit_test( binary_search_tree_copy_items_to_list
+    mock/cpfphig_mock.c
+    mock/binary_search_tree_insert_mock.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_insert.c
+    mock/malloc_mock.c
+    mock/free_mock.c
+    mock/list_push_mock.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/list_push.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/list_empty.c
+    mock/list_shift_mock.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/list_shift.c
+    ${PROJECT_SOURCE_DIR}/src/cpfphig/binary_search_tree_empty.c
+)
+
 set(COVERAGE_COMMANDS_LIST ${COVERAGE_COMMANDS_LIST} PARENT_SCOPE)
 

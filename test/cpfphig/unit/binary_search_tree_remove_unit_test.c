@@ -102,6 +102,45 @@ static void argument_compare_symbol_null( void** state )
                                                                     &error ) );
 }
 
+static void remove_root_empty_tree( void** state )
+{
+    struct cpfphig_binary_search_tree   tree = CPFPHIG_CONST_CPFPHIG_BINARY_SEARCH_TREE;
+
+    int    key_a    = 50;
+    char* item_a    = "50";
+
+    char* item = NULL;
+
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
+
+    // Setup tree
+
+    will_return( cpfphig_binary_search_tree_insert, CPFPHIG_OK );
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_insert( &tree,
+                                                                  &key_a,
+                                                                  item_a,
+                                                                  &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
+                                                                  &error ) );
+
+   
+
+
+
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_remove( &tree,
+                                                                  &key_a,
+                                                                  &cpfphig_binary_search_tree_compare_number,
+                                                                  (void**)&item,
+                                                                  &error ) );
+
+    assert_non_null( item );
+    assert_string_equal( item_a, item );
+
+    assert_null( tree.left );
+    assert_null( tree.right );
+    assert_null( tree.item );
+}
+
 static void remove_tree( void** state )
 {
     struct cpfphig_binary_search_tree   tree = CPFPHIG_CONST_CPFPHIG_BINARY_SEARCH_TREE;
@@ -228,6 +267,89 @@ static void remove_tree( void** state )
 }
 
 
+static void remove_tree_no_parent( void** state )
+{
+    struct cpfphig_binary_search_tree   tree = CPFPHIG_CONST_CPFPHIG_BINARY_SEARCH_TREE;
+
+    int    key_a    = 50;
+    char* item_a    = "50";
+
+    int    key_b    = 45;
+    char* item_b    = "45";
+
+    int    key_c    = 55;
+    char* item_c    = "55";
+
+    char* item = NULL;
+
+    struct cpfphig_error error = CPFPHIG_CONST_CPFPHIG_ERROR;
+
+    // Setup tree
+
+    will_return( cpfphig_binary_search_tree_insert, CPFPHIG_OK );
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_insert( &tree,
+                                                                  &key_a,
+                                                                  item_a,
+                                                                  &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
+                                                                  &error ) );
+
+    expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_binary_search_tree ) );
+    will_return( cpfphig_malloc, CPFPHIG_OK );
+
+    will_return( cpfphig_binary_search_tree_insert, CPFPHIG_OK );
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_insert( &tree,
+                                                                  &key_b,
+                                                                  item_b,
+                                                                  &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
+                                                                  &error ) );
+
+
+    expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_binary_search_tree ) );
+    will_return( cpfphig_malloc, CPFPHIG_OK );
+
+    will_return( cpfphig_binary_search_tree_insert, CPFPHIG_OK );
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_insert( &tree,
+                                                                  &key_c,
+                                                                  item_c,
+                                                                  &cpfphig_binary_search_tree_compare_number,
+                                                                  NULL,
+                                                                  &error ) );
+
+
+
+    expect_value( cpfphig_malloc, Size, sizeof( struct cpfphig_binary_search_tree ));
+    will_return( cpfphig_malloc, CPFPHIG_OK);
+
+    will_return_count( cpfphig_binary_search_tree_insert, CPFPHIG_OK, 2 );
+
+    expect_any_count( cpfphig_free, Ptr, 2 );
+    will_return_count( cpfphig_free, CPFPHIG_OK, 2 );
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_remove( &tree,
+                                                                  &key_a,
+                                                                  &cpfphig_binary_search_tree_compare_number,
+                                                                  (void**)&item,
+                                                                  &error ) );
+
+    assert_non_null( item );
+    assert_string_equal( item_a, item );
+
+    assert_non_null( tree.item );
+    assert_string_equal( item_b, tree.item );
+
+    assert_null( tree.left );
+    assert_non_null( tree.right );
+    assert_string_equal( item_c, tree.right->item );
+
+
+    expect_any( cpfphig_free, Ptr );
+    will_return( cpfphig_free, CPFPHIG_OK );
+
+    assert_true( CPFPHIG_OK == cpfphig_binary_search_tree_empty( &tree,
+                                                                 &error ) );
+}
+
 int main( void )
 
 {
@@ -236,7 +358,9 @@ int main( void )
         cmocka_unit_test(argument_key_null),
         cmocka_unit_test(argument_compare_symbol_null),
 
+        cmocka_unit_test(remove_root_empty_tree),
         cmocka_unit_test(remove_tree),
+        cmocka_unit_test(remove_tree_no_parent),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);

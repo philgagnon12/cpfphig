@@ -61,7 +61,7 @@ cpfphig_thread_cond_timed_wait( struct cpfphig_thread_cond*               Cond,
             break;
         default:
             if( Error != NULL )
-                cpfphig_error_message( cpfphig_user_error, "pthread_cond_timedwait failed", Error );
+                cpfphig_error_message( cpfphig_system_error, "pthread_cond_timedwait failed", Error );
 
             ret = CPFPHIG_FAIL;
     }

@@ -47,7 +47,7 @@ cpfphig_thread_cond_timed_wait( struct cpfphig_thread_cond*               Cond,
                 break;
             default:
                 if( Error != NULL )
-                    cpfphig_error_message( cpfphig_user_error, "SleepConditionVariableCS failed", Error );
+                    cpfphig_error_message( cpfphig_system_error, "SleepConditionVariableCS failed", Error );
 
                 ret = CPFPHIG_FAIL;
         }

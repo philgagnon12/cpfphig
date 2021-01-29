@@ -38,6 +38,7 @@ set_property( TARGET ${CMAKE_PROJECT_NAME}
     thread_cond_signal.h
     thread_cond_broadcast.h
     thread_cond_wait.h
+    thread_cond_timed_wait.h
     mutex.h
     mutex_attr.h
     mutex_init.h
